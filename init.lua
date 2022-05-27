@@ -17,6 +17,7 @@ local install_path = vim.fn.stdpath('data')..'/site/pack/packer/start/packer.nvi
 
 if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
     packer_bootstrap = vim.fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
+    vim.o.runtimepath = vim.fn.stdpath('data') .. '/site/pack/*/start/*,' .. vim.o.runtimepath
 end
 
 require("packer").config = {
