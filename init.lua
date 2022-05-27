@@ -94,15 +94,15 @@ require('packer').startup(function()
         use({ 'nvim-lualine/lualine.nvim',--{{{
             requires = { 'kyazdani42/nvim-web-devicons', opt = true },
             config = function()
-                require('lualine').setup {
+                require('lualine').setup({
                     options = {
                         icons_enabled = true,
                         theme = 'auto',
-                        component_separators = { left = '', right = ''},
-                        section_separators = { left = '', right = ''},
+                        component_separators = { left = '|', right = '|'},
+                        section_separators = { left = '', right = ''},
                         disabled_filetypes = {},
                         always_divide_middle = true,
-                        globalstatus = false,
+                        globalstatus = true,
                     },
                     sections = {
                         lualine_a = {'mode'},
@@ -122,8 +122,7 @@ require('packer').startup(function()
                     },
                     tabline = {},
                     extensions = {}
-                }
-                require('lualine').setup()
+                })
             end
         })--}}}
 
