@@ -556,10 +556,9 @@ require "lsp_signature".setup({
 
 -- lua-dev.nvim {{{
 local luadev = require("lua-dev").setup({
-    -- add any options here, or leave empty to use the default settings
-    -- lspconfig = {
-    --   cmd = {"lua-language-server"}
-    -- },
+    lspconfig = {
+      cmd = {vim.fn.stdpath('data') .. "/lsp_servers/sumneko_lua/extension/server/bin/lua-language-server"}
+    },
 })
 
 local lspconfig = require('lspconfig')
