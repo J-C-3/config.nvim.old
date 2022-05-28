@@ -1550,8 +1550,8 @@ function LazygitFloat()
         cmd = "lazygit",
         auto_close = true,
         dimensions = {
-            height = 0.8, -- Height of the terminal window
-            width = 0.8, -- Width of the terminal window
+            height = 0.9, -- Height of the terminal window
+            width = 0.9, -- Width of the terminal window
         },
     }
 
