@@ -13,10 +13,10 @@
 vim = vim
 --}}}
 
-local install_path = vim.fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
+local install_path = vim.fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
 
 if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
-    packer_bootstrap = vim.fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
+    packer_bootstrap = vim.fn.system({ 'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path })
     vim.o.runtimepath = vim.fn.stdpath('data') .. '/site/pack/*/start/*,' .. vim.o.runtimepath
 end
 
@@ -36,99 +36,101 @@ require('packer').startup(function()
     use 'wbthomason/packer.nvim'
 
     -- Modes{{{
-        use {
-            'sindrets/winshift.nvim'
-        }
+    use {
+        'sindrets/winshift.nvim'
+    }
 
-        use {
-            'kyazdani42/nvim-tree.lua',
-            requires = 'kyazdani42/nvim-web-devicons'
-        }
+    use {
+        'kyazdani42/nvim-tree.lua',
+        requires = 'kyazdani42/nvim-web-devicons'
+    }
 
-        use {
-            'mbbill/undotree',
-            opt = true
-        }
+    use {
+        'mbbill/undotree',
+        opt = true
+    }
 
-        use {
-            "akinsho/toggleterm.nvim",
-            opt = false,
-            config = function()
-                require("toggleterm").setup{
-                    hide_numbers = true, 
-                    shade_filetypes = {},
-                    shade_terminals = true,
-                    shading_factor = '0.8',
-                    start_in_insert = true,
-                    terminal_mappings = true, 
-                    persist_size = true,
-                    direction = 'horizontal',
-                    close_on_exit = true, 
-                    
-                    float_opts = {
-                        border = 'single', 
-                        height = 15,
-                        winblend = 3,
-                        highlights = {
-                            border = "Normal",
-                            background = "Normal",
-                        }
+    use {
+        "akinsho/toggleterm.nvim",
+        opt = false,
+        config = function()
+            require("toggleterm").setup {
+                hide_numbers = true,
+                shade_filetypes = {},
+                shade_terminals = true,
+                shading_factor = '0.8',
+                start_in_insert = true,
+                terminal_mappings = true,
+                persist_size = true,
+                direction = 'horizontal',
+                close_on_exit = true,
+
+                float_opts = {
+                    border = 'single',
+                    height = 15,
+                    winblend = 3,
+                    highlights = {
+                        border = "Normal",
+                        background = "Normal",
                     }
                 }
-            end
+            }
+        end
 
-        }
+    }
 
-        use 'vimwiki/vimwiki'
+    use "numToStr/FTerm.nvim"
+
+    use 'vimwiki/vimwiki'
     --}}}
 
     -- Aesthetics{{{
-        use 'ellisonleao/gruvbox.nvim'
-        use "rebelot/kanagawa.nvim"
+    use 'ellisonleao/gruvbox.nvim'
+    use "rebelot/kanagawa.nvim"
 
-        use 'nvim-treesitter/nvim-treesitter'
-        use 'p00f/nvim-ts-rainbow'
+    use 'nvim-treesitter/nvim-treesitter'
+    use 'p00f/nvim-ts-rainbow'
 
-        use 'kevinhwang91/nvim-hlslens'
+    use 'kevinhwang91/nvim-hlslens'
 
-        use({ 'nvim-lualine/lualine.nvim',--{{{
-            requires = { 'kyazdani42/nvim-web-devicons', opt = true },
-            config = function()
-                require('lualine').setup({
-                    options = {
-                        icons_enabled = true,
-                        theme = 'auto',
-                        component_separators = { left = '|', right = '|'},
-                        section_separators = { left = '', right = ''},
-                        disabled_filetypes = {},
-                        always_divide_middle = true,
-                        globalstatus = true,
-                    },
-                    sections = {
-                        lualine_a = {'mode'},
-                        lualine_b = {'branch', 'diff', 'diagnostics'},
-                        lualine_c = {'filename'},
-                        lualine_x = {'encoding', 'fileformat', 'filetype'},
-                        lualine_y = {'progress'},
-                        lualine_z = {'location'}
-                    },
-                    inactive_sections = {
-                        lualine_a = {},
-                        lualine_b = {},
-                        lualine_c = {'filename'},
-                        lualine_x = {'location'},
-                        lualine_y = {},
-                        lualine_z = {}
-                    },
-                    tabline = {},
-                    extensions = {}
-                })
-            end
-        })--}}}
+    use({ 'nvim-lualine/lualine.nvim', --{{{
+        requires = { 'kyazdani42/nvim-web-devicons', opt = true },
+        config = function()
+            require('lualine').setup({
+                options = {
+                    icons_enabled = true,
+                    theme = 'auto',
+                    component_separators = { left = '|', right = '|' },
+                    section_separators = { left = '', right = '' },
+                    disabled_filetypes = {},
+                    always_divide_middle = true,
+                    globalstatus = true,
+                },
+                sections = {
+                    lualine_a = { 'mode' },
+                    lualine_b = { 'branch', 'diff', 'diagnostics' },
+                    lualine_c = { 'filename' },
+                    lualine_x = { 'encoding', 'fileformat', 'filetype' },
+                    lualine_y = { 'progress' },
+                    lualine_z = { 'location' }
+                },
+                inactive_sections = {
+                    lualine_a = {},
+                    lualine_b = {},
+                    lualine_c = { 'filename' },
+                    lualine_x = { 'location' },
+                    lualine_y = {},
+                    lualine_z = {}
+                },
+                tabline = {},
+                extensions = {}
+            })
+        end
+    }) --}}}
 
-        use({ 'noib3/nvim-cokeline', --{{{
-            requires = 'kyazdani42/nvim-web-devicons', -- If you want devicons
-            config = function()
+    use({ 'noib3/nvim-cokeline', --{{{
+        requires = 'kyazdani42/nvim-web-devicons', -- If you want devicons
+        config = function()
             local get_hex = require('cokeline/utils').get_hex
 
             local yellow = vim.g.terminal_color_3
@@ -136,14 +138,12 @@ require('packer').startup(function()
             require('cokeline').setup({
                 default_hl = {
                     fg = function(buffer)
-                        return
-                            buffer.is_focused
+                        return buffer.is_focused
                             and get_hex('ColorColumn', 'bg')
                             or get_hex('Normal', 'fg')
                     end,
                     bg = function(buffer)
-                        return
-                            buffer.is_focused
+                        return buffer.is_focused
                             and get_hex('Normal', 'fg')
                             or get_hex('ColorColumn', 'bg')
                     end,
@@ -194,172 +194,172 @@ require('packer').startup(function()
                     },
                 },
             })
-            end
-        }) --}}}
+        end
+    }) --}}}
     --}}}
 
     -- Languages/Filetypes {{{
-        use "nathom/filetype.nvim"
+    use "nathom/filetype.nvim"
 
-        use "folke/lua-dev.nvim"
+    use "folke/lua-dev.nvim"
 
-        -- Ansible
-        use {
-            'pearofducks/ansible-vim',
-            opt = true,
-            ft = {'ansible'}
-        }
+    -- Ansible
+    use {
+        'pearofducks/ansible-vim',
+        opt = true,
+        ft = { 'ansible' }
+    }
 
-        -- GPG
-        use 'jamessan/vim-gnupg'
+    -- GPG
+    use 'jamessan/vim-gnupg'
 
-        -- C
-        use {
-            'rhysd/vim-clang-format',
-            opt = true,
-            ft = {'c', 'cpp'}
-        }
+    -- C
+    use {
+        'rhysd/vim-clang-format',
+        opt = true,
+        ft = { 'c', 'cpp' }
+    }
 
-        -- CSV
-        use {
-            'chrisbra/csv.vim',
-            opt = true,
-            ft = {'csv'}
-        }
+    -- CSV
+    use {
+        'chrisbra/csv.vim',
+        opt = true,
+        ft = { 'csv' }
+    }
 
-        -- Python
-        use {
-            'davidhalter/jedi-vim',
-            opt = true,
-            ft = {'python'}
-        }
+    -- Python
+    use {
+        'davidhalter/jedi-vim',
+        opt = true,
+        ft = { 'python' }
+    }
 
-        use {
-            'raimon49/requirements.txt.vim',
-            opt = true,
-            ft = {'txt'}
-        }
+    use {
+        'raimon49/requirements.txt.vim',
+        opt = true,
+        ft = { 'txt' }
+    }
 
-        use {
-            'mfussenegger/nvim-dap-python',
-            opt = true,
-            ft = {'python'}
-        }
+    use {
+        'mfussenegger/nvim-dap-python',
+        opt = true,
+        ft = { 'python' }
+    }
 
-        use {
-            'psf/black',
-            opt = true,
-            ft = {'python'}
-        }
+    use {
+        'psf/black',
+        opt = true,
+        ft = { 'python' }
+    }
 
-        -- Go
-        use {
-            -- 'fatih/vim-go',
-            'ray-x/go.nvim',
-            opt = true,
-            ft = {'go', 'gomod'}
-        }
+    -- Go
+    use {
+        -- 'fatih/vim-go',
+        'ray-x/go.nvim',
+        opt = true,
+        ft = { 'go', 'gomod' }
+    }
 
-        -- Rust
-        use {
-            'rust-lang/rust.vim',
-            opt = true,
-            ft = {'rust'}
-        }
+    -- Rust
+    use {
+        'rust-lang/rust.vim',
+        opt = true,
+        ft = { 'rust' }
+    }
 
-        -- Openscad (kinda)
-        use {
-            'sirtaj/vim-openscad',
-            opt = true,
-            ft = {'openscad'}
-        }
+    -- Openscad (kinda)
+    use {
+        'sirtaj/vim-openscad',
+        opt = true,
+        ft = { 'openscad' }
+    }
 
-        -- markdown
-        use {
-            'plasticboy/vim-markdown',
-            requires = 'godlygeek/tabular',
-            opt = true,
-            ft = {'markdown'}
-        }
+    -- markdown
+    use {
+        'plasticboy/vim-markdown',
+        requires = 'godlygeek/tabular',
+        opt = true,
+        ft = { 'markdown' }
+    }
     -- }}}
 
     -- LSP & Completion {{{
-        use 'mfussenegger/nvim-dap'         
-        use 'rcarriga/nvim-dap-ui'         
-        use 'theHamsta/nvim-dap-virtual-text'
+    use 'mfussenegger/nvim-dap'
+    use 'rcarriga/nvim-dap-ui'
+    use 'theHamsta/nvim-dap-virtual-text'
 
-        use 'neovim/nvim-lspconfig'
-        use 'williamboman/nvim-lsp-installer'
+    use 'neovim/nvim-lspconfig'
+    use 'williamboman/nvim-lsp-installer'
 
-        use 'hrsh7th/nvim-cmp'
-        use 'hrsh7th/cmp-nvim-lsp'
-        use 'hrsh7th/cmp-buffer'
-        use 'hrsh7th/cmp-look'
-        use 'hrsh7th/cmp-cmdline'
-        use 'hrsh7th/cmp-path'
-        use 'hrsh7th/cmp-calc'
-        use 'hrsh7th/cmp-nvim-lua'
-        use 'f3fora/cmp-spell'
+    use 'hrsh7th/nvim-cmp'
+    use 'hrsh7th/cmp-nvim-lsp'
+    use 'hrsh7th/cmp-buffer'
+    use 'hrsh7th/cmp-look'
+    use 'hrsh7th/cmp-cmdline'
+    use 'hrsh7th/cmp-path'
+    use 'hrsh7th/cmp-calc'
+    use 'hrsh7th/cmp-nvim-lua'
+    use 'f3fora/cmp-spell'
 
-        use 'hrsh7th/cmp-vsnip'
-        use 'hrsh7th/vim-vsnip'
-        use 'rafamadriz/friendly-snippets'
+    use 'hrsh7th/cmp-vsnip'
+    use 'hrsh7th/vim-vsnip'
+    use 'rafamadriz/friendly-snippets'
 
-        use 'ray-x/lsp_signature.nvim'
+    use 'ray-x/lsp_signature.nvim'
 
-        use 'onsails/lspkind-nvim'
+    use 'onsails/lspkind-nvim'
 
-        use 'windwp/nvim-autopairs'
+    use 'windwp/nvim-autopairs'
 
-        use 'tami5/lspsaga.nvim'
+    use 'tami5/lspsaga.nvim'
     --}}}
 
     -- Misc/QOL {{{
-        use 'folke/which-key.nvim'
+    use 'folke/which-key.nvim'
 
-        use 'christoomey/vim-tmux-navigator'
-        use({
-            "aserowy/tmux.nvim",
-            config = function()
-                require("tmux").setup({
-                    copy_sync = {
-                        enable = false,
-                    },
-                    navigation = {
-                        enable_default_keybindings = false,
-                    },
-                    resize = {
-                        enable_default_keybindings = false,
-                    }
-                })
-            end
-        })
+    use 'christoomey/vim-tmux-navigator'
+    use({
+        "aserowy/tmux.nvim",
+        config = function()
+            require("tmux").setup({
+                copy_sync = {
+                    enable = false,
+                },
+                navigation = {
+                    enable_default_keybindings = false,
+                },
+                resize = {
+                    enable_default_keybindings = false,
+                }
+            })
+        end
+    })
 
 
-        use 'edluffy/specs.nvim'
+    use 'edluffy/specs.nvim'
 
-        use 'norcalli/nvim-colorizer.lua'
+    use 'norcalli/nvim-colorizer.lua'
 
-        use 'nvim-lua/plenary.nvim'
+    use 'nvim-lua/plenary.nvim'
 
-        use {
-            'junegunn/fzf',
-            opt=true
-        }
-        use {
-            'junegunn/fzf.vim',
-            opt=true
-        }
+    use {
+        'junegunn/fzf',
+        opt = true
+    }
+    use {
+        'junegunn/fzf.vim',
+        opt = true
+    }
 
-        use 'nvim-telescope/telescope.nvim'
+    use 'nvim-telescope/telescope.nvim'
 
-        use 'tpope/vim-commentary'
+    use 'tpope/vim-commentary'
 
-        use "lukas-reineke/indent-blankline.nvim"
+    use "lukas-reineke/indent-blankline.nvim"
 
-        use 'lewis6991/gitsigns.nvim'
+    use 'lewis6991/gitsigns.nvim'
 
-        use 'kazhala/close-buffers.nvim'
+    use 'kazhala/close-buffers.nvim'
     -- }}}
 
     if packer_bootstrap then
@@ -373,7 +373,7 @@ end)
 -- Plugin configs {{{
 
 -- gitsigns {{{
-require('gitsigns').setup ()
+require('gitsigns').setup()
 -- }}}
 
 -- indent_blankline{{{
@@ -399,8 +399,8 @@ vim.g.indent_blankline_context_patterns = {
 
 require("indent_blankline").setup {
     char = "▏",
-    filetype_exclude = {"help", "terminal", "startify", "packer", "markdown"},
-    buftype_exclude = {"terminal"},
+    filetype_exclude = { "help", "terminal", "startify", "packer", "markdown" },
+    buftype_exclude = { "terminal" },
     use_treesitter = true,
     show_current_context = true,
     show_trailing_blankline_indent = false,
@@ -428,37 +428,37 @@ require("indent_blankline").setup {
 --}}}
 
 -- jedi-vim {{{
-vim.cmd[[ let g:jedi#use_tabs_not_buffers = 0 ]]
-vim.cmd[[ let g:jedi#use_splits_not_buffers = 1 ]]
-vim.cmd[[ let g:jedi#auto_initialization = 1 ]]
-vim.cmd[[ let g:jedi#auto_vim_configuration = 1 ]]
-vim.cmd[[ let g:jedi#goto_command = "" ]]
-vim.cmd[[ let g:jedi#goto_assignments_command = "" ]]
-vim.cmd[[ let g:jedi#goto_definitions_command = "" ]]
-vim.cmd[[ let g:jedi#goto_stubs_command = "" ]]
-vim.cmd[[ let g:jedi#completions_command = "" ]]
-vim.cmd[[ let g:jedi#call_signatures_command = "" ]]
-vim.cmd[[ let g:jedi#usages_command = "" ]]
-vim.cmd[[ let g:jedi#rename_command = "" ]]
-vim.cmd[[ let g:jedi#completions_enabled = 1 ]]
-vim.cmd[[ let g:jedi#popup_on_dot = 0 ]]
-vim.cmd[[ let g:jedi#documentation_command = "" ]]
-vim.cmd[[ let g:jedi#show_call_signatures_delay = 500 ]]
-vim.cmd[[ let g:jedi#call_signature_escape = "?!?" ]]
-vim.cmd[[ let g:jedi#auto_close_doc = 1 ]]
-vim.cmd[[ let g:jedi#max_doc_height = 30 ]]
-vim.cmd[[ let g:jedi#popup_select_first = 1 ]]
-vim.cmd[[ let g:jedi#quickfix_window_height = 10 ]]
-vim.cmd[[ let g:jedi#force_py_version = "auto" ]]
-vim.cmd[[ let g:jedi#environment_path = "auto" ]]
-vim.cmd[[ let g:jedi#added_sys_path = "[]" ]]
-vim.cmd[[ let g:jedi#project_path = "auto" ]]
-vim.cmd[[ let g:jedi#smart_auto_mappings = 0 ]]
-vim.cmd[[ let g:jedi#use_tag_stack = 1 ]]
+vim.cmd [[ let g:jedi#use_tabs_not_buffers = 0 ]]
+vim.cmd [[ let g:jedi#use_splits_not_buffers = 1 ]]
+vim.cmd [[ let g:jedi#auto_initialization = 1 ]]
+vim.cmd [[ let g:jedi#auto_vim_configuration = 1 ]]
+vim.cmd [[ let g:jedi#goto_command = "" ]]
+vim.cmd [[ let g:jedi#goto_assignments_command = "" ]]
+vim.cmd [[ let g:jedi#goto_definitions_command = "" ]]
+vim.cmd [[ let g:jedi#goto_stubs_command = "" ]]
+vim.cmd [[ let g:jedi#completions_command = "" ]]
+vim.cmd [[ let g:jedi#call_signatures_command = "" ]]
+vim.cmd [[ let g:jedi#usages_command = "" ]]
+vim.cmd [[ let g:jedi#rename_command = "" ]]
+vim.cmd [[ let g:jedi#completions_enabled = 1 ]]
+vim.cmd [[ let g:jedi#popup_on_dot = 0 ]]
+vim.cmd [[ let g:jedi#documentation_command = "" ]]
+vim.cmd [[ let g:jedi#show_call_signatures_delay = 500 ]]
+vim.cmd [[ let g:jedi#call_signature_escape = "?!?" ]]
+vim.cmd [[ let g:jedi#auto_close_doc = 1 ]]
+vim.cmd [[ let g:jedi#max_doc_height = 30 ]]
+vim.cmd [[ let g:jedi#popup_select_first = 1 ]]
+vim.cmd [[ let g:jedi#quickfix_window_height = 10 ]]
+vim.cmd [[ let g:jedi#force_py_version = "auto" ]]
+vim.cmd [[ let g:jedi#environment_path = "auto" ]]
+vim.cmd [[ let g:jedi#added_sys_path = "[]" ]]
+vim.cmd [[ let g:jedi#project_path = "auto" ]]
+vim.cmd [[ let g:jedi#smart_auto_mappings = 0 ]]
+vim.cmd [[ let g:jedi#use_tag_stack = 1 ]]
 -- }}}
 
 -- lspsaga {{{
-require('lspsaga').init_lsp_saga{
+require('lspsaga').init_lsp_saga {
     use_saga_diagnostic_sign = true,
     error_sign = '',
     warn_sign = '',
@@ -466,10 +466,10 @@ require('lspsaga').init_lsp_saga{
     infor_sign = '',
     code_action_icon = ' ',
     code_action_prompt = {
-      enable = true,
-      sign = false,
-      sign_priority = 20,
-      virtual_text = true,
+        enable = true,
+        sign = false,
+        sign_priority = 20,
+        virtual_text = true,
     },
 
     -- finder_definition_icon = '  ',
@@ -557,7 +557,7 @@ require "lsp_signature".setup({
 -- lua-dev.nvim {{{
 local luadev = require("lua-dev").setup({
     lspconfig = {
-      cmd = {vim.fn.stdpath('data') .. "/lsp_servers/sumneko_lua/extension/server/bin/lua-language-server"}
+        cmd = { vim.fn.stdpath('data') .. "/lsp_servers/sumneko_lua/extension/server/bin/lua-language-server" }
     },
 })
 
@@ -567,19 +567,19 @@ lspconfig.sumneko_lua.setup(luadev)
 
 -- nvim-autopairs {{{
 require('nvim-autopairs').setup({
-    disable_filetype = { "TelescopePrompt" , "vim" },
+    disable_filetype = { "TelescopePrompt", "vim" },
     disable_in_macro = true,
-    ignored_next_char = string.gsub([[ [%w%%%'%[%"%.] ]],"%s+", ""),
+    ignored_next_char = string.gsub([[ [%w%%%'%[%"%.] ]], "%s+", ""),
     enable_moveright = true,
-    enable_afterquote = true,  -- add bracket pairs after quote,
-    enable_check_bracket_line = true,  --- check bracket in same line,
-    map_bs = true,  -- map the <BS> key,
+    enable_afterquote = true, -- add bracket pairs after quote,
+    enable_check_bracket_line = true, --- check bracket in same line,
+    map_bs = true, -- map the <BS> key,
     map_c_w = false, -- map <c-w> to delete an pair if possible,
     check_ts = true,
     ts_config = {
-        lua = {'string'},-- it will not add a pair on that treesitter node
-        javascript = {'template_string'},
-        java = false,-- don't check treesitter on java
+        lua = { 'string' }, -- it will not add a pair on that treesitter node
+        javascript = { 'template_string' },
+        java = false, -- don't check treesitter on java
     }
 })
 
@@ -601,19 +601,19 @@ require('nvim-autopairs').setup({
 --     }
 -- })
 local cmp_autopairs = require("nvim-autopairs.completion.cmp")
-require('cmp').event:on( 'confirm_done', cmp_autopairs.on_confirm_done({  map_char = { tex = '' } }))
+require('cmp').event:on('confirm_done', cmp_autopairs.on_confirm_done({ map_char = { tex = '' } }))
 -- }}}
 
 -- nvim-cmp {{{
-local cmp = require'cmp'
+local cmp = require 'cmp'
 
 local has_words_before = function()
-  local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-  return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+    local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+    return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
 end
 
 local feedkey = function(key, mode)
-  vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), mode, true)
+    vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), mode, true)
 end
 
 -- cmp.register_source('look', require('cmp_look').new())
@@ -629,38 +629,38 @@ cmp.setup({
         format = require('lspkind').cmp_format({
             with_text = true,
             maxwidth  = 50,
-            menu = ({
-                buffer    = "[Buffer]",
-                nvim_lsp  = "[LSP]",
-                vsnip     = "[Vsnip]",
-                nvim_lua  = "[Lua]",
-                look      = "[Look]",
-                spell     = "[Spell]",
-                cmdline   = "[CmdLine]",
-                path      = "[Path]",
-                calc      = "[Calc]",
+            menu      = ({
+                buffer   = "[Buffer]",
+                nvim_lsp = "[LSP]",
+                vsnip    = "[Vsnip]",
+                nvim_lua = "[Lua]",
+                look     = "[Look]",
+                spell    = "[Spell]",
+                cmdline  = "[CmdLine]",
+                path     = "[Path]",
+                calc     = "[Calc]",
             })
         })
     },
     mapping = {
         ["<Tab>"] = cmp.mapping(function(fallback)
-                if cmp.visible() then
-                    cmp.select_next_item()
-                elseif vim.fn["vsnip#available"]() == 1 then
-                    feedkey("<Plug>(vsnip-expand-or-jump)", "")
-                elseif has_words_before() then
-                    cmp.complete()
-                else
-                    fallback() -- The fallback function sends a already mapped key. In this case, it's probably `<Tab>`.
-                end
-            end, { "i", "s" }),
+            if cmp.visible() then
+                cmp.select_next_item()
+            elseif vim.fn["vsnip#available"]() == 1 then
+                feedkey("<Plug>(vsnip-expand-or-jump)", "")
+            elseif has_words_before() then
+                cmp.complete()
+            else
+                fallback() -- The fallback function sends a already mapped key. In this case, it's probably `<Tab>`.
+            end
+        end, { "i", "s" }),
         ["<S-Tab>"] = cmp.mapping(function()
-                if cmp.visible() then
-                    cmp.select_prev_item()
-                elseif vim.fn["vsnip#jumpable"](-1) == 1 then
-                    feedkey("<Plug>(vsnip-jump-prev)", "")
-                end
-            end, { "i", "s" }),
+            if cmp.visible() then
+                cmp.select_prev_item()
+            elseif vim.fn["vsnip#jumpable"](-1) == 1 then
+                feedkey("<Plug>(vsnip-jump-prev)", "")
+            end
+        end, { "i", "s" }),
         ['<C-d>'] = cmp.mapping.scroll_docs(-4),
         ['<C-f>'] = cmp.mapping.scroll_docs(4),
         ['<C-Space>'] = cmp.mapping.complete(),
@@ -676,7 +676,7 @@ cmp.setup({
         { name = 'nvim_lua' },
         { name = 'vsnip' },
         { name = 'buffer' },
-        { name = 'look', keyword_length=2, options={convert_case=true, loud=true}},
+        { name = 'look', keyword_length = 2, options = { convert_case = true, loud = true } },
         { name = 'spell' },
         { name = 'cmdline' },
         { name = 'path' },
@@ -689,20 +689,20 @@ cmp.setup({
 local dap = require('dap')
 
 dap.adapters.go = function(callback, config)
-  local handle
-  local port = 38697
-  handle, _ = vim.loop.spawn("dlv", {
-    args = {"dap", "-l", "127.0.0.1:" .. port},
-    detached = true
-  }, function(code)
-    handle:close()
-    print("Delve exited with exit code: " .. code)
-  end)
-  -- Wait 100ms for delve to start
-  vim.defer_fn(function()
-    dap.repl.open()
-    callback({type = "server", host = "127.0.0.1", port = port})
-  end, 100)
+    local handle
+    local port = 38697
+    handle, _ = vim.loop.spawn("dlv", {
+        args = { "dap", "-l", "127.0.0.1:" .. port },
+        detached = true
+    }, function(code)
+        handle:close()
+        print("Delve exited with exit code: " .. code)
+    end)
+    -- Wait 100ms for delve to start
+    vim.defer_fn(function()
+        dap.repl.open()
+        callback({ type = "server", host = "127.0.0.1", port = port })
+    end, 100)
 end
 
 -- https://github.com/go-delve/delve/blob/master/Documentation/usage/dlv_dap.md
@@ -743,38 +743,38 @@ require("dapui").setup({
 })
 
 dap.adapters.dlv_spawn = function(cb)
-  local stdout = vim.loop.new_pipe(false)
-  local handle
-  local pid_or_err
-  local port = 38697
-  local opts = {
-    stdio = {nil, stdout},
-    args = {"dap", "-l", "127.0.0.1:" .. port},
-    detached = true
-  }
-  handle, pid_or_err = vim.loop.spawn("dlv", opts, function(code)
-    stdout:close()
-    handle:close()
-    if code ~= 0 then
-      print('dlv exited with code', code)
-    end
-  end)
-  assert(handle, 'Error running dlv: ' .. tostring(pid_or_err))
-  stdout:read_start(function(err, chunk)
-    assert(not err, err)
-    if chunk then
-      vim.schedule(function()
-        --- You could adapt this and send `chunk` to somewhere else
-        require('dap.repl').append(chunk)
-      end)
-    end
-  end)
-  -- Wait for delve to start
-  vim.defer_fn(
-    function()
-      cb({type = "server", host = "127.0.0.1", port = port})
-    end,
-    100)
+    local stdout = vim.loop.new_pipe(false)
+    local handle
+    local pid_or_err
+    local port = 38697
+    local opts = {
+        stdio = { nil, stdout },
+        args = { "dap", "-l", "127.0.0.1:" .. port },
+        detached = true
+    }
+    handle, pid_or_err = vim.loop.spawn("dlv", opts, function(code)
+        stdout:close()
+        handle:close()
+        if code ~= 0 then
+            print('dlv exited with code', code)
+        end
+    end)
+    assert(handle, 'Error running dlv: ' .. tostring(pid_or_err))
+    stdout:read_start(function(err, chunk)
+        assert(not err, err)
+        if chunk then
+            vim.schedule(function()
+                --- You could adapt this and send `chunk` to somewhere else
+                require('dap.repl').append(chunk)
+            end)
+        end
+    end)
+    -- Wait for delve to start
+    vim.defer_fn(
+        function()
+            cb({ type = "server", host = "127.0.0.1", port = port })
+        end,
+        100)
 end
 
 dap.configurations.go = {
@@ -813,7 +813,7 @@ dap.configurations.go = {
 dap.defaults.fallback.force_external_terminal = true
 dap.defaults.fallback.external_terminal = {
     command = '/Applications/Alacritty.app/Contents/MacOS/alacritty';
-    args = {'-e'};
+    args = { '-e' };
 }
 require('nvim-dap-virtual-text').setup()
 -- }}}
@@ -885,9 +885,9 @@ require('nvim-dap-virtual-text').setup()
 -- }}}
 
 -- nvim-tree{{{
-local tree_cb = require'nvim-tree.config'.nvim_tree_callback
+local tree_cb = require 'nvim-tree.config'.nvim_tree_callback
 
-require'nvim-tree'.setup {
+require 'nvim-tree'.setup {
     disable_netrw       = false,
     hijack_netrw        = false,
     open_on_setup       = false,
@@ -904,21 +904,21 @@ require'nvim-tree'.setup {
         update_cwd  = false,
         ignore_list = {}
     },
-    system_open = {
+    system_open         = {
         cmd  = nil,
         args = {}
     },
-    view = {
+    view                = {
         width = 30,
         side = 'left',
         mappings = {
             custom_only = false,
             list = {
-                { key = {"<2-RightMouse>", "C"},    cb = tree_cb("cd") },
+                { key = { "<2-RightMouse>", "C" }, cb = tree_cb("cd") },
             }
         }
     },
-    actions = {
+    actions             = {
         open_file = {
             resize_window = false,
         }
@@ -940,12 +940,12 @@ endif
 --}}}
 
 -- specs.nvim {{{
-require('specs').setup{ 
-    show_jumps  = true,
-    min_jump = 10,
-    popup = {
+require('specs').setup {
+    show_jumps       = true,
+    min_jump         = 10,
+    popup            = {
         delay_ms = 0, -- delay before popup displays
-        inc_ms = 10, -- time increments used for fade/resize effects 
+        inc_ms = 10, -- time increments used for fade/resize effects
         blend = 50, -- starting blend, between 0-100 (fully transparent), see :h winblend
         width = 30,
         winhl = "TermCursor",
@@ -953,20 +953,20 @@ require('specs').setup{
         resizer = require('specs').slide_resizer
     },
     ignore_filetypes = {},
-    ignore_buftypes = {
+    ignore_buftypes  = {
         nofile = true,
     },
 }
 -- }}}
 
 -- Toggleterm{{{
-require("toggleterm").setup{}
+require("toggleterm").setup {}
 --}}}
 
 -- Treesitter{{{
-require'nvim-treesitter.configs'.setup {
+require 'nvim-treesitter.configs'.setup {
     ensure_installed = "all", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
-    ignore_install = {'haskell', 'phpdoc'}, -- List of parsers to ignore installing
+    ignore_install = { 'haskell', 'phpdoc' }, -- List of parsers to ignore installing
     highlight = {
         enable = true,
         additional_vim_regex_highlighting = true,
@@ -1014,7 +1014,7 @@ vim.g.vimwiki_key_mappings = {
 -- }}}
 
 -- which-key{{{
-require("which-key").setup{
+require("which-key").setup {
     triggers_blacklist = {
         i = { "<" },
         c = { "h" },
@@ -1029,7 +1029,7 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
 vim.o.autoread = true
-vim.backspace={"indent","eol","start"}
+vim.backspace = { "indent", "eol", "start" }
 vim.o.breakindent = true
 vim.o.clipboard = "unnamedplus"
 vim.o.cmdheight = 1
@@ -1037,7 +1037,7 @@ vim.wo.colorcolumn = "80"
 vim.o.cursorline = true
 vim.o.encoding = "utf-8"
 vim.o.expandtab = true
-vim.o.fileformats="unix,dos,mac"
+vim.o.fileformats = "unix,dos,mac"
 vim.o.fillchars = "vert:│,fold:-,eob: "
 vim.o.foldmethod = "marker"
 vim.o.hidden = true
@@ -1055,9 +1055,9 @@ vim.o.numberwidth = 5
 vim.o.pumblend = 15
 vim.o.relativenumber = true
 vim.o.ruler = true
-vim.o.scrolloff=2
+vim.o.scrolloff = 2
 vim.o.shiftwidth = 4
-vim.o.showbreak="↪ "
+vim.o.showbreak = "↪ "
 vim.o.showmode = false
 vim.o.showtabline = 2
 vim.o.signcolumn = "yes:2"
@@ -1085,23 +1085,23 @@ vim.opt.fillchars:append({
     verthoriz = '╋',
 })
 
-vim.cmd[[set sessionoptions-=blank]]
+vim.cmd [[set sessionoptions-=blank]]
 
 vim.o.swapfile = false
-vim.o.undodir = os.getenv("HOME").."/.cache/nvim/undodir"
+vim.o.undodir = os.getenv("HOME") .. "/.cache/nvim/undodir"
 vim.o.undofile = true
 
 vim.o.splitright = true
 vim.o.splitbelow = true
 
 -- Remove cursorline in insert mode
-vim.cmd[[autocmd InsertLeave,WinEnter * set cursorline]]
-vim.cmd[[autocmd InsertEnter,WinLeave * set nocursorline]]
+vim.cmd [[autocmd InsertLeave,WinEnter * set cursorline]]
+vim.cmd [[autocmd InsertEnter,WinLeave * set nocursorline]]
 
 -- Cursor shape:
 -- Insert - line; Normal - block; Replace - underline
 -- Works with tmux as well
-vim.cmd[[
+vim.cmd [[
     if empty($TMUX)
         let &t_SI = "\<Esc>]50;CursorShape=1\x7"
         let &t_EI = "\<Esc>]50;CursorShape=0\x7"
@@ -1114,11 +1114,11 @@ vim.cmd[[
 ]]
 
 -- Neovide
-vim.cmd[[set guifont=FiraCode\ Nerd\ Font\ Mono:h16]]
-vim.cmd[[set guicursor+=a:blinkon650]]
+vim.cmd [[set guifont=FiraCode\ Nerd\ Font\ Mono:h16]]
+vim.cmd [[set guicursor+=a:blinkon650]]
 
 -- netrw Sexplore or Lexplore
-vim.cmd[[let g:netrw_winsize = 20]]
+vim.cmd [[let g:netrw_winsize = 20]]
 
 --}}}
 
@@ -1161,7 +1161,7 @@ end
 
 -- Compile packer on save of nvim's init.lua
 vim.api.nvim_create_autocmd("BufWritePost", {
-    pattern = {"*/nvim/init.lua"},
+    pattern = { "*/nvim/init.lua" },
     callback = function()
         require("packer").compile()
     end
@@ -1177,7 +1177,7 @@ vim.api.nvim_create_autocmd("BufWritePost", {
 -- ]]
 
 vim.api.nvim_create_autocmd("BufReadPost", {
-    pattern = {"*"},
+    pattern = { "*" },
     callback = function()
         _autocommands.line_return()
     end
@@ -1195,7 +1195,7 @@ vim.api.nvim_create_autocmd("BufReadPost", {
 vim.api.nvim_create_augroup("qf", { clear = true })
 
 vim.api.nvim_create_autocmd("FileType", {
-    pattern = {"qf"},
+    pattern = { "qf" },
     callback = function()
         vim.o.buflisted = false
     end,
@@ -1203,17 +1203,17 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 vim.api.nvim_create_autocmd("WinEnter", {
-    pattern = {"*"},
+    pattern = { "*" },
     callback = function()
         if vim.fn.winnr('$') == 1 and vim.bo.buftype == "quickfix" then
-            vim.cmd[[q]]
+            vim.cmd [[q]]
         end
     end,
     group = "qf",
 })
 
 -- Terminal
-vim.cmd[[
+vim.cmd [[
     augroup Terminal
         autocmd!
         " au BufEnter term://* startinsert
@@ -1221,7 +1221,7 @@ vim.cmd[[
     augroup end
 ]]
 
-vim.cmd[[
+vim.cmd [[
     function! NeatFoldText()
         let line = ' ' . substitute(getline(v:foldstart), '^\s*"\?\s*\|\s*"\?\s*{{' . '{\d*\s*', '', 'g') . ' '
         let lines_count = v:foldend - v:foldstart + 1
@@ -1236,7 +1236,7 @@ vim.cmd[[
     set foldtext=NeatFoldText()
 ]]
 
-vim.cmd[[
+vim.cmd [[
     augroup markdown
         setlocal spell
     augroup end
@@ -1281,18 +1281,18 @@ local overrides = {
 }
 
 local conf = {
-    undercurl = true,           -- enable undercurls
+    undercurl = true, -- enable undercurls
     commentStyle = "italic",
     functionStyle = "NONE",
     keywordStyle = "italic",
     statementStyle = "bold",
     typeStyle = "NONE",
     variablebuiltinStyle = "italic",
-    specialReturn = true,       -- special highlight for the return keyword
-    specialException = true,    -- special highlight for exception handling keywords
-    transparent = false,        -- do not set background color
-    dimInactive = false,        -- dim inactive window `:h hl-NormalNC`
-    globalStatus = true,        -- adjust window separators highlight for laststatus=3
+    specialReturn = true, -- special highlight for the return keyword
+    specialException = true, -- special highlight for exception handling keywords
+    transparent = false, -- do not set background color
+    dimInactive = false, -- dim inactive window `:h hl-NormalNC`
+    globalStatus = true, -- adjust window separators highlight for laststatus=3
     overrides = overrides,
 }
 
@@ -1312,13 +1312,13 @@ local lspconfig = require('lspconfig')
 -- Formatting{{{
 -- Map :Format to vim.lsp.buf.formatting()
 FormattingOptions = {
-	tabSize = 4;
+    tabSize = 4;
     insertSpaces = false;
 }
 
 FormattingParams = vim.lsp.util.make_formatting_params(FormattingOptions)
 
-vim.cmd[[command! Format execute 'lua vim.lsp.buf.formatting(FormattingParams)']]
+vim.cmd [[command! Format execute 'lua vim.lsp.buf.formatting(FormattingParams)']]
 --}}}
 
 -- Aesthetics{{{
@@ -1378,11 +1378,11 @@ local runtime_path = vim.split(package.path, ';')
 table.insert(runtime_path, ".config/nvim/lua/?.lua")
 table.insert(runtime_path, ".config/nvim/lua/?/init.lua")
 
-require'lsp_signature'.on_attach()
+require 'lsp_signature'.on_attach()
 --}}}
 
 -- clangd {{{
-require'lspconfig'.clangd.setup{}
+require 'lspconfig'.clangd.setup {}
 -- }}}
 
 --}}}
@@ -1402,27 +1402,27 @@ end
 -- Skips over quickfix buf when tabbing through buffers
 _G.skipQFAndTerm = function(dir)
     if dir == "prev" then
-        vim.cmd[[bp]]
+        vim.cmd [[bp]]
     else
-        vim.cmd[[bn]]
+        vim.cmd [[bn]]
     end
 
     while vim.api.nvim_buf_get_option(0, "buftype") == "quickfix" do
         if dir == "prev" then
-            vim.cmd[[bp]]
+            vim.cmd [[bp]]
 
             -- I have no idea why this is needed
-            vim.cmd[[stopinsert]]
+            vim.cmd [[stopinsert]]
         else
-            vim.cmd[[bn]]
+            vim.cmd [[bn]]
 
-            vim.cmd[[stopinsert]]
+            vim.cmd [[stopinsert]]
         end
     end
 end
 
 -- Useful for determining highlight names
-vim.cmd[[
+vim.cmd [[
 function! SynStack ()
     for i1 in synstack(line("."), col("."))
         let i2 = synIDtrans(i1)
@@ -1443,10 +1443,10 @@ end
 
 _G.zoom = function()
     if vim.g.is_zoomed == true then
-        vim.cmd[[tabclose]]
+        vim.cmd [[tabclose]]
         vim.g.is_zoomed = false
     else
-        vim.cmd[[tabnew %]]
+        vim.cmd [[tabnew %]]
         vim.g.is_zoomed = true
     end
 end
@@ -1466,30 +1466,30 @@ end
 _G.nvimTreeToggle = function()
     vim.g.nvimtreeOpen = not vim.g.nvimtreeOpen
 
-    require'nvim-tree'.toggle()
+    require 'nvim-tree'.toggle()
 end
 
 _G.vistaToggle = function()
     vim.g.vistaOpen = not vim.g.vistaOpen
 
-    vim.cmd[[Vista!!]]
+    vim.cmd [[Vista!!]]
 end
 
 _G.toggleTerm = function()
     local doWinCmd = false
 
-    local nvimTree = require"nvim-tree"
-    local nvimTreeView = require"nvim-tree.view"
+    local nvimTree = require "nvim-tree"
+    local nvimTreeView = require "nvim-tree.view"
 
     if vim.g.nvimtreeOpen then
         nvimTreeView.close()
     end
 
     if vim.g.vistaOpen then
-        vim.cmd[[Vista!]]
+        vim.cmd [[Vista!]]
     end
 
-    vim.cmd[[ToggleTerm]]
+    vim.cmd [[ToggleTerm]]
 
     if vim.g.nvimtreeOpen then
         doWinCmd = true
@@ -1498,11 +1498,11 @@ _G.toggleTerm = function()
 
     if vim.g.vistaOpen then
         doWinCmd = true
-        vim.cmd[[Vista]]
+        vim.cmd [[Vista]]
     end
 
     if doWinCmd then
-        vim.cmd[[silent wincmd p]]
+        vim.cmd [[silent wincmd p]]
     end
 end
 
@@ -1545,7 +1545,7 @@ _G.getColor = function(group, attr)
 end
 
 function LazygitFloat()
-    cfg = {
+    local cfg = {
         ft = 'lazygit',
         cmd = "lazygit",
         auto_close = true,
@@ -1555,38 +1555,34 @@ function LazygitFloat()
         },
     }
 
-    local term = require('FTerm').new(cfg)
+    local term = require('FTerm'):new(cfg)
 
-    if not term then
-        return
-    end
-
-    term.open()
-
+    term:open()
 end
+
 -- }}}
 
 -- Mappings {{{
 
 -- inits{{{
-local opts = {noremap = true, silent = true}
+local opts = { noremap = true, silent = true }
 local map = function(mode, keys, command)
     vim.api.nvim_set_keymap(mode, keys, command, opts)
 end
 
 local exmap = function(mode, keys, command)
-    vim.api.nvim_set_keymap(mode, keys, command, {noremap = true, expr = true, silent = true})
+    vim.api.nvim_set_keymap(mode, keys, command, { noremap = true, expr = true, silent = true })
 end
 --}}}
 
 -- Vim maps {{{
 -- Remap for dealing with word wrap
 -- Allows for navigating through wrapped lines without skipping over wrap
-exmap('n', 'k',          "v:count == 0 ? 'gk' : 'k'")
-exmap('n', 'j',          "v:count == 0 ? 'gj' : 'j'")
+exmap('n', 'k', "v:count == 0 ? 'gk' : 'k'")
+exmap('n', 'j', "v:count == 0 ? 'gj' : 'j'")
 
-exmap('v', ">",          "'>gv'")
-exmap('v', "<",          "'<gv'")
+exmap('v', ">", "'>gv'")
+exmap('v', "<", "'<gv'")
 
 -- Better incsearch
 -- map("n", "n",            "nzzzv")
@@ -1598,73 +1594,73 @@ map("n", "N", "<Cmd>execute('normal! ' . v:count1 . 'N')<CR><Cmd>lua require('hl
 map("n", "gx", 'yiW:!open <C-R>"<CR><Esc>')
 
 -- mksession
-map("n", "<leader>mk",   ":mksession!")
+map("n", "<leader>mk", ":mksession!")
 
 -- nohl
-map("n", "<leader>nh",   ":nohl<CR>")
+map("n", "<leader>nh", ":nohl<CR>")
 
 -- Split Terminal
 -- map("n", "<leader>st",   ":lua split('split term://vimterm.sh')<CR>")
 -- map("n", "<leader>vt",   ":lua split('vsplit term://vimterm.sh')<CR>")
-map("n", "<leader>st",   ":lua split('split term://zsh')<CR>")
-map("n", "<leader>vt",   ":lua split('vsplit term://zsh')<CR>")
+map("n", "<leader>st", ":lua split('split term://zsh')<CR>")
+map("n", "<leader>vt", ":lua split('vsplit term://zsh')<CR>")
 
 -- Current window terminal
-map("n", "<leader>tt",   ":lua split('term')<CR>")
+map("n", "<leader>tt", ":lua split('term')<CR>")
 
 -- Term escape
-map("t", "<A-z>",        "<c-\\><c-n>")
+map("t", "<A-z>", "<c-\\><c-n>")
 
 -- switch tabs
-map("n", "<Tab>",        ':lua skipQFAndTerm("next")<cr>')
-map("n", "<S-Tab>",      ':lua skipQFAndTerm("prev")<cr>')
+map("n", "<Tab>", ':lua skipQFAndTerm("next")<cr>')
+map("n", "<S-Tab>", ':lua skipQFAndTerm("prev")<cr>')
 
 -- Window/buffer stuff
-map("n", "<leader>vs",   ":lua split('vsplit')<cr>")
-map("n", "<leader>ss",   ":lua split('split')<cr>")
+map("n", "<leader>vs", ":lua split('vsplit')<cr>")
+map("n", "<leader>ss", ":lua split('split')<cr>")
 
 -- Window movement
-map("n", "<A-S-h>",      '<cmd>WinShift left<cr>')
-map("n", "<A-S-j>",      '<cmd>WinShift down<cr>')
-map("n", "<A-S-k>",      '<cmd>WinShift up<cr>')
-map("n", "<A-S-l>",      '<cmd>WinShift right<cr>')
+map("n", "<A-S-h>", '<cmd>WinShift left<cr>')
+map("n", "<A-S-j>", '<cmd>WinShift down<cr>')
+map("n", "<A-S-k>", '<cmd>WinShift up<cr>')
+map("n", "<A-S-l>", '<cmd>WinShift right<cr>')
 
 -- Close window(split)
-map("n", "<A-w>",        '<cmd>wincmd c<cr>')
+map("n", "<A-w>", '<cmd>wincmd c<cr>')
 
 -- Delete buffer
-map("n", "<A-q>",        ':BDelete! this<cr>')
+map("n", "<A-q>", ':BDelete! this<cr>')
 
 -- Navigate windows/panes incl. tmux
-map("n", "<A-j>",        ":TmuxNavigateDown<CR>")
-map("n", "<A-k>",        ":TmuxNavigateUp<CR>  ")
-map("n", "<A-l>",        ":TmuxNavigateRight<CR>")
-map("n", "<A-h>",        ":TmuxNavigateLeft<CR> ")
+map("n", "<A-j>", ":TmuxNavigateDown<CR>")
+map("n", "<A-k>", ":TmuxNavigateUp<CR>  ")
+map("n", "<A-l>", ":TmuxNavigateRight<CR>")
+map("n", "<A-h>", ":TmuxNavigateLeft<CR> ")
 
-map("v", "<A-j>",        ":TmuxNavigateDown<CR>")
-map("v", "<A-k>",        ":TmuxNavigateUp<CR>  ")
-map("v", "<A-l>",        ":TmuxNavigateRight<CR>")
-map("v", "<A-h>",        ":TmuxNavigateLeft<CR> ")
+map("v", "<A-j>", ":TmuxNavigateDown<CR>")
+map("v", "<A-k>", ":TmuxNavigateUp<CR>  ")
+map("v", "<A-l>", ":TmuxNavigateRight<CR>")
+map("v", "<A-h>", ":TmuxNavigateLeft<CR> ")
 
-map("t", "<A-j>",        "<c-\\><c-n>:TmuxNavigateDown<CR>")
-map("t", "<A-k>",        "<c-\\><c-n>:TmuxNavigateUp<CR>  ")
-map("t", "<A-l>",        "<c-\\><c-n>:TmuxNavigateRight<CR>")
-map("t", "<A-h>",        "<c-\\><c-n>:TmuxNavigateLeft<CR> ")
+map("t", "<A-j>", "<c-\\><c-n>:TmuxNavigateDown<CR>")
+map("t", "<A-k>", "<c-\\><c-n>:TmuxNavigateUp<CR>  ")
+map("t", "<A-l>", "<c-\\><c-n>:TmuxNavigateRight<CR>")
+map("t", "<A-h>", "<c-\\><c-n>:TmuxNavigateLeft<CR> ")
 
-map("n", "<A-C-j>",      '<cmd>lua require("tmux").resize_bottom()<cr>')
-map("n", "<A-C-k>",      '<cmd>lua require("tmux").resize_top()<cr>')
-map("n", "<A-C-l>",      '<cmd>lua require("tmux").resize_right()<cr>')
-map("n", "<A-C-h>",      '<cmd>lua require("tmux").resize_left()<cr>')
+map("n", "<A-C-j>", '<cmd>lua require("tmux").resize_bottom()<cr>')
+map("n", "<A-C-k>", '<cmd>lua require("tmux").resize_top()<cr>')
+map("n", "<A-C-l>", '<cmd>lua require("tmux").resize_right()<cr>')
+map("n", "<A-C-h>", '<cmd>lua require("tmux").resize_left()<cr>')
 
-map("v", "<A-C-j>",      '<cmd>lua require("tmux").resize_bottom()<cr>')
-map("v", "<A-C-k>",      '<cmd>lua require("tmux").resize_top()<cr>')
-map("v", "<A-C-l>",      '<cmd>lua require("tmux").resize_right()<cr>')
-map("v", "<A-C-h>",      '<cmd>lua require("tmux").resize_left()<cr>')
+map("v", "<A-C-j>", '<cmd>lua require("tmux").resize_bottom()<cr>')
+map("v", "<A-C-k>", '<cmd>lua require("tmux").resize_top()<cr>')
+map("v", "<A-C-l>", '<cmd>lua require("tmux").resize_right()<cr>')
+map("v", "<A-C-h>", '<cmd>lua require("tmux").resize_left()<cr>')
 
-map("t", "<A-C-j>",      '<c-\\><c-n>:lua require("tmux").resize_bottom()<cr>')
-map("t", "<A-C-k>",      '<c-\\><c-n>:lua require("tmux").resize_top()<cr>')
-map("t", "<A-C-l>",      '<c-\\><c-n>:lua require("tmux").resize_right()<cr>')
-map("t", "<A-C-h>",      '<c-\\><c-n>:lua require("tmux").resize_left()<cr>')
+map("t", "<A-C-j>", '<c-\\><c-n>:lua require("tmux").resize_bottom()<cr>')
+map("t", "<A-C-k>", '<c-\\><c-n>:lua require("tmux").resize_top()<cr>')
+map("t", "<A-C-l>", '<c-\\><c-n>:lua require("tmux").resize_right()<cr>')
+map("t", "<A-C-h>", '<c-\\><c-n>:lua require("tmux").resize_left()<cr>')
 -- }}}
 
 -- Plugin maps {{{
@@ -1673,91 +1669,87 @@ map("t", "<A-C-h>",      '<c-\\><c-n>:lua require("tmux").resize_left()<cr>')
 -- map("n", "<leader>f",    '<cmd>lua require("hop").hint_words()<cr>')
 
 -- Commentary
-map("n", "<leader>cm",   ':Commentary<cr><esc>')
-map("v", "<leader>cm",   ':Commentary<cr><esc>')
+map("n", "<leader>cm", ':Commentary<cr><esc>')
+map("v", "<leader>cm", ':Commentary<cr><esc>')
 
 -- nvim-tree
 
-map("n", "<leader>1",        "<cmd>lua nvimTreeToggle()<CR>")
-map("t", "<leader>1",        "<C-\\><C-n>:lua nvimTreeToggle()<CR>")
+map("n", "<leader>1", "<cmd>lua nvimTreeToggle()<CR>")
+map("t", "<leader>1", "<C-\\><C-n>:lua nvimTreeToggle()<CR>")
 
--- Floaterm
--- map("n", "<leader>2",        '<cmd>lua require("FTerm").toggle()<CR>')
--- map("t", "<leader>2",        '<cmd>lua require("FTerm").toggle()<CR>')
-map("n", "<leader>2",        ":lua toggleTerm()<CR>")
-map("t", "<leader>2",        "<C-\\><C-n>:lua toggleTerm()<CR>")
+map("n", "<leader>2", ":lua toggleTerm()<CR>")
+map("t", "<leader>2", "<C-\\><C-n>:lua toggleTerm()<CR>")
 
 -- -- Tagbar
 -- map("n", "<leader>3",        "<cmd>lua vistaToggle()<CR>")
 
 -- Lazygit
-map("n", "<leader>lg",   ":lua LazygitFloat()<cr>")
+map("n", "<leader>lg", ":lua LazygitFloat()<cr>")
 
 -- Undotree
-map("n", "<leader>ud",   ":packadd undotree | :UndotreeToggle<CR>")
+map("n", "<leader>ud", ":packadd undotree | :UndotreeToggle<CR>")
 
 -- LSP {{{
-map('n', '<leader>gy',   '<Cmd>lua vim.lsp.buf.declaration()<CR>')
-map('n', '<leader>gd',   '<Cmd>lua vim.lsp.buf.definition()<CR>')
-map('n', '<leader>gD',   '<cmd>lua vim.lsp.buf.type_definition()<CR>')
-map('n', '<leader>sd',   "<cmd>lua vim.lsp.buf.hover()<CR>")
-map('n', '<leader>pd',   "<cmd>lua require('lspsaga.provider').preview_definition()<CR>")
-map("n", "<leader>gr",   "<cmd>lua require('telescope.builtin').lsp_references()<cr>")
-map('n', '<leader>sD',   '<cmd>lua vim.diagnostic.open_float()<CR>')
-map('n', '<leader>g[',   '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>')
-map('n', '<leader>g]',   '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>')
-map('n', '<leader>rn',   "<cmd>lua require('lspsaga.rename').rename()<CR>")
-map('n', '<leader>ca',   '<cmd>lua vim.lsp.buf.code_action()<CR>')
+map('n', '<leader>gy', '<Cmd>lua vim.lsp.buf.declaration()<CR>')
+map('n', '<leader>gd', '<Cmd>lua vim.lsp.buf.definition()<CR>')
+map('n', '<leader>gD', '<cmd>lua vim.lsp.buf.type_definition()<CR>')
+map('n', '<leader>sd', "<cmd>lua vim.lsp.buf.hover()<CR>")
+map('n', '<leader>pd', "<cmd>lua require('lspsaga.provider').preview_definition()<CR>")
+map("n", "<leader>gr", "<cmd>lua require('telescope.builtin').lsp_references()<cr>")
+map('n', '<leader>sD', '<cmd>lua vim.diagnostic.open_float()<CR>')
+map('n', '<leader>g[', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>')
+map('n', '<leader>g]', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>')
+map('n', '<leader>rn', "<cmd>lua require('lspsaga.rename').rename()<CR>")
+map('n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>')
 
 --}}}
 
 -- FZF
-map('n', '<leader>pr',   ":packadd fzf | :packadd fzf.vim | :Rg<cr>")
-map('n', '<leader>pw',   ":packadd fzf | :packadd fzf.vim | :FindWord><cr>")
+map('n', '<leader>pr', ":packadd fzf | :packadd fzf.vim | :Rg<cr>")
+map('n', '<leader>pw', ":packadd fzf | :packadd fzf.vim | :FindWord><cr>")
 
 -- Limelight toggles with '!!'
 -- map('n', '<leader>li',   '<cmd>Limelight!!<CR>')
 
 -- Obsession
-map('n', '<leader>Ob',   '<cmd>Obsess<CR>')
-map('n', '<leader>OB',   '<cmd>Obsess!<CR>')
+map('n', '<leader>Ob', '<cmd>Obsess<CR>')
+map('n', '<leader>OB', '<cmd>Obsess!<CR>')
 
-map("n","<leader>tf","<cmd>lua require('telescope.builtin').find_files()<cr>")
-map("n","<leader>tg","<cmd>lua require('telescope.builtin').live_grep()<cr>")
-map("n","<leader>tb","<cmd>lua require('telescope.builtin').buffers()<cr>")
-map("n","<leader>th","<cmd>lua require('telescope.builtin').help_tags()<cr>")
+map("n", "<leader>tf", "<cmd>lua require('telescope.builtin').find_files()<cr>")
+map("n", "<leader>tg", "<cmd>lua require('telescope.builtin').live_grep()<cr>")
+map("n", "<leader>tb", "<cmd>lua require('telescope.builtin').buffers()<cr>")
+map("n", "<leader>th", "<cmd>lua require('telescope.builtin').help_tags()<cr>")
 
-map("n", "<leader>qf",    "<cmd>lua require('telescope.builtin').quickfix()<cr>")
-map('n', '<leader>ql',    "<cmd>lua require('telescope.builtin').loclist()<cr>")
-map('n', '<leader>ql',    "<cmd>lua require('telescope.builtin').loclist()<cr>")
+map("n", "<leader>qf", "<cmd>lua require('telescope.builtin').quickfix()<cr>")
+map('n', '<leader>ql', "<cmd>lua require('telescope.builtin').loclist()<cr>")
+map('n', '<leader>ql', "<cmd>lua require('telescope.builtin').loclist()<cr>")
 
 -- }}}
 
 -- Debug maps {{{
-map("n", "<leader>db",   "<cmd>lua require('dap').toggle_breakpoint()<CR>")
-map("n", "<leader>di",   "<cmd>lua require('dap').step_into()<CR>")
-map("n", "<leader>dn",   "<cmd>lua require('dap').step_over()<CR>")
-map("n", "<leader>do",   "<cmd>lua require('dap').step_out()<CR>")
-map("n", "<leader>du",   "<cmd>lua require('dap').up()<CR>")
-map("n", "<leader>drn",  "<cmd>lua require('dap').run_to_cursor()<CR>")
-map("n", "<leader>dd",   "<cmd>lua require('dap').down()<CR>")
-map("n", "<leader>dc",   "<cmd>lua require('dap').continue()<CR>")
-map("n", "<leader>ds",   "<cmd>lua require('dapui').open()<cr>")
-map("n", "<leader>dS",   "<cmd>lua dapStop()<cr>")
+map("n", "<leader>db", "<cmd>lua require('dap').toggle_breakpoint()<CR>")
+map("n", "<leader>di", "<cmd>lua require('dap').step_into()<CR>")
+map("n", "<leader>dn", "<cmd>lua require('dap').step_over()<CR>")
+map("n", "<leader>do", "<cmd>lua require('dap').step_out()<CR>")
+map("n", "<leader>du", "<cmd>lua require('dap').up()<CR>")
+map("n", "<leader>drn", "<cmd>lua require('dap').run_to_cursor()<CR>")
+map("n", "<leader>dd", "<cmd>lua require('dap').down()<CR>")
+map("n", "<leader>dc", "<cmd>lua require('dap').continue()<CR>")
+map("n", "<leader>ds", "<cmd>lua require('dapui').open()<cr>")
+map("n", "<leader>dS", "<cmd>lua dapStop()<cr>")
 -- }}}
 
 -- Language specific maps {{{
-    -- Go {{{
+-- Go {{{
 -- map("n", "<leader>Gie", ":lua goIfErr()<CR>")
 -- map("n", "<leader>Gfs", ":lua goFillStruct()<CR>")
-    --}}}
+--}}}
 -- }}}
 
 -- Custom Function maps{{{
 
-map("n", "<leader>sn",   ":call SynStack()<cr>")
+map("n", "<leader>sn", ":call SynStack()<cr>")
 
 --}}}
 
---}}}
-
+--}}
