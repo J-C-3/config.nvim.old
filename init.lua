@@ -1405,9 +1405,8 @@ Util.line_return = function()
 end
 
 -- Skips over quickfix buf when tabbing through buffers
-_G.skipQFAndTerm = function(dir)
-    if dir == "prev" then
-        vim.cmd [[bp]]
+Util.skipQF = function(dir)
+    if dir == "prev" then vim.cmd [[bp]]
     else
         vim.cmd [[bn]]
     end
@@ -1617,8 +1616,8 @@ map("n", "<leader>tt", ":lua split('term')<CR>")
 map("t", "<A-z>", "<c-\\><c-n>")
 
 -- switch tabs
-map("n", "<Tab>", ':lua skipQFAndTerm("next")<cr>')
-map("n", "<S-Tab>", ':lua skipQFAndTerm("prev")<cr>')
+map("n", "<Tab>", ':lua Util.skipQF("next")<cr>')
+map("n", "<S-Tab>", ':lua Util.skipQF("prev")<cr>')
 
 -- Window/buffer stuff
 map("n", "<leader>vs", ":lua split('vsplit')<cr>")
@@ -1680,11 +1679,11 @@ map("v", "<leader>cm", ':Commentary<cr><esc>')
 
 -- nvim-tree
 
-map("n", "<leader>1", "<cmd>lua nvimTreeToggle()<CR>")
-map("t", "<leader>1", "<C-\\><C-n>:lua nvimTreeToggle()<CR>")
+map("n", "<leader>1", "<cmd>lua Util.nvimTreeToggle()<CR>")
+map("t", "<leader>1", "<C-\\><C-n>:lua Util.nvimTreeToggle()<CR>")
 
-map("n", "<leader>2", ":lua toggleTerm()<CR>")
-map("t", "<leader>2", "<C-\\><C-n>:lua toggleTerm()<CR>")
+map("n", "<leader>2", ":lua Util.toggleTerm()<CR>")
+map("t", "<leader>2", "<C-\\><C-n>:lua Util.toggleTerm()<CR>")
 
 -- -- Tagbar
 -- map("n", "<leader>3",        "<cmd>lua vistaToggle()<CR>")
