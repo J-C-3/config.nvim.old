@@ -1250,6 +1250,33 @@ vim.cmd [[
 -- }}}
 
 -- Theme {{{
+-- kanagawa {{{
+local overrides = {
+    Terminal = { bg = "12121a" },
+}
+
+local conf = {
+    undercurl = true, -- enable undercurls
+    commentStyle = "italic",
+    functionStyle = "NONE",
+    keywordStyle = "italic",
+    statementStyle = "bold",
+    typeStyle = "NONE",
+    variablebuiltinStyle = "italic",
+    specialReturn = true, -- special highlight for the return keyword
+    specialException = true, -- special highlight for exception handling keywords
+    transparent = false, -- do not set background color
+    dimInactive = false, -- dim inactive window `:h hl-NormalNC`
+    globalStatus = true, -- adjust window separators highlight for laststatus=3
+    overrides = overrides,
+}
+
+local get_hex = require('cokeline/utils').get_hex
+
+require('kanagawa').setup(conf)
+
+vim.cmd("colorscheme kanagawa")
+-- }}}
 
 -- gruvbox {{{
 --vim.g.gruvbox_bold = 1
@@ -1280,35 +1307,6 @@ vim.cmd [[
 
 --vim.cmd('highlight NvimTreeNormal guibg='..Darken(getColor("Normal", "bg#"), 0.8))
 --}}}
-
--- kanagawa {{{
-local overrides = {
-    Terminal = { bg = "12121a" },
-}
-
-local conf = {
-    undercurl = true, -- enable undercurls
-    commentStyle = "italic",
-    functionStyle = "NONE",
-    keywordStyle = "italic",
-    statementStyle = "bold",
-    typeStyle = "NONE",
-    variablebuiltinStyle = "italic",
-    specialReturn = true, -- special highlight for the return keyword
-    specialException = true, -- special highlight for exception handling keywords
-    transparent = false, -- do not set background color
-    dimInactive = false, -- dim inactive window `:h hl-NormalNC`
-    globalStatus = true, -- adjust window separators highlight for laststatus=3
-    overrides = overrides,
-}
-
-local get_hex = require('cokeline/utils').get_hex
-
-require('kanagawa').setup(conf)
-
-vim.cmd("colorscheme kanagawa")
--- }}}
-
 -- }}}
 
 -- LSP {{{
