@@ -335,6 +335,12 @@ require('packer').startup(function()
         end
     })
 
+    use {
+        'declancm/maximize.nvim',
+        config = function() require('maximize').setup({
+            default_keymaps = false,
+        }) end
+    }
 
     use 'edluffy/specs.nvim'
 
@@ -1665,6 +1671,7 @@ map("t", "<A-C-h>", '<c-\\><c-n>:lua require("tmux").resize_left()<cr>')
 
 -- Plugin maps {{{
 
+map("n", "<A-f>", ":lua require('maximize').toggle()<cr>")
 -- EasyMotion
 -- map("n", "<leader>f",    '<cmd>lua require("hop").hint_words()<cr>')
 
