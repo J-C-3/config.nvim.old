@@ -1606,11 +1606,11 @@ map("n", "<leader>nh", ":nohl<CR>")
 -- Split Terminal
 -- map("n", "<leader>st",   ":lua split('split term://vimterm.sh')<CR>")
 -- map("n", "<leader>vt",   ":lua split('vsplit term://vimterm.sh')<CR>")
-map("n", "<leader>st", ":lua split('split term://zsh')<CR>")
-map("n", "<leader>vt", ":lua split('vsplit term://zsh')<CR>")
+map("n", "<leader>st", ":split term://zsh<CR>")
+map("n", "<leader>vt", ":vsplit term://zsh<CR>")
 
 -- Current window terminal
-map("n", "<leader>tt", ":lua split('term')<CR>")
+map("n", "<leader>tt", ":term<CR>")
 
 -- Term escape
 map("t", "<A-z>", "<c-\\><c-n>")
@@ -1620,8 +1620,8 @@ map("n", "<Tab>", ':lua Util.skipQF("next")<cr>')
 map("n", "<S-Tab>", ':lua Util.skipQF("prev")<cr>')
 
 -- Window/buffer stuff
-map("n", "<leader>vs", ":lua split('vsplit')<cr>")
-map("n", "<leader>ss", ":lua split('split')<cr>")
+map("n", "<leader>vs", ":vsplit<cr>")
+map("n", "<leader>ss", ":split<cr>")
 
 -- Window movement
 map("n", "<A-S-h>", '<cmd>WinShift left<cr>')
