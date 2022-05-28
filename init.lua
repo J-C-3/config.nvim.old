@@ -1211,8 +1211,22 @@ vim.api.nvim_create_autocmd("WinEnter", {
     group = "qf",
 })
 
--- Terminal
 
+-- Terminal
+vim.api.nvim_create_augroup("Terminal", { clear = true })
+
+vim.api.nvim_create_autocmd("TermOpen", {
+    pattern = { "*" },
+    callback = function()
+        vim.opt_local.number = false
+        vim.opt_local.relativenumber = false
+        vim.opt_local.wrap = true
+        vim.opt_local.list = true
+    end,
+    group = "Terminal",
+})
+
+-- I am putting off rewriting this
 vim.cmd [[
     function! NeatFoldText()
         let line = ' ' . substitute(getline(v:foldstart), '^\s*"\?\s*\|\s*"\?\s*{{' . '{\d*\s*', '', 'g') . ' '
