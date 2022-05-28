@@ -1185,19 +1185,12 @@ vim.api.nvim_create_autocmd("BufWritePost", {
 vim.api.nvim_create_autocmd("BufReadPost", {
     pattern = { "*" },
     callback = function()
-        _autocommands.line_return()
+        Util.line_return()
     end
 })
 
 -- Deal with quickfix
 -- set nobuflisted and close if last window
--- vim.cmd[[
---     augroup qf
---         autocmd!
---         autocmd FileType qf set nobuflisted
---         autocmd WinEnter * if winnr('$') == 1 && &buftype == "quickfix"|q|endif
---     augroup END
--- ]]
 vim.api.nvim_create_augroup("qf", { clear = true })
 
 vim.api.nvim_create_autocmd("FileType", {
@@ -1219,13 +1212,6 @@ vim.api.nvim_create_autocmd("WinEnter", {
 })
 
 -- Terminal
-vim.cmd [[
-    augroup Terminal
-        autocmd!
-        " au BufEnter term://* startinsert
-        au TermOpen * setlocal nonumber norelativenumber wrap list
-    augroup end
-]]
 
 vim.cmd [[
     function! NeatFoldText()
@@ -1396,10 +1382,11 @@ require 'lspconfig'.clangd.setup {}
 -- }}}
 
 -- Util {{{
-_G._autocommands = {}
+Util = {}
 
-_G._autocommands.line_return = function()
+Util.line_return = function()
     local line = vim.fn.line
+
     if line("'\"") > 0 and line("'\"") <= line("$") then
         vim.cmd("normal! g`\"zvzz'")
     end
@@ -1439,25 +1426,25 @@ function! SynStack ()
 endfunction
 ]]
 
-_G.split = function(cmd)
-    if vim.g.is_zoomed == true then
-        vim.notify("Currently zoomed")
-    else
-        vim.cmd(cmd)
-    end
-end
+-- Split = function(cmd)
+--     if vim.g.is_zoomed == true then
+--         vim.notify("Currently zoomed")
+--     else
+--         vim.cmd(cmd)
+--     end
+-- end
 
-_G.zoom = function()
-    if vim.g.is_zoomed == true then
-        vim.cmd [[tabclose]]
-        vim.g.is_zoomed = false
-    else
-        vim.cmd [[tabnew %]]
-        vim.g.is_zoomed = true
-    end
-end
+-- Util.zoom = function()
+--     if vim.g.is_zoomed == true then
+--         vim.cmd [[tabclose]]
+--         vim.g.is_zoomed = false
+--     else
+--         vim.cmd [[tabnew %]]
+--         vim.g.is_zoomed = true
+--     end
+-- end
 
-_G.dapStop = function()
+Util.dapStop = function()
     local dap = require('dap')
     local dapui = require('dapui')
 
@@ -1469,19 +1456,19 @@ _G.dapStop = function()
     dapui.close()
 end
 
-_G.nvimTreeToggle = function()
+Util.nvimTreeToggle = function()
     vim.g.nvimtreeOpen = not vim.g.nvimtreeOpen
 
     require 'nvim-tree'.toggle()
 end
 
-_G.vistaToggle = function()
+Util.vistaToggle = function()
     vim.g.vistaOpen = not vim.g.vistaOpen
 
     vim.cmd [[Vista!!]]
 end
 
-_G.toggleTerm = function()
+Util.toggleTerm = function()
     local doWinCmd = false
 
     local nvimTree = require "nvim-tree"
@@ -1546,7 +1533,7 @@ function Lighten(hex, amount)
     return blend(hex, utilfg, math.abs(amount))
 end
 
-_G.getColor = function(group, attr)
+Util.getColor = function(group, attr)
     return vim.fn.synIDattr(vim.fn.synIDtrans(vim.fn.hlID(group)), attr)
 end
 
