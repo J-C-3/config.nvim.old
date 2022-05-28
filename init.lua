@@ -317,9 +317,8 @@ require('packer').startup(function()
     -- Misc/QOL {{{
     use 'folke/which-key.nvim'
 
-    use 'christoomey/vim-tmux-navigator'
     use({
-        "aserowy/tmux.nvim",
+        "aserowy/tmux.nvim", -- only used for window resize function
         config = function()
             require("tmux").setup({
                 copy_sync = {
@@ -1589,8 +1588,6 @@ exmap('v', ">", "'>gv'")
 exmap('v', "<", "'<gv'")
 
 -- Better incsearch
--- map("n", "n",            "nzzzv")
--- map("n", "N",            "Nzzzv")
 map("n", "n", "<Cmd>execute('normal! ' . v:count1 . 'n')<CR><Cmd>lua require('hlslens').start()<CR>")
 map("n", "N", "<Cmd>execute('normal! ' . v:count1 . 'N')<CR><Cmd>lua require('hlslens').start()<CR>")
 
@@ -1604,8 +1601,6 @@ map("n", "<leader>mk", ":mksession!")
 map("n", "<leader>nh", ":nohl<CR>")
 
 -- Split Terminal
--- map("n", "<leader>st",   ":lua split('split term://vimterm.sh')<CR>")
--- map("n", "<leader>vt",   ":lua split('vsplit term://vimterm.sh')<CR>")
 map("n", "<leader>st", ":split term://zsh<CR>")
 map("n", "<leader>vt", ":vsplit term://zsh<CR>")
 
@@ -1636,20 +1631,20 @@ map("n", "<A-w>", '<cmd>wincmd c<cr>')
 map("n", "<A-q>", ':BDelete! this<cr>')
 
 -- Navigate windows/panes incl. tmux
-map("n", "<A-j>", ":TmuxNavigateDown<CR>")
-map("n", "<A-k>", ":TmuxNavigateUp<CR>  ")
-map("n", "<A-l>", ":TmuxNavigateRight<CR>")
-map("n", "<A-h>", ":TmuxNavigateLeft<CR> ")
+map("n", "<A-j>", ":lua require('tmux').move_bottom()<CR>")
+map("n", "<A-k>", ":lua require('tmux').move_top()<CR>")
+map("n", "<A-l>", ":lua require('tmux').move_right<CR>")
+map("n", "<A-h>", ":lua require('tmux').move_left<CR> ")
 
-map("v", "<A-j>", ":TmuxNavigateDown<CR>")
-map("v", "<A-k>", ":TmuxNavigateUp<CR>  ")
-map("v", "<A-l>", ":TmuxNavigateRight<CR>")
-map("v", "<A-h>", ":TmuxNavigateLeft<CR> ")
+map("v", "<A-j>", ":lua require('tmux').move_bottom()<CR>")
+map("v", "<A-k>", ":lua require('tmux').move_top()<CR>  ")
+map("v", "<A-l>", ":lua require('tmux').move_right<CR>")
+map("v", "<A-h>", ":lua require('tmux').move_left<CR> ")
 
-map("t", "<A-j>", "<c-\\><c-n>:TmuxNavigateDown<CR>")
-map("t", "<A-k>", "<c-\\><c-n>:TmuxNavigateUp<CR>  ")
-map("t", "<A-l>", "<c-\\><c-n>:TmuxNavigateRight<CR>")
-map("t", "<A-h>", "<c-\\><c-n>:TmuxNavigateLeft<CR> ")
+map("t", "<A-j>", "<c-\\><c-n>:lua require('tmux').move_bottom()<CR>")
+map("t", "<A-k>", "<c-\\><c-n>:lua require('tmux').move_top()<CR>  ")
+map("t", "<A-l>", "<c-\\><c-n>:lua require('tmux').move_right<CR>")
+map("t", "<A-h>", "<c-\\><c-n>:lua require('tmux').move_left<CR> ")
 
 map("n", "<A-C-j>", '<cmd>lua require("tmux").resize_bottom()<cr>')
 map("n", "<A-C-k>", '<cmd>lua require("tmux").resize_top()<cr>')
