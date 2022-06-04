@@ -589,6 +589,8 @@ require "lsp_signature".setup({
         border = "single"
     },
 })
+
+require 'lsp_signature'.on_attach()
 --
 -- }}}
 
@@ -1469,8 +1471,6 @@ lspconfig.tsserver.setup {
 local runtime_path = vim.split(package.path, ';')
 table.insert(runtime_path, ".config/nvim/lua/?.lua")
 table.insert(runtime_path, ".config/nvim/lua/?/init.lua")
-
-require 'lsp_signature'.on_attach()
 --}}}
 
 -- clangd {{{
