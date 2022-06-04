@@ -136,7 +136,7 @@ require('packer').startup(function()
 
             vim.cmd("colorscheme kanagawa")
 
-            vim.cmd('highlight NvimTreeNormal guibg=' .. Darken(Util.getColor("Normal", "bg#"), 0.4))
+            vim.cmd('highlight NvimTreeNormal guibg=' .. Darken(Util.getColor("Normal", "bg#"), 0.6))
             vim.cmd('highlight NvimTreeNormalNC guibg=' .. Darken(Util.getColor("Normal", "bg#"), 0.6))
             vim.cmd('highlight Terminal guibg=' .. Darken(Util.getColor("Normal", "bg#"), 0.5))
         end
