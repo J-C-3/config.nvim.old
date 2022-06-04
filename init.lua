@@ -396,9 +396,11 @@ require('packer').startup(function()
 
     use {
         'declancm/maximize.nvim',
-        config = function() require('maximize').setup({
-            default_keymaps = false,
-        }) end
+        config = function()
+            require('maximize').setup({
+                default_keymaps = false,
+            })
+        end
     }
 
     use 'edluffy/specs.nvim'
