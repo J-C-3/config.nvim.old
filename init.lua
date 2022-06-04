@@ -72,7 +72,7 @@ require('packer').startup(function()
                         link = "Terminal"
                     }
                 },
-                shell = vim.fn.expand("~").."/.config/nvim/vimterm.sh",
+                shell = vim.fn.expand("~") .. "/.config/nvim/vimterm.sh",
             }
         end
 
@@ -84,6 +84,7 @@ require('packer').startup(function()
     --}}}
 
     -- Aesthetics{{{
+    -- Theme{{{
     use {
         'ellisonleao/gruvbox.nvim',
         config = function()
@@ -143,6 +144,7 @@ require('packer').startup(function()
             vim.cmd('highlight Terminal guibg=' .. Darken(Util.getColor("Normal", "bg#"), 0.5))
         end
     }
+    --}}}
 
     use 'nvim-treesitter/nvim-treesitter'
     use 'p00f/nvim-ts-rainbow'
@@ -189,8 +191,6 @@ require('packer').startup(function()
         config = function()
             local get_hex = require('cokeline/utils').get_hex
 
-            local yellow = vim.g.terminal_color_3
-
             require('cokeline').setup({
                 default_hl = {
                     fg = function(buffer)
@@ -199,9 +199,9 @@ require('packer').startup(function()
                             or get_hex('Normal', 'fg')
                     end,
                     bg = function(buffer)
-                        return Darken(buffer.is_focused
+                        return buffer.is_focused
                             and get_hex('Normal', 'fg')
-                            or get_hex('ColorColumn', 'bg'), 0.7)
+                            or get_hex('ColorColumn', 'bg')
                     end,
                 },
 
@@ -210,8 +210,8 @@ require('packer').startup(function()
                     components = {
                         {
                             text = '  NvimTree',
-                            fg = get_hex('NvimTreeNormal', 'fg'),
-                            bg = Lighten(get_hex('NvimTreeNormal', 'bg'), 0.6),
+                            fg = get_hex('Normal', 'fg'),
+                            bg = get_hex('Normal', 'bg'),
                             style = 'bold',
                         },
                     }
@@ -316,25 +316,46 @@ require('packer').startup(function()
 
     -- Go
     use {
-        -- 'fatih/vim-go',
-        'ray-x/go.nvim',
+        'fatih/vim-go',
         opt = true,
         ft = { 'go', 'gomod' },
         config = function()
-            require('go').setup({
-                go = 'go', -- go command, can be go[default] or go1.18beta1
-                goimport = 'gopls', -- goimport command, can be gopls[default] or goimport
-                fillstruct = 'gopls', -- can be nil (use fillstruct, slower) and gopls
-                gofmt = 'gofmt', --gofmt cmd,
-                max_line_len = 120, -- max line length in goline format
-                -- gopls_cmd = nil, -- if you need to specify gopls path and cmd, e.g {"/home/user/lsp/gopls", "-logfile","/var/log/gopls.log" }
-                gopls_remote_auto = true, -- add -remote=auto to gopls
-                -- dap_debug = true, -- set to false to disable dap
-                -- dap_debug_keymap = true, -- true: use keymap for debugger defined in go/dap.lua
-                -- -- false: do not use keymap in go/dap.lua.  you must define your own.
-                -- dap_debug_gui = true, -- set to true to enable dap gui, highly recommand
-                -- dap_debug_vt = true, -- set to true to enable dap virtual text
-            })
+            vim.g.go_template_use_pkg = 1
+            vim.g.go_highlight_build_constraints = 1
+            vim.g.go_highlight_extra_types = 1
+            vim.g.go_highlight_fields = 1
+            vim.g.go_highlight_functions = 1
+            vim.g.go_highlight_methods = 1
+            vim.g.go_highlight_operators = 1
+            vim.g.go_highlight_structs = 1
+            vim.g.go_highlight_types = 1
+            vim.g.go_highlight_function_parameters = 1
+            vim.g.go_highlight_function_calls = 1
+            vim.g.go_highlight_generate_tags = 1
+            vim.g.go_highlight_format_strings = 1
+            vim.g.go_highlight_variable_declarations = 1
+            vim.g.go_highlight_variable_assignments = 1
+            vim.g.go_auto_sameids = 1
+            vim.g.go_def_mapping_enabled = 0
+            vim.g.go_list_type = "quickfix"
+            vim.g.go_fmt_autosave = 1
+            vim.g.go_imports_autosave = 1
+            vim.g.go_fmt_command = "goimports"
+            vim.g.go_fmt_fail_silently = 0
+            vim.g.go_highlight_types = 1
+            vim.g.go_highlight_diagnostic_errors = 1
+            vim.g.go_highlight_fields = 1
+            vim.g.go_highlight_functions = 1
+            vim.g.go_highlight_methods = 1
+            vim.g.go_highlight_operators = 1
+            vim.g.go_highlight_build_constraints = 1
+            vim.g.go_highlight_structs = 1
+            vim.g.go_highlight_generate_tags = 1
+            vim.g.go_highlight_space_tab_error = 0
+            vim.g.go_highlight_array_whitespace_error = 0
+            vim.g.go_highlight_trailing_whitespace_error = 0
+            vim.g.go_highlight_extra_types = 1
+            vim.g.go_rename_command = "gopls"
         end,
     }
 
@@ -455,6 +476,290 @@ require('packer').startup(function()
     end
 end)
 -- }}}
+
+-- }}}
+
+-- Global sets {{{
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
+
+vim.o.autoread = true
+vim.backspace = { "indent", "eol", "start" }
+vim.o.breakindent = true
+vim.o.clipboard = "unnamedplus"
+vim.o.cmdheight = 1
+vim.wo.colorcolumn = "80"
+vim.o.cursorline = true
+vim.o.encoding = "utf-8"
+vim.o.expandtab = true
+vim.o.fileformats = "unix,dos,mac"
+vim.cmd [[filetype plugin indent on]]
+vim.o.fillchars = "vert:│,fold:-,eob: "
+vim.o.foldmethod = "marker"
+vim.o.hidden = true
+vim.o.hlsearch = true
+vim.o.ignorecase = true
+vim.o.inccommand = "nosplit"
+vim.o.incsearch = true
+vim.opt.laststatus = 3
+vim.o.linebreak = true
+vim.o.modeline = true
+vim.o.modelines = 5
+vim.o.mouse = "a"
+vim.o.number = true
+vim.o.numberwidth = 5
+vim.o.pumblend = 15
+vim.o.relativenumber = true
+vim.o.ruler = true
+vim.o.scrolloff = 2
+vim.o.shell = "/usr/bin/env bash"
+local vimterm = vim.fn.expand("~") .. "/.config/nvim/vimterm.sh"
+vim.o.shiftwidth = 4
+vim.o.showbreak = "↪ "
+vim.o.showmode = false
+vim.o.showtabline = 2
+vim.o.signcolumn = "yes:2"
+vim.o.smartcase = true
+vim.o.softtabstop = 0
+vim.opt.spell = false
+vim.opt.spelllang = { 'en_us' }
+vim.o.startofline = 0
+vim.o.syntax = "on"
+vim.o.tabstop = 4
+vim.o.termguicolors = true
+vim.o.timeoutlen = 250
+vim.o.updatetime = 250
+vim.o.wildignore = "*.o,*.obj,.git,*.rbc,*.pyc,__pycache__"
+vim.o.wildmode = "list:longest,list:full"
+vim.o.wrap = true
+
+vim.opt.fillchars:append({
+    horiz = '█',
+    horizup = '█',
+    horizdown = '█',
+    vert = '█',
+    vertleft = '█',
+    vertright = '█',
+    verthoriz = '█',
+})
+
+vim.cmd [[set sessionoptions-=blank]]
+
+vim.o.swapfile = false
+vim.o.undodir = os.getenv("HOME") .. "/.cache/nvim/undodir"
+vim.o.undofile = true
+
+vim.o.splitright = true
+vim.o.splitbelow = true
+
+-- Remove cursorline in insert mode
+vim.cmd [[autocmd InsertLeave,WinEnter * set cursorline]]
+vim.cmd [[autocmd InsertEnter,WinLeave * set nocursorline]]
+
+-- Cursor shape:
+-- Insert - line; Normal - block; Replace - underline
+-- Works with tmux as well
+vim.cmd [[
+    if empty($TMUX)
+        let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+        let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+        let &t_SR = "\<Esc>]50;CursorShape=2\x7"
+    else
+        let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
+        let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
+        let &t_SR = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=2\x7\<Esc>\\"
+    endif
+]]
+
+-- Neovide
+vim.cmd [[set guifont=FiraCode\ Nerd\ Font\ Mono:h16]]
+vim.cmd [[set guicursor+=a:blinkon650]]
+
+-- netrw Sexplore or Lexplore
+vim.cmd [[let g:netrw_winsize = 20]]
+
+--}}}
+
+-- Util {{{
+Util = {}
+
+Util.newTerm = function()
+    if vim.fn.winnr('$') > 1 then
+        vim.cmd("split term://" .. vimterm)
+        return
+    else
+        vim.cmd("vsplit term://" .. vimterm)
+        return
+    end
+end
+
+Util.line_return = function()
+    local line = vim.fn.line
+
+    if line("'\"") > 0 and line("'\"") <= line("$") then
+        vim.cmd("normal! g`\"zvzz'")
+    end
+end
+
+-- Skips over quickfix buf when tabbing through buffers
+Util.skipQF = function(dir)
+    if dir == "prev" then vim.cmd [[bp]]
+    else
+        vim.cmd [[bn]]
+    end
+
+    while vim.api.nvim_buf_get_option(0, "buftype") == "quickfix" do
+        if dir == "prev" then
+            vim.cmd [[bp]]
+
+            -- I have no idea why this is needed
+            vim.cmd [[stopinsert]]
+        else
+            vim.cmd [[bn]]
+
+            vim.cmd [[stopinsert]]
+        end
+    end
+end
+
+-- Useful for determining highlight names
+vim.cmd [[
+function! SynStack ()
+    for i1 in synstack(line("."), col("."))
+        let i2 = synIDtrans(i1)
+        let n1 = synIDattr(i1, "name")
+        let n2 = synIDattr(i2, "name")
+        echo n1 "->" n2
+    endfor
+endfunction
+]]
+
+-- Split = function(cmd)
+--     if vim.g.is_zoomed == true then
+--         vim.notify("Currently zoomed")
+--     else
+--         vim.cmd(cmd)
+--     end
+-- end
+
+-- Util.zoom = function()
+--     if vim.g.is_zoomed == true then
+--         vim.cmd [[tabclose]]
+--         vim.g.is_zoomed = false
+--     else
+--         vim.cmd [[tabnew %]]
+--         vim.g.is_zoomed = true
+--     end
+-- end
+
+Util.dapStop = function()
+    local dap = require('dap')
+    local dapui = require('dapui')
+
+    if dap.session() then
+        dap.disconnect()
+    end
+
+    dap.close()
+    dapui.close()
+end
+
+Util.nvimTreeToggle = function()
+    vim.g.nvimtreeOpen = not vim.g.nvimtreeOpen
+
+    require 'nvim-tree'.toggle()
+end
+
+Util.vistaToggle = function()
+    vim.g.vistaOpen = not vim.g.vistaOpen
+
+    vim.cmd [[Vista!!]]
+end
+
+Util.toggleTerm = function()
+    local doWinCmd = false
+
+    local nvimTree = require "nvim-tree"
+    local nvimTreeView = require "nvim-tree.view"
+
+    if vim.g.nvimtreeOpen then
+        nvimTreeView.close()
+    end
+
+    if vim.g.vistaOpen then
+        vim.cmd [[Vista!]]
+    end
+
+    vim.cmd [[ToggleTerm]]
+
+    if vim.g.nvimtreeOpen then
+        doWinCmd = true
+        nvimTree.toggle()
+    end
+
+    if vim.g.vistaOpen then
+        doWinCmd = true
+        vim.cmd [[Vista]]
+    end
+
+    if doWinCmd then
+        vim.cmd [[silent wincmd p]]
+    end
+end
+
+local utilbg = "#000000"
+local utilfg = "#ffffff"
+
+local function hexToRgb(hex_str)
+    local hex = "[abcdef0-9][abcdef0-9]"
+    local pat = "^#(" .. hex .. ")(" .. hex .. ")(" .. hex .. ")$"
+    hex_str = string.lower(hex_str)
+
+    assert(string.find(hex_str, pat) ~= nil, "hex_to_rgb: invalid hex_str: " .. tostring(hex_str))
+
+    local r, g, b = string.match(hex_str, pat)
+    return { tonumber(r, 16), tonumber(g, 16), tonumber(b, 16) }
+end
+
+local function blend(fg, bg, alpha)
+    bg = hexToRgb(bg)
+    fg = hexToRgb(fg)
+
+    local blendChannel = function(i)
+        local ret = (alpha * fg[i] + ((1 - alpha) * bg[i]))
+        return math.floor(math.min(math.max(0, ret), 255) + 0.5)
+    end
+
+    return string.format("#%02X%02X%02X", blendChannel(1), blendChannel(2), blendChannel(3))
+end
+
+function Darken(hex, amount)
+    return blend(hex, utilbg, math.abs(amount))
+end
+
+function Lighten(hex, amount)
+    return blend(hex, utilfg, math.abs(amount))
+end
+
+Util.getColor = function(group, attr)
+    return vim.fn.synIDattr(vim.fn.synIDtrans(vim.fn.hlID(group)), attr)
+end
+
+function LazygitFloat()
+    local cfg = {
+        ft = 'lazygit',
+        cmd = vimterm .. " lazygit",
+        auto_close = false,
+        dimensions = {
+            height = 0.9, -- Height of the terminal window
+            width = 0.9, -- Width of the terminal window
+        },
+    }
+
+    local term = require('FTerm'):new(cfg)
+
+    term:open()
+end
 
 -- }}}
 
@@ -1016,16 +1321,16 @@ require('telescope').setup({
                 { "search highlighting (F12)", ':set hlsearch!' },
             },
             { "Debug",
-                {"Toggle breakpoint <leader>db", ":lua require('dap').toggle_breakpoint()"},
-                {"Step into <leader>di", ":lua require('dap').step_into()"},
-                {"Step over <leader>dn", ":lua require('dap').step_over()"},
-                {"Step out <leader>do", ":lua require('dap').step_out()"},
-                {"Up <leader>du", ":lua require('dap').up()"},
-                {"Down <leader>dd", ":lua require('dap').down()"},
-                {"Run to cursor <leader>drn", ":lua require('dap').run_to_cursor()"},
-                {"Continue <leader>dc", ":lua require('dap').continue()"},
-                {"DAP Open <leader>ds", ":lua require('dapui').open()"},
-                {"DAP Stop/Close <leader>dS", ":lua Util.dapStop()"},
+                { "Toggle breakpoint <leader>db", ":lua require('dap').toggle_breakpoint()" },
+                { "Step into <leader>di", ":lua require('dap').step_into()" },
+                { "Step over <leader>dn", ":lua require('dap').step_over()" },
+                { "Step out <leader>do", ":lua require('dap').step_out()" },
+                { "Up <leader>du", ":lua require('dap').up()" },
+                { "Down <leader>dd", ":lua require('dap').down()" },
+                { "Run to cursor <leader>drn", ":lua require('dap').run_to_cursor()" },
+                { "Continue <leader>dc", ":lua require('dap').continue()" },
+                { "DAP Open <leader>ds", ":lua require('dapui').open()" },
+                { "DAP Stop/Close <leader>dS", ":lua Util.dapStop()" },
             }
         }
     }
@@ -1171,106 +1476,6 @@ require("which-key").setup {
 
 --}}}
 
--- Global sets {{{
-vim.g.mapleader = " "
-vim.g.maplocalleader = " "
-
-vim.o.autoread = true
-vim.backspace = { "indent", "eol", "start" }
-vim.o.breakindent = true
-vim.o.clipboard = "unnamedplus"
-vim.o.cmdheight = 1
-vim.wo.colorcolumn = "80"
-vim.o.cursorline = true
-vim.o.encoding = "utf-8"
-vim.o.expandtab = true
-vim.o.fileformats = "unix,dos,mac"
-vim.cmd[[filetype plugin indent on]]
-vim.o.fillchars = "vert:│,fold:-,eob: "
-vim.o.foldmethod = "marker"
-vim.o.hidden = true
-vim.o.hlsearch = true
-vim.o.ignorecase = true
-vim.o.inccommand = "nosplit"
-vim.o.incsearch = true
-vim.opt.laststatus = 3
-vim.o.linebreak = true
-vim.o.modeline = true
-vim.o.modelines = 5
-vim.o.mouse = "a"
-vim.o.number = true
-vim.o.numberwidth = 5
-vim.o.pumblend = 15
-vim.o.relativenumber = true
-vim.o.ruler = true
-vim.o.scrolloff = 2
-vim.o.shell = vim.fn.expand("~").."/.config/nvim/vimterm.sh"
-vim.o.shiftwidth = 4
-vim.o.showbreak = "↪ "
-vim.o.showmode = false
-vim.o.showtabline = 2
-vim.o.signcolumn = "yes:2"
-vim.o.smartcase = true
-vim.o.softtabstop = 0
-vim.opt.spell = false
-vim.opt.spelllang = { 'en_us' }
-vim.o.startofline = 0
-vim.o.syntax = "on"
-vim.o.tabstop = 4
-vim.o.termguicolors = true
-vim.o.timeoutlen = 250
-vim.o.updatetime = 250
-vim.o.wildignore = "*.o,*.obj,.git,*.rbc,*.pyc,__pycache__"
-vim.o.wildmode = "list:longest,list:full"
-vim.o.wrap = true
-
-vim.opt.fillchars:append({
-    horiz = '█',
-    horizup = '█',
-    horizdown = '█',
-    vert = '█',
-    vertleft = '█',
-    vertright = '█',
-    verthoriz = '█',
-})
-
-vim.cmd [[set sessionoptions-=blank]]
-
-vim.o.swapfile = false
-vim.o.undodir = os.getenv("HOME") .. "/.cache/nvim/undodir"
-vim.o.undofile = true
-
-vim.o.splitright = true
-vim.o.splitbelow = true
-
--- Remove cursorline in insert mode
-vim.cmd [[autocmd InsertLeave,WinEnter * set cursorline]]
-vim.cmd [[autocmd InsertEnter,WinLeave * set nocursorline]]
-
--- Cursor shape:
--- Insert - line; Normal - block; Replace - underline
--- Works with tmux as well
-vim.cmd [[
-    if empty($TMUX)
-        let &t_SI = "\<Esc>]50;CursorShape=1\x7"
-        let &t_EI = "\<Esc>]50;CursorShape=0\x7"
-        let &t_SR = "\<Esc>]50;CursorShape=2\x7"
-    else
-        let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
-        let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
-        let &t_SR = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=2\x7\<Esc>\\"
-    endif
-]]
-
--- Neovide
-vim.cmd [[set guifont=FiraCode\ Nerd\ Font\ Mono:h16]]
-vim.cmd [[set guicursor+=a:blinkon650]]
-
--- netrw Sexplore or Lexplore
-vim.cmd [[let g:netrw_winsize = 20]]
-
---}}}
-
 -- User globals {{{
 vim.g.nvimtreeOpen = false
 
@@ -1312,6 +1517,7 @@ end
 vim.api.nvim_create_autocmd("BufWritePost", {
     pattern = { "*/nvim/init.lua" },
     callback = function()
+        os.execute("rm " .. vim.fn.expand("~") .. ".config/nvim/plugin/packer-compiled.lua")
         require("packer").compile()
     end
 })
@@ -1489,189 +1695,6 @@ require 'lspconfig'.clangd.setup {}
 
 -- }}}
 
--- Util {{{
-Util = {}
-
-Util.newTerm = function()
-    if vim.fn.winnr('$') > 1 then
-        vim.cmd("split term://"..vim.o.shell)
-        return
-    else
-        vim.cmd("vsplit term://"..vim.o.shell)
-        return
-    end
-end
-
-Util.line_return = function()
-    local line = vim.fn.line
-
-    if line("'\"") > 0 and line("'\"") <= line("$") then
-        vim.cmd("normal! g`\"zvzz'")
-    end
-end
-
--- Skips over quickfix buf when tabbing through buffers
-Util.skipQF = function(dir)
-    if dir == "prev" then vim.cmd [[bp]]
-    else
-        vim.cmd [[bn]]
-    end
-
-    while vim.api.nvim_buf_get_option(0, "buftype") == "quickfix" do
-        if dir == "prev" then
-            vim.cmd [[bp]]
-
-            -- I have no idea why this is needed
-            vim.cmd [[stopinsert]]
-        else
-            vim.cmd [[bn]]
-
-            vim.cmd [[stopinsert]]
-        end
-    end
-end
-
--- Useful for determining highlight names
-vim.cmd [[
-function! SynStack ()
-    for i1 in synstack(line("."), col("."))
-        let i2 = synIDtrans(i1)
-        let n1 = synIDattr(i1, "name")
-        let n2 = synIDattr(i2, "name")
-        echo n1 "->" n2
-    endfor
-endfunction
-]]
-
--- Split = function(cmd)
---     if vim.g.is_zoomed == true then
---         vim.notify("Currently zoomed")
---     else
---         vim.cmd(cmd)
---     end
--- end
-
--- Util.zoom = function()
---     if vim.g.is_zoomed == true then
---         vim.cmd [[tabclose]]
---         vim.g.is_zoomed = false
---     else
---         vim.cmd [[tabnew %]]
---         vim.g.is_zoomed = true
---     end
--- end
-
-Util.dapStop = function()
-    local dap = require('dap')
-    local dapui = require('dapui')
-
-    if dap.session() then
-        dap.disconnect()
-    end
-
-    dap.close()
-    dapui.close()
-end
-
-Util.nvimTreeToggle = function()
-    vim.g.nvimtreeOpen = not vim.g.nvimtreeOpen
-
-    require 'nvim-tree'.toggle()
-end
-
-Util.vistaToggle = function()
-    vim.g.vistaOpen = not vim.g.vistaOpen
-
-    vim.cmd [[Vista!!]]
-end
-
-Util.toggleTerm = function()
-    local doWinCmd = false
-
-    local nvimTree = require "nvim-tree"
-    local nvimTreeView = require "nvim-tree.view"
-
-    if vim.g.nvimtreeOpen then
-        nvimTreeView.close()
-    end
-
-    if vim.g.vistaOpen then
-        vim.cmd [[Vista!]]
-    end
-
-    vim.cmd [[ToggleTerm]]
-
-    if vim.g.nvimtreeOpen then
-        doWinCmd = true
-        nvimTree.toggle()
-    end
-
-    if vim.g.vistaOpen then
-        doWinCmd = true
-        vim.cmd [[Vista]]
-    end
-
-    if doWinCmd then
-        vim.cmd [[silent wincmd p]]
-    end
-end
-
-local utilbg = "#000000"
-local utilfg = "#ffffff"
-
-local function hexToRgb(hex_str)
-    local hex = "[abcdef0-9][abcdef0-9]"
-    local pat = "^#(" .. hex .. ")(" .. hex .. ")(" .. hex .. ")$"
-    hex_str = string.lower(hex_str)
-
-    assert(string.find(hex_str, pat) ~= nil, "hex_to_rgb: invalid hex_str: " .. tostring(hex_str))
-
-    local r, g, b = string.match(hex_str, pat)
-    return { tonumber(r, 16), tonumber(g, 16), tonumber(b, 16) }
-end
-
-local function blend(fg, bg, alpha)
-    bg = hexToRgb(bg)
-    fg = hexToRgb(fg)
-
-    local blendChannel = function(i)
-        local ret = (alpha * fg[i] + ((1 - alpha) * bg[i]))
-        return math.floor(math.min(math.max(0, ret), 255) + 0.5)
-    end
-
-    return string.format("#%02X%02X%02X", blendChannel(1), blendChannel(2), blendChannel(3))
-end
-
-function Darken(hex, amount)
-    return blend(hex, utilbg, math.abs(amount))
-end
-
-function Lighten(hex, amount)
-    return blend(hex, utilfg, math.abs(amount))
-end
-
-Util.getColor = function(group, attr)
-    return vim.fn.synIDattr(vim.fn.synIDtrans(vim.fn.hlID(group)), attr)
-end
-
-function LazygitFloat()
-    local cfg = {
-        ft = 'lazygit',
-        cmd = " lazygit",
-        auto_close = false,
-        dimensions = {
-            height = 0.9, -- Height of the terminal window
-            width = 0.9, -- Width of the terminal window
-        },
-    }
-
-    local term = require('FTerm'):new(cfg)
-
-    term:open()
-end
-
--- }}}
-
 -- Mappings {{{
 
 -- inits{{{
@@ -1708,8 +1731,8 @@ map("n", "<leader>mk", ":mksession!")
 map("n", "<leader>nh", ":nohl<CR>")
 
 -- Split Terminal
-map("n", "<leader>st", ":split term://"..vim.o.shell.."<CR>")
-map("n", "<leader>vt", ":vsplit term://"..vim.o.shell.."<CR>")
+map("n", "<leader>st", ":split term://" .. vimterm .. "<CR>")
+map("n", "<leader>vt", ":vsplit term://" .. vimterm .. "<CR>")
 
 -- Current window terminal
 map("n", "<leader>tt", ":term<CR>")
