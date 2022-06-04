@@ -1106,10 +1106,6 @@ require('specs').setup {
 }
 -- }}}
 
--- Toggleterm{{{
-require("toggleterm").setup {}
---}}}
-
 -- Treesitter{{{
 require 'nvim-treesitter.configs'.setup {
     ensure_installed = "all", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
@@ -1203,6 +1199,7 @@ vim.o.pumblend = 15
 vim.o.relativenumber = true
 vim.o.ruler = true
 vim.o.scrolloff = 2
+vim.o.shell = vim.fn.expand("~").."/.config/nvim/vimterm.sh"
 vim.o.shiftwidth = 4
 vim.o.showbreak = "↪ "
 vim.o.showmode = false
@@ -1487,6 +1484,16 @@ require 'lspconfig'.clangd.setup {}
 -- Util {{{
 Util = {}
 
+Util.newTerm = function()
+    if vim.fn.winnr('$') > 1 then
+        vim.cmd("split term://"..vim.o.shell)
+        return
+    else
+        vim.cmd("vsplit term://"..vim.o.shell)
+        return
+    end
+end
+
 Util.line_return = function()
     local line = vim.fn.line
 
@@ -1693,8 +1700,8 @@ map("n", "<leader>mk", ":mksession!")
 map("n", "<leader>nh", ":nohl<CR>")
 
 -- Split Terminal
-map("n", "<leader>st", ":split term://zsh<CR>")
-map("n", "<leader>vt", ":vsplit term://zsh<CR>")
+map("n", "<leader>st", ":split term://"..vim.o.shell.."<CR>")
+map("n", "<leader>vt", ":vsplit term://"..vim.o.shell.."<CR>")
 
 -- Current window terminal
 map("n", "<leader>tt", ":term<CR>")
@@ -1775,6 +1782,9 @@ map("t", "<leader>2", "<C-\\><C-n>:lua Util.toggleTerm()<CR>")
 -- -- Tagbar
 -- map("n", "<leader>3",        "<cmd>lua vistaToggle()<CR>")
 
+
+map("n", "<leader><leader>", ":Telescope command_palette<cr>")
+
 -- Lazygit
 map("n", "<leader>lg", ":lua LazygitFloat()<cr>")
 
@@ -1828,7 +1838,7 @@ map("n", "<leader>drn", "<cmd>lua require('dap').run_to_cursor()<CR>")
 map("n", "<leader>dd", "<cmd>lua require('dap').down()<CR>")
 map("n", "<leader>dc", "<cmd>lua require('dap').continue()<CR>")
 map("n", "<leader>ds", "<cmd>lua require('dapui').open()<cr>")
-map("n", "<leader>dS", "<cmd>lua dapStop()<cr>")
+map("n", "<leader>dS", "<cmd>lua Util.dapStop()<cr>")
 -- }}}
 
 -- Language specific maps {{{
@@ -1841,6 +1851,11 @@ map("n", "<leader>dS", "<cmd>lua dapStop()<cr>")
 -- Custom Function maps{{{
 
 map("n", "<leader>sn", ":call SynStack()<cr>")
+
+-- term split like any ol TWM
+map("n", "<M-CR>", ":lua Util.newTerm()<cr>")
+map("t", "<M-CR>", ":lua Util.newTerm()<cr>")
+map("i", "<M-CR>", ":lua Util.newTerm()<cr>")
 
 --}}}
 
