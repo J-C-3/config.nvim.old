@@ -55,6 +55,7 @@ require('packer').startup(function()
         opt = false,
         config = function()
             require("toggleterm").setup {
+                size = 20,
                 hide_numbers = true,
                 shade_terminals = true,
                 shading_factor = '0.4',
@@ -62,7 +63,7 @@ require('packer').startup(function()
                 terminal_mappings = true,
                 persist_size = true,
                 direction = 'horizontal',
-                close_on_exit = true,
+                close_on_exit = false,
                 highlights = {
                     Normal = {
                         link = "Terminal"
@@ -70,7 +71,8 @@ require('packer').startup(function()
                     SignColumn = {
                         link = "Terminal"
                     }
-                }
+                },
+                shell = vim.fn.expand("~").."/.config/nvim/vimterm.sh",
             }
         end
 
@@ -1202,8 +1204,7 @@ vim.o.pumblend = 15
 vim.o.relativenumber = true
 vim.o.ruler = true
 vim.o.scrolloff = 2
-vim.o.shell = "/usr/bin/env bash"
-local vimterm = vim.fn.expand("~").."/.config/nvim/vimterm.sh"
+vim.o.shell = vim.fn.expand("~").."/.config/nvim/vimterm.sh"
 vim.o.shiftwidth = 4
 vim.o.showbreak = "↪ "
 vim.o.showmode = false
@@ -1493,10 +1494,10 @@ Util = {}
 
 Util.newTerm = function()
     if vim.fn.winnr('$') > 1 then
-        vim.cmd("split term://"..vimterm)
+        vim.cmd("split term://"..vim.o.shell)
         return
     else
-        vim.cmd("vsplit term://"..vimterm)
+        vim.cmd("vsplit term://"..vim.o.shell)
         return
     end
 end
@@ -1656,8 +1657,8 @@ end
 function LazygitFloat()
     local cfg = {
         ft = 'lazygit',
-        cmd = "lazygit",
-        auto_close = true,
+        cmd = " lazygit",
+        auto_close = false,
         dimensions = {
             height = 0.9, -- Height of the terminal window
             width = 0.9, -- Width of the terminal window
@@ -1707,8 +1708,8 @@ map("n", "<leader>mk", ":mksession!")
 map("n", "<leader>nh", ":nohl<CR>")
 
 -- Split Terminal
-map("n", "<leader>st", ":split term://"..vimterm.."<CR>")
-map("n", "<leader>vt", ":vsplit term://"..vimterm.."<CR>")
+map("n", "<leader>st", ":split term://"..vim.o.shell.."<CR>")
+map("n", "<leader>vt", ":vsplit term://"..vim.o.shell.."<CR>")
 
 -- Current window terminal
 map("n", "<leader>tt", ":term<CR>")

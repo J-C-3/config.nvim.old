@@ -6,7 +6,7 @@ if ! command -v tmux &> /dev/null; then
     echo "tmux not found, attempting to start SHELL instead"
 
     if [ -v $SHELL ]; then
-        $SHELL
+        $SHELL "$@"
         exit
     fi
 
@@ -94,8 +94,13 @@ if tmux ${TMUX_ARGS[@]} ls &> /dev/null; then
     done
 fi
 
-tmux ${TMUX_ARGS[@]} -f $tmuxConfLocation new-session -d -s vimterm$session
-if [ -z "$@" ]; then
-    tmux ${TMUX_ARGS[@]} send-keys -t vimterm$session "$@" "Enter"
+ARGS=$(echo "$@" | sed 's/\-c//')
+if [ ! -z "$ARGS" ]; then
+    tmux ${TMUX_ARGS[@]} -f $tmuxConfLocation new-session -d -s vimterm$session "$ARGS"
+else
+    tmux ${TMUX_ARGS[@]} -f $tmuxConfLocation new-session -d -s vimterm$session
 fi
+
+unset TMUX
+
 tmux ${TMUX_ARGS[@]} a -t vimterm$session
