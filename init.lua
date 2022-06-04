@@ -1316,14 +1316,6 @@ vim.api.nvim_create_autocmd("BufWritePost", {
 })
 
 -- Return to previous line in file
--- line_return defined in functions.lua
--- vim.cmd[[
---     augroup line_return
---         au!
---         au BufReadPost * lua _autocommands.line_return()
---     augroup END
--- ]]
-
 vim.api.nvim_create_autocmd("BufReadPost", {
     pattern = { "*" },
     callback = function()
