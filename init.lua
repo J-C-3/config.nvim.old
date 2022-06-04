@@ -197,9 +197,9 @@ require('packer').startup(function()
                             or get_hex('Normal', 'fg')
                     end,
                     bg = function(buffer)
-                        return buffer.is_focused
+                        return Darken(buffer.is_focused
                             and get_hex('Normal', 'fg')
-                            or get_hex('ColorColumn', 'bg')
+                            or get_hex('ColorColumn', 'bg'), 0.7)
                     end,
                 },
 
@@ -209,7 +209,7 @@ require('packer').startup(function()
                         {
                             text = '  NvimTree',
                             fg = get_hex('NvimTreeNormal', 'fg'),
-                            bg = get_hex('NvimTreeNormal', 'bg'),
+                            bg = Lighten(get_hex('NvimTreeNormal', 'bg'), 0.6),
                             style = 'bold',
                         },
                     }
@@ -217,7 +217,9 @@ require('packer').startup(function()
 
                 components = {
                     {
-                        text = function(buffer) return (buffer.index ~= 1) and '▏' or '' end,
+                        text = function(buffer)
+                            return (buffer.index ~= 1) and '▏' or ''
+                        end,
                     },
                     {
                         text = '  ',
@@ -234,13 +236,17 @@ require('packer').startup(function()
                         text = ' ',
                     },
                     {
-                        text = function(buffer) return buffer.filename .. '  ' end,
+                        text = function(buffer)
+                            return buffer.unique_prefix .. buffer.filename .. '  '
+                        end,
                         style = function(buffer)
                             return buffer.is_focused and 'bold' or nil
                         end,
                     },
                     {
-                        text = '',
+                        text = function(buffer)
+                            return buffer.is_modified and "●" or ""
+                        end,
                         delete_buffer_on_left_click = true,
                     },
                     {
