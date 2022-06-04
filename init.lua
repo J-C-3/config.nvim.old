@@ -56,22 +56,19 @@ require('packer').startup(function()
         config = function()
             require("toggleterm").setup {
                 hide_numbers = true,
-                shade_filetypes = {},
                 shade_terminals = true,
-                shading_factor = '0.8',
+                shading_factor = '0.4',
                 start_in_insert = true,
                 terminal_mappings = true,
                 persist_size = true,
                 direction = 'horizontal',
                 close_on_exit = true,
-
-                float_opts = {
-                    border = 'single',
-                    height = 15,
-                    winblend = 3,
-                    highlights = {
-                        border = "Normal",
-                        background = "Normal",
+                highlights = {
+                    Normal = {
+                        link = "Terminal"
+                    },
+                    SignColumn = {
+                        link = "Terminal"
                     }
                 }
             }
