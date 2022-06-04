@@ -375,6 +375,7 @@ require('packer').startup(function()
     --}}}
 
     -- Misc/QOL {{{
+    use 'powerman/vim-plugin-AnsiEsc'
     use 'folke/which-key.nvim'
 
     use({
