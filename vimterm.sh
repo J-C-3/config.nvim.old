@@ -1,5 +1,21 @@
 #!/usr/bin/env bash
 
+# initial checks
+
+if ! command -v tmux &> /dev/null; then
+    echo "tmux not found, attempting to start SHELL instead"
+
+    if [ -v $SHELL ]; then
+        $SHELL
+        exit
+    fi
+
+    echo "SHELL not set, exiting. Press any key (so you had a chance to see this)"
+    read
+    exit 1
+fi
+
+
 tmuxConfLocation=/tmp/tmux-vimterm/vimterm.conf
 
 if [ ! -d /tmp/tmux-vimterm ]; then
@@ -54,12 +70,12 @@ session=0
 
 TMUX_ARGS=(-S /tmp/tmux-vimterm/vimterm -L vimterm)
 
-if tmux ${TMUX_ARGS[@]} ls 2>/dev/null; then
+if tmux ${TMUX_ARGS[@]} ls &> /dev/null; then
     # close all unattached first
     IFS=$'\n'
     currentSessions=($(tmux ${TMUX_ARGS[@]} ls))
     for s in ${currentSessions[@]}; do
-        if echo $s | grep attached; then
+        if echo $s | grep attached &> /dev/null; then
             continue
         fi
 
@@ -68,9 +84,9 @@ if tmux ${TMUX_ARGS[@]} ls 2>/dev/null; then
 
     currentSessions=($(tmux ${TMUX_ARGS[@]} ls))
     for s in ${currentSessions[@]}; do
-        if echo "$s" | grep -i "vimterm[0-9]" > /dev/null; then
-            if tmux ${TMUX_ARGS[@]} -f $tmuxConfLocation ls -F '#{session_name}' | grep "vimterm$session" > /dev/null; then
-                session=$((session + 1))
+        if echo "$s" | grep -i "vimterm[0-9]" &> /dev/null; then
+            if tmux ${TMUX_ARGS[@]} -f $tmuxConfLocation ls -F '#{session_name}' | grep "vimterm$session" &> /dev/null; then
+                let session++
             else
                 break
             fi
@@ -79,4 +95,7 @@ if tmux ${TMUX_ARGS[@]} ls 2>/dev/null; then
 fi
 
 tmux ${TMUX_ARGS[@]} -f $tmuxConfLocation new-session -d -s vimterm$session
+if [ -z "$@" ]; then
+    tmux ${TMUX_ARGS[@]} send-keys -t vimterm$session "$@" "Enter"
+fi
 tmux ${TMUX_ARGS[@]} a -t vimterm$session

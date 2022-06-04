@@ -1202,7 +1202,8 @@ vim.o.pumblend = 15
 vim.o.relativenumber = true
 vim.o.ruler = true
 vim.o.scrolloff = 2
-vim.o.shell = vim.fn.expand("~").."/.config/nvim/vimterm.sh"
+vim.o.shell = "/usr/bin/env bash"
+local vimterm = vim.fn.expand("~").."/.config/nvim/vimterm.sh"
 vim.o.shiftwidth = 4
 vim.o.showbreak = "↪ "
 vim.o.showmode = false
@@ -1367,6 +1368,13 @@ vim.api.nvim_create_autocmd("TermOpen", {
     group = "Terminal",
 })
 
+vim.api.nvim_create_autocmd("TermClose", {
+    pattern = { "*" },
+    callback = function()
+        vim.cmd(':call feedkeys("i")')
+    end,
+    group = "Terminal",
+})
 -- I am putting off rewriting this
 vim.cmd [[
     function! NeatFoldText()
@@ -1493,10 +1501,10 @@ Util = {}
 
 Util.newTerm = function()
     if vim.fn.winnr('$') > 1 then
-        vim.cmd("split term://"..vim.o.shell)
+        vim.cmd("split term://"..vimterm)
         return
     else
-        vim.cmd("vsplit term://"..vim.o.shell)
+        vim.cmd("vsplit term://"..vimterm)
         return
     end
 end
@@ -1707,8 +1715,8 @@ map("n", "<leader>mk", ":mksession!")
 map("n", "<leader>nh", ":nohl<CR>")
 
 -- Split Terminal
-map("n", "<leader>st", ":split term://"..vim.o.shell.."<CR>")
-map("n", "<leader>vt", ":vsplit term://"..vim.o.shell.."<CR>")
+map("n", "<leader>st", ":split term://"..vimterm.."<CR>")
+map("n", "<leader>vt", ":vsplit term://"..vimterm.."<CR>")
 
 -- Current window terminal
 map("n", "<leader>tt", ":term<CR>")
