@@ -1111,7 +1111,7 @@ require('specs').setup {
 -- Treesitter{{{
 require 'nvim-treesitter.configs'.setup {
     ensure_installed = "all", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
-    ignore_install = { 'haskell', 'phpdoc' }, -- List of parsers to ignore installing
+    ignore_install = { 'haskell', 'phpdoc', 'norg' }, -- List of parsers to ignore installing
     highlight = {
         enable = true,
         additional_vim_regex_highlighting = true,
@@ -1183,6 +1183,7 @@ vim.o.cursorline = true
 vim.o.encoding = "utf-8"
 vim.o.expandtab = true
 vim.o.fileformats = "unix,dos,mac"
+vim.cmd[[filetype plugin indent on]]
 vim.o.fillchars = "vert:│,fold:-,eob: "
 vim.o.foldmethod = "marker"
 vim.o.hidden = true
@@ -1222,13 +1223,13 @@ vim.o.wildmode = "list:longest,list:full"
 vim.o.wrap = true
 
 vim.opt.fillchars:append({
-    horiz = '━',
-    horizup = '┻',
-    horizdown = '┳',
-    vert = '┃',
-    vertleft = '┨',
-    vertright = '┣',
-    verthoriz = '╋',
+    horiz = '█',
+    horizup = '█',
+    horizdown = '█',
+    vert = '█',
+    vertleft = '█',
+    vertright = '█',
+    verthoriz = '█',
 })
 
 vim.cmd [[set sessionoptions-=blank]]
@@ -1403,11 +1404,15 @@ vim.cmd [[
 
 local lspconfig = require('lspconfig')
 
+vim.diagnostic.config({
+    virtual_text = true,
+})
+
 -- Formatting{{{
 -- Map :Format to vim.lsp.buf.formatting()
 FormattingOptions = {
-    tabSize = 4;
-    insertSpaces = false;
+    tabSize = 4,
+    insertSpaces = true,
 }
 
 FormattingParams = vim.lsp.util.make_formatting_params(FormattingOptions)
@@ -1430,6 +1435,7 @@ local lsp_installer = require("nvim-lsp-installer")
 
 -- Provide settings first!
 lsp_installer.settings {
+    automatic_installation = true,
     ui = {
         icons = {
             server_installed = "✓",
@@ -1447,6 +1453,7 @@ lsp_installer.on_server_ready(
 --}}}
 
 -- Extra server config{{{
+--
 -- Typescript{{{
 -- I have no idea if this works
 lspconfig.tsserver.setup {
