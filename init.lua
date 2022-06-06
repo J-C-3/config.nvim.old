@@ -1413,16 +1413,6 @@ vim.cmd [[
 ]]
 -- }}}
 
--- Theme {{{
--- kanagawa {{{
--- moved to packer config
--- }}}
-
--- gruvbox {{{
--- moved to packer config
---}}}
--- }}}
-
 -- LSP {{{
 
 local lspconfig = require('lspconfig')
