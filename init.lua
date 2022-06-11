@@ -674,6 +674,11 @@ require('packer').startup(function()
             vim.o.conceallevel = 2
         end, --}}}
     }
+
+    -- -- hare
+    -- use {
+    --     'https://git.sr.ht/~sircmpwn/hare.vim',
+    -- }
     -- }}}
 
     -- LSP & Completion {{{
