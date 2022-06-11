@@ -6,10 +6,8 @@ local map = function(mode, keys, command)
 end
 
 vim.api.nvim_create_autocmd("BufEnter", {
-    pattern = { "go" },
+    pattern = { "*go" },
     callback = function()
-        vim.o.buflisted = false
-
         map("n", "<leader>mk", ":mksession!")
         map("n", "<leader>Gfs", ":GoFillStruct<cr>")
         map("n", "<leader>Gie", ":GoIfErr<cr>")
