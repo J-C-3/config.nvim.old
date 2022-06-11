@@ -1,4 +1,4 @@
--- Packer {{{
+-- Packer
 
 -- Init {{{
 -- Don't mind me:{{{
@@ -1015,6 +1015,4 @@ require('packer').startup(function()
         require('packer').sync()
     end
 end)
--- }}}
-
 -- }}}

@@ -77,6 +77,14 @@ vim.api.nvim_create_autocmd("WinEnter", {
 -- Terminal
 vim.api.nvim_create_augroup("Terminal", { clear = true })
 
+vim.api.nvim_create_autocmd("TermEnter", {
+    pattern = { "*" },
+    callback = function()
+        vim.cmd[[startinsert]]
+    end,
+    group = "Terminal",
+})
+
 vim.api.nvim_create_autocmd("TermOpen", {
     pattern = { "*" },
     callback = function()

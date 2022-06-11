@@ -2,7 +2,7 @@
 
 require('util')
 require('plugins')
-require('globals') -- put user globals in here
+require('globals')
 require('autocmds')
 require('lsp-conf')
 require('mappings')

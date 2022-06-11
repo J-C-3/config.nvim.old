@@ -1,4 +1,4 @@
--- Util {{{
+-- Util
 Util = {}
 
 Util.newTerm = function()
@@ -161,5 +161,3 @@ function LazygitFloat()
 
     term:open()
 end
-
--- }}}
