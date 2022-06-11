@@ -29,19 +29,20 @@ end
 
 -- Skips over quickfix buf when tabbing through buffers
 Util.skipQF = function(dir)
-    if dir == "prev" then vim.cmd [[bp]]
+    if dir == "prev" then
+        vim.cmd [[lua require"cokeline/mappings".by_step("focus", -1)]]
     else
-        vim.cmd [[bn]]
+        vim.cmd [[lua require"cokeline/mappings".by_step("focus", 1)]]
     end
 
     while vim.api.nvim_buf_get_option(0, "buftype") == "quickfix" do
         if dir == "prev" then
-            vim.cmd [[bp]]
+            vim.cmd [[lua require"cokeline/mappings".by_step("focus", -1)]]
 
             -- I have no idea why this is needed
             vim.cmd [[stopinsert]]
         else
-            vim.cmd [[bn]]
+            vim.cmd [[lua require"cokeline/mappings".by_step("focus", 1)]]
 
             vim.cmd [[stopinsert]]
         end
@@ -1351,7 +1352,7 @@ vim.api.nvim_create_autocmd("BufNewFile,BufRead", {
     pattern = { "*.ha" },
     callback = function()
         vim.notify("asdf")
-        vim.cmd[[:set syntax=cpp]]
+        vim.cmd [[:set syntax=cpp]]
     end
 })
 
@@ -1586,9 +1587,13 @@ map("n", "<leader>tt", ":term<CR>")
 -- Term escape
 map("t", "<A-z>", "<c-\\><c-n>")
 
--- switch tabs
+-- focus buffers
 map("n", "<Tab>", ':lua Util.skipQF("next")<cr>')
 map("n", "<S-Tab>", ':lua Util.skipQF("prev")<cr>')
+
+-- move buffers
+map("n", "<A-Tab>", '<Cmd>lua require"cokeline/mappings".by_step("switch", 1)<CR>')
+map("n", "<A-S-Tab>", '<Cmd>lua require"cokeline/mappings".by_step("switch", -1)<CR>')
 
 -- Window/buffer stuff
 map("n", "<leader>vs", ":vsplit<cr>")
