@@ -1531,6 +1531,12 @@ table.insert(runtime_path, ".config/nvim/lua/?/init.lua")
 require 'lspconfig'.clangd.setup {}
 -- }}}
 
+-- gopls {{{
+lspconfig.gopls.setup {
+    root_dir = lspconfig.util.root_pattern("go.mod", ".git", "main.go")
+}
+-- }}}
+
 --}}}
 
 -- }}}
