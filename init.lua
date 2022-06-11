@@ -1346,6 +1346,40 @@ vim.api.nvim_create_autocmd("BufReadPost", {
     end
 })
 
+-- Return to previous line in file
+vim.api.nvim_create_autocmd("BufNewFile,BufRead", {
+    pattern = { "*.ha" },
+    callback = function()
+        vim.notify("asdf")
+        vim.cmd[[:set syntax=cpp]]
+    end
+})
+
+-- LSP - documentHighlight
+-- highlight - normal
+vim.api.nvim_create_autocmd("CursorHold", {
+    pattern = { "<buffer>" },
+    callback = function()
+        vim.lsp.buf.document_highlight()
+    end
+})
+
+-- highlight - insert
+vim.api.nvim_create_autocmd("CursorHoldI", {
+    pattern = { "<buffer>" },
+    callback = function()
+        vim.lsp.buf.document_highlight()
+    end
+})
+
+-- highlight clear on move
+vim.api.nvim_create_autocmd("CursorMoved", {
+    pattern = { "<buffer>" },
+    callback = function()
+        vim.lsp.buf.clear_references()
+    end
+})
+
 -- Deal with quickfix
 -- set nobuflisted and close if last window
 vim.api.nvim_create_augroup("qf", { clear = true })
