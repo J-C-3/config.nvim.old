@@ -1031,19 +1031,19 @@ require('packer').startup(function()
 
     use {
         'folke/which-key.nvim',
-        config = function()--{{{
+        config = function() --{{{
             require("which-key").setup {
                 triggers_blacklist = {
                     i = { "<" },
                     c = { "h" },
                 }
             }
-        end--}}}
+        end --}}}
     }
 
     use({
         "aserowy/tmux.nvim", -- only used for window resize function
-        config = function()--{{{
+        config = function() --{{{
             require("tmux").setup({
                 copy_sync = {
                     enable = false,
@@ -1055,21 +1055,21 @@ require('packer').startup(function()
                     enable_default_keybindings = false,
                 }
             })
-        end--}}}
+        end --}}}
     })
 
     use {
         'declancm/maximize.nvim',
-        config = function()--{{{
+        config = function() --{{{
             require('maximize').setup({
                 default_keymaps = false,
             })
-        end--}}}
+        end --}}}
     }
 
     use {
         'edluffy/specs.nvim',
-        config = function()--{{{
+        config = function() --{{{
             require('specs').setup {
                 show_jumps       = true,
                 min_jump         = 10,
@@ -1087,7 +1087,7 @@ require('packer').startup(function()
                     nofile = true,
                 },
             }
-        end--}}}
+        end --}}}
     }
 
     use 'norcalli/nvim-colorizer.lua'
@@ -1101,7 +1101,7 @@ require('packer').startup(function()
     use {
         'junegunn/fzf.vim',
         opt = true,
-        config = function()--{{{
+        config = function() --{{{
             vim.api.nvim_exec([[
                 if executable('rg')
                     let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --follow --glob "!.git/*"'
@@ -1109,13 +1109,13 @@ require('packer').startup(function()
                     command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
                     command! -bang -nargs=* FindWord call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --hidden --follow --glob "!.git/*" --color "always" '.shellescape(expand('<cword>')).'| tr -d "\017"', 1, <bang>0)
                 endif
-            ]] , false)
-        end--}}}
+            ]], false)
+        end --}}}
     }
 
     use {
         'nvim-telescope/telescope.nvim',
-        config = function()--{{{
+        config = function() --{{{
             require('telescope').setup({
                 extensions = {
                     command_palette = {
@@ -1174,7 +1174,7 @@ require('packer').startup(function()
 
             require('telescope').load_extension('command_palette')
 
-        end--}}}
+        end --}}}
     }
 
     use 'tpope/vim-commentary'
