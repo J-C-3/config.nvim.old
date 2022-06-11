@@ -218,7 +218,7 @@ require('packer').startup(function()
     use {
         "akinsho/toggleterm.nvim",
         opt = false,
-        config = function()--{{{
+        config = function() --{{{
             require("toggleterm").setup {
                 size = 20,
                 hide_numbers = true,
@@ -239,14 +239,14 @@ require('packer').startup(function()
                 },
                 shell = vim.fn.expand("~") .. "/.config/nvim/vimterm.sh",
             }
-        end--}}}
+        end --}}}
     }
 
     use "numToStr/FTerm.nvim"
 
     use {
         'vimwiki/vimwiki',
-        config = function()--{{{
+        config = function() --{{{
             vim.g.vimwiki_key_mappings = {
                 all_maps = 1,
                 global = 1,
@@ -259,7 +259,7 @@ require('packer').startup(function()
                 html = 1,
                 mouse = 0,
             }
-        end--}}}
+        end --}}}
     }
     --}}}
 
@@ -328,7 +328,7 @@ require('packer').startup(function()
 
     use {
         'nvim-treesitter/nvim-treesitter',
-        config = function()--{{{
+        config = function() --{{{
             local tree_cb = require 'nvim-tree.config'.nvim_tree_callback
 
             require 'nvim-tree'.setup {
@@ -387,7 +387,7 @@ require('packer').startup(function()
                     -- termcolors = {} -- table of colour name strings
                 },
             }
-        end--}}}
+        end --}}}
     }
     use 'p00f/nvim-ts-rainbow'
 
@@ -395,7 +395,7 @@ require('packer').startup(function()
 
     use({ 'nvim-lualine/lualine.nvim',
         requires = { 'kyazdani42/nvim-web-devicons', opt = true },
-        config = function()--{{{
+        config = function() --{{{
             require('lualine').setup({
                 options = {
                     icons_enabled = true,
@@ -425,12 +425,12 @@ require('packer').startup(function()
                 tabline = {},
                 extensions = {}
             })
-        end--}}}
+        end --}}}
     })
 
     use({ 'noib3/nvim-cokeline',
         requires = 'kyazdani42/nvim-web-devicons', -- If you want devicons
-        config = function()--{{{
+        config = function() --{{{
             local get_hex = require('cokeline/utils').get_hex
 
             require('cokeline').setup({
@@ -498,7 +498,7 @@ require('packer').startup(function()
                     },
                 },
             })
-        end--}}}
+        end --}}}
     })
     --}}}
 
@@ -507,7 +507,7 @@ require('packer').startup(function()
 
     use {
         "folke/lua-dev.nvim",
-        config = function()--{{{
+        config = function() --{{{
             local luadev = require("lua-dev").setup({
                 lspconfig = {
                     cmd = { vim.fn.stdpath('data') .. "/lsp_servers/sumneko_lua/extension/server/bin/lua-language-server" }
@@ -516,7 +516,7 @@ require('packer').startup(function()
 
             local lspconfig = require('lspconfig')
             lspconfig.sumneko_lua.setup(luadev)
-        end--}}}
+        end --}}}
     }
 
     -- Ansible
@@ -548,7 +548,7 @@ require('packer').startup(function()
         'davidhalter/jedi-vim',
         opt = true,
         ft = { 'python' },
-        config = function()--{{{
+        config = function() --{{{
             vim.cmd [[ let g:jedi#use_tabs_not_buffers = 0 ]]
             vim.cmd [[ let g:jedi#use_splits_not_buffers = 1 ]]
             vim.cmd [[ let g:jedi#auto_initialization = 1 ]]
@@ -576,7 +576,7 @@ require('packer').startup(function()
             vim.cmd [[ let g:jedi#project_path = "auto" ]]
             vim.cmd [[ let g:jedi#smart_auto_mappings = 0 ]]
             vim.cmd [[ let g:jedi#use_tag_stack = 1 ]]
-        end--}}}
+        end --}}}
     }
 
     use {
@@ -602,7 +602,7 @@ require('packer').startup(function()
         'fatih/vim-go',
         opt = true,
         ft = { 'go', 'gomod' },
-        config = function()--{{{
+        config = function() --{{{
             vim.g.go_template_use_pkg = 1
             vim.g.go_highlight_build_constraints = 1
             vim.g.go_highlight_extra_types = 1
@@ -639,7 +639,7 @@ require('packer').startup(function()
             vim.g.go_highlight_trailing_whitespace_error = 0
             vim.g.go_highlight_extra_types = 1
             vim.g.go_rename_command = "gopls"
-        end,--}}}
+        end, --}}}
     }
 
     -- Rust
@@ -662,7 +662,7 @@ require('packer').startup(function()
         requires = 'godlygeek/tabular',
         opt = true,
         ft = { 'markdown' },
-        config = function()--{{{
+        config = function() --{{{
             vim.g.vim_markdown_folding_disabled = 1
             vim.g.vim_markdown_no_default_key_mappings = 1
             vim.g.vim_markdown_conceal = 1
@@ -670,14 +670,14 @@ require('packer').startup(function()
             vim.g.vim_markdown_strikethrough = 1
 
             vim.o.conceallevel = 2
-        end,--}}}
+        end, --}}}
     }
     -- }}}
 
     -- LSP & Completion {{{
     use {
         'mfussenegger/nvim-dap',
-        config = function()--{{{
+        config = function() --{{{
             local dap = require('dap')
 
             dap.adapters.go = function(callback, config)
@@ -808,7 +808,7 @@ require('packer').startup(function()
                 args = { '-e' };
             }
             require('nvim-dap-virtual-text').setup()
-        end--}}}
+        end --}}}
     }
     use 'rcarriga/nvim-dap-ui'
     use 'theHamsta/nvim-dap-virtual-text'
@@ -818,7 +818,7 @@ require('packer').startup(function()
 
     use {
         'hrsh7th/nvim-cmp',
-        config = function()--{{{
+        config = function() --{{{
             local cmp = require 'cmp'
 
             local has_words_before = function()
@@ -897,7 +897,7 @@ require('packer').startup(function()
                     { name = 'calc' },
                 })
             })
-        end--}}}
+        end --}}}
     }
     use 'hrsh7th/cmp-nvim-lsp'
     use 'hrsh7th/cmp-buffer'
@@ -919,7 +919,7 @@ require('packer').startup(function()
 
     use {
         'ray-x/lsp_signature.nvim',
-        config = function()--{{{
+        config = function() --{{{
             require "lsp_signature".setup({
                 bind = true, -- This is mandatory, otherwise border config won't get registered.
                 hint_enable = false,
@@ -929,14 +929,14 @@ require('packer').startup(function()
             })
 
             require 'lsp_signature'.on_attach()
-        end--}}}
+        end --}}}
     }
 
     use 'onsails/lspkind-nvim'
 
     use {
         'windwp/nvim-autopairs',
-        config = function()--{{{
+        config = function() --{{{
             require('nvim-autopairs').setup({
                 disable_filetype = { "TelescopePrompt", "vim" },
                 disable_in_macro = true,
@@ -973,7 +973,7 @@ require('packer').startup(function()
             -- })
             local cmp_autopairs = require("nvim-autopairs.completion.cmp")
             require('cmp').event:on('confirm_done', cmp_autopairs.on_confirm_done({ map_char = { tex = '' } }))
-        end--}}}
+        end --}}}
     }
 
     use 'tami5/lspsaga.nvim'
@@ -1176,9 +1176,9 @@ require('packer').startup(function()
 
     use {
         'lewis6991/gitsigns.nvim',
-        config = function()--{{{
+        config = function() --{{{
             require('gitsigns').setup()
-        end,--}}}
+        end, --}}}
     }
 
     use 'kazhala/close-buffers.nvim'
