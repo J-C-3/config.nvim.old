@@ -91,7 +91,7 @@ vim.cmd [[
 ]]
 
 -- Neovide
-vim.cmd [[set guifont=FiraCode\ Nerd\ Font\ Mono:h16]]
+vim.cmd [[set guifont=FiraCode\ Nerd\ Font\ Mono:h10]]
 vim.cmd [[set guicursor+=a:blinkon650]]
 
 -- netrw Sexplore or Lexplore
