@@ -47,7 +47,7 @@ require('packer').startup(function()
         opt = false,
         config = function() --{{{
             require("toggleterm").setup {
-                size = 20,
+                size = 15,
                 hide_numbers = true,
                 shade_terminals = true,
                 shading_factor = '0.4',
