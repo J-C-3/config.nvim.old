@@ -2,7 +2,7 @@
 
 -- Compile packer on save of nvim's init.lua
 vim.api.nvim_create_autocmd("BufWritePost", {
-    pattern = { "*/nvim/init.lua" },
+    pattern = { "*/nvim/init.lua", "*/nvim/lua/*.lua" },
     callback = function()
         os.execute("rm " .. vim.fn.expand("~") .. ".config/nvim/plugin/packer-compiled.lua")
         require("packer").compile()
