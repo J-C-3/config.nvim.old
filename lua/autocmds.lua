@@ -1,4 +1,4 @@
--- Autocommands {{{
+-- Autocommands
 
 -- Compile packer on save of nvim's init.lua
 vim.api.nvim_create_autocmd("BufWritePost", {
@@ -73,12 +73,11 @@ vim.api.nvim_create_autocmd("WinEnter", {
     group = "qf",
 })
 
-
 -- Terminal
 vim.api.nvim_create_augroup("Terminal", { clear = true })
 
-vim.api.nvim_create_autocmd("TermEnter", {
-    pattern = { "*" },
+vim.api.nvim_create_autocmd("BufEnter", {
+    pattern = { "vimterm*" },
     callback = function()
         vim.cmd[[startinsert]]
     end,
@@ -124,4 +123,3 @@ vim.cmd [[
         setlocal spell
     augroup end
 ]]
--- }}}
