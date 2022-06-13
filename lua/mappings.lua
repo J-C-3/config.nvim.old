@@ -93,10 +93,10 @@ map("v", "<A-C-k>", '<cmd>lua require("tmux").resize_top()<cr>')
 map("v", "<A-C-l>", '<cmd>lua require("tmux").resize_right()<cr>')
 map("v", "<A-C-h>", '<cmd>lua require("tmux").resize_left()<cr>')
 
-map("t", "<A-C-j>", '<c-\\><c-n>:lua require("tmux").resize_bottom()<cr>')
-map("t", "<A-C-k>", '<c-\\><c-n>:lua require("tmux").resize_top()<cr>')
-map("t", "<A-C-l>", '<c-\\><c-n>:lua require("tmux").resize_right()<cr>')
-map("t", "<A-C-h>", '<c-\\><c-n>:lua require("tmux").resize_left()<cr>')
+map("t", "<A-C-j>", '<cmd>lua require("tmux").resize_bottom()<cr>')
+map("t", "<A-C-k>", '<cmd>lua require("tmux").resize_top()<cr>')
+map("t", "<A-C-l>", '<cmd>lua require("tmux").resize_right()<cr>')
+map("t", "<A-C-h>", '<cmd>lua require("tmux").resize_left()<cr>')
 -- }}}
 
 -- Plugin maps {{{
@@ -112,10 +112,10 @@ map("v", "<leader>cm", ':Commentary<cr><esc>')
 -- nvim-tree
 
 map("n", "<leader>1", "<cmd>lua Util.nvimTreeToggle()<CR>")
-map("t", "<leader>1", "<C-\\><C-n>:lua Util.nvimTreeToggle()<CR>")
+map("t", "<leader>1", "<cmd>lua Util.nvimTreeToggle()<CR>")
 
-map("n", "<leader>2", ":lua Util.toggleTerm()<CR>")
-map("t", "<leader>2", "<C-\\><C-n>:lua Util.toggleTerm()<CR>")
+map("n", "<leader>2", "<cmd>lua Util.toggleTerm()<CR>")
+map("t", "<leader>2", "<cmd>lua Util.toggleTerm()<CR>")
 
 -- -- Tagbar
 -- map("n", "<leader>3",        "<cmd>lua vistaToggle()<CR>")
@@ -191,9 +191,9 @@ map("n", "<leader>dS", "<cmd>lua Util.dapStop()<cr>")
 map("n", "<leader>sn", ":call SynStack()<cr>")
 
 -- term split like any ol TWM
-map("n", "<M-CR>", ":lua Util.newTerm()<cr>")
-map("t", "<M-CR>", ":lua Util.newTerm()<cr>")
-map("i", "<M-CR>", ":lua Util.newTerm()<cr>")
+map("n", "<M-CR>", "<cmd>lua Util.newTerm()<cr>")
+map("t", "<M-CR>", "<cmd>lua Util.newTerm()<cr>")
+map("i", "<M-CR>", "<cmd>lua Util.newTerm()<cr>")
 
 --}}}
 
