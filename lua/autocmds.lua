@@ -33,7 +33,7 @@ vim.api.nvim_create_autocmd("CursorHold", {
     callback = function()
         local clients = vim.lsp.get_active_clients()
 
-        if not clients then
+        if not next(clients) then
             return
         end
 
@@ -49,7 +49,7 @@ vim.api.nvim_create_autocmd("CursorHoldI", {
     callback = function()
         local clients = vim.lsp.get_active_clients()
 
-        if not clients then
+        if not next(clients) then
             return
         end
 
