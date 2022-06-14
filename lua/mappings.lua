@@ -197,4 +197,6 @@ map("i", "<M-CR>", "<cmd>lua Util.newTerm()<cr>")
 
 --}}}
 
+map("t", "<C-S-n>", "<c-\\><c-n>")
+
 --}}

@@ -47,7 +47,12 @@ bind-key -T copy-mode-vi MouseDragEnd1Pane send-keys -X copy-pipe-and-cancel "wl
 bind-key -T copy-mode-vi v send-keys -X begin-selection
 bind-key -T copy-mode-vi y send-keys -X copy-pipe-and-cancel "wl-copy"
 bind-key -T copy-mode MouseDragEnd1Pane send-keys -X copy-pipe-and-cancel "wl-copy"
+
 bind-key -T root M-z copy-mode
+
+bind-key -T copy-mode-vi Tab run-shell "nvim --server $NVIM_LISTEN_ADDRESS --remote-send '<C-S-n><Tab>'"
+bind-key -T copy-mode-vi S-Tab run-shell "nvim --server $NVIM_LISTEN_ADDRESS --remote-send '<C-S-n><S-Tab>'"
+
 bind-key -T root WheelUpPane \
     if-shell -Ft= '#{?mouse_any_flag,1,#{pane_in_mode}}' \
     'send -Mt=' 'if-shell -t= "#{?alternate_on,true,false} || \
