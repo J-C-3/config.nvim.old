@@ -31,7 +31,15 @@ vim.api.nvim_create_autocmd("BufNewFile,BufRead", {
 vim.api.nvim_create_autocmd("CursorHold", {
     pattern = { "<buffer>" },
     callback = function()
-        vim.lsp.buf.document_highlight()
+        local clients = vim.lsp.get_active_clients()
+
+        if not clients then
+            return
+        end
+
+        if clients[1].server_capabilities.documentHighlightProvider then
+            vim.lsp.buf.document_highlight()
+        end
     end
 })
 
@@ -39,7 +47,15 @@ vim.api.nvim_create_autocmd("CursorHold", {
 vim.api.nvim_create_autocmd("CursorHoldI", {
     pattern = { "<buffer>" },
     callback = function()
-        vim.lsp.buf.document_highlight()
+        local clients = vim.lsp.get_active_clients()
+
+        if not clients then
+            return
+        end
+
+        if clients[1].server_capabilities.documentHighlightProvider then
+            vim.lsp.buf.document_highlight()
+        end
     end
 })
 
