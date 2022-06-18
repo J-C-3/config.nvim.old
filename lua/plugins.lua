@@ -5,25 +5,23 @@
 vim = vim
 --}}}
 
-local install_path = vim.fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
+local install_path = vim.fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
+
+local firstRun = false
 
 if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
-    packer_bootstrap = vim.fn.system({ 'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim',
-        install_path })
-    vim.o.runtimepath = vim.fn.stdpath('data') .. '/site/pack/*/start/*,' .. vim.o.runtimepath
+    firstRun = true
+    vim.cmd("!git clone https://github.com/wbthomason/packer.nvim " .. install_path)
 end
 
-require("packer").config = {
-    max_jobs = 1,
-    profile = {
-        enable = true,
-        threshold = 1
-    }
-}
+vim.cmd [[
+        packadd packer.nvim
+]]
+
 --}}}
 
 -- Plugins{{{
-require('packer').startup(function()
+require('packer').startup({ function()
     local use = require('packer').use
 
     use 'wbthomason/packer.nvim'
@@ -340,7 +338,8 @@ require('packer').startup(function()
         config = function() --{{{
             local luadev = require("lua-dev").setup({
                 lspconfig = {
-                    cmd = { vim.fn.stdpath('data') .. "/lsp_servers/sumneko_lua/extension/server/bin/lua-language-server" }
+                    cmd = { vim.fn.stdpath('data') ..
+                        "/lsp_servers/sumneko_lua/extension/server/bin/lua-language-server" }
                 },
             })
 
@@ -925,7 +924,8 @@ require('packer').startup(function()
                             { "save current file (C-s)", ':w' },
                             { "save all files (C-A-s)", ':wa' },
                             { "quit (C-q)", ':qa' },
-                            { "file browser (C-i)", ":lua require'telescope'.extensions.file_browser.file_browser()", 1 },
+                            { "file browser (C-i)", ":lua require'telescope'.extensions.file_browser.file_browser()",
+                                1 },
                             { "search word (A-w)", ":lua require('telescope.builtin').live_grep()", 1 },
                             { "git files (A-f)", ":lua require('telescope.builtin').git_files()", 1 },
                             { "files (C-f)", ":lua require('telescope.builtin').find_files()", 1 },
@@ -997,5 +997,17 @@ require('packer').startup(function()
     if packer_bootstrap then
         require('packer').sync()
     end
-end)
+end,
+    config = {
+        max_jobs = 1,
+        profile = {
+            enable = true,
+            threshold = 1
+        }
+    }
+})
+
+if firstRun then
+    require('packer').sync()
+end
 -- }}}
