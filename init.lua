@@ -1,5 +1,5 @@
 -- Nvim config
-local packerInstall = vim.fn.stdpath("data") .. "/site/pack/packer/opt/packer.nvim"
+local packerInstall = vim.fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
 
 require('util')
 require('plugins')
