@@ -144,9 +144,8 @@ map('n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>')
 
 --}}}
 
--- FZF
-map('n', '<leader>pr', ":packadd fzf | :packadd fzf.vim | :Rg<cr>")
-map('n', '<leader>pw', ":packadd fzf | :packadd fzf.vim | :FindWord<cr>")
+map('n', '<leader>pr', "<cmd>lua require('telescope.builtin').live_grep()<cr>")
+map('n', '<leader>pw', "<cmd>lua require('telescope.builtin').grep_string()<cr>")
 
 -- Limelight toggles with '!!'
 -- map('n', '<leader>li',   '<cmd>Limelight!!<CR>')

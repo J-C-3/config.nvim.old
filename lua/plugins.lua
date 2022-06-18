@@ -915,25 +915,6 @@ require('packer').startup(function()
     use 'nvim-lua/plenary.nvim'
 
     use {
-        'junegunn/fzf',
-        opt = true
-    }
-    use {
-        'junegunn/fzf.vim',
-        opt = true,
-        config = function() --{{{
-            vim.api.nvim_exec([[
-                if executable('rg')
-                    let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --follow --glob "!.git/*"'
-                    set grepprg=rg\ --vimgrep
-                    command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
-                    command! -bang -nargs=* FindWord call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --hidden --follow --glob "!.git/*" --color "always" '.shellescape(expand('<cword>')).'| tr -d "\017"', 1, <bang>0)
-                endif
-            ]], false)
-        end --}}}
-    }
-
-    use {
         'nvim-telescope/telescope.nvim',
         config = function() --{{{
             require('telescope').setup({
