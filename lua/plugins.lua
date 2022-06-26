@@ -1014,7 +1014,7 @@ require('packer').startup({ function()
     end
 end,
     config = {
-        max_jobs = 1,
+        max_jobs = 5,
         profile = {
             enable = true,
             threshold = 1
