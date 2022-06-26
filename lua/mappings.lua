@@ -118,7 +118,7 @@ map("n", "<leader>2", "<cmd>lua Util.toggleTerm()<CR>")
 map("t", "<leader>2", "<cmd>lua Util.toggleTerm()<CR>")
 
 -- -- Tagbar
--- map("n", "<leader>3",        "<cmd>lua vistaToggle()<CR>")
+map("n", "<leader>3",        "<cmd>lua Util.tagbarToggle()<CR>")
 
 
 map("n", "<leader><leader>", ":Telescope command_palette<cr>")

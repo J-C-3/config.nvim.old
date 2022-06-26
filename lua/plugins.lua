@@ -42,6 +42,17 @@ require('packer').startup({ function()
     }
 
     use {
+        'preservim/tagbar',
+        install = function()
+            vim.cmd("!"..vim.fn.stdpath("config").."/scripts/ctags.sh")
+        end,
+        config = function()
+            vim.cmd[[
+            ]]
+        end,
+    }
+
+    use {
         "akinsho/toggleterm.nvim",
         opt = false,
         config = function() --{{{

@@ -71,10 +71,10 @@ Util.nvimTreeToggle = function()
     require 'nvim-tree'.toggle()
 end
 
-Util.vistaToggle = function()
-    vim.g.vistaOpen = not vim.g.vistaOpen
+Util.tagbarToggle = function()
+    vim.g.tagbarOpen = not vim.g.tagbarOpen
 
-    vim.cmd [[Vista!!]]
+    vim.cmd [[TagbarToggle]]
 end
 
 Util.toggleTerm = function()
@@ -87,8 +87,8 @@ Util.toggleTerm = function()
         nvimTreeView.close()
     end
 
-    if vim.g.vistaOpen then
-        vim.cmd [[Vista!]]
+    if vim.g.tagbarOpen then
+        vim.cmd [[TagbarToggle]]
     end
 
     vim.cmd [[ToggleTerm]]
@@ -98,9 +98,9 @@ Util.toggleTerm = function()
         nvimTree.toggle()
     end
 
-    if vim.g.vistaOpen then
+    if vim.g.tagbarOpen then
         doWinCmd = true
-        vim.cmd [[Vista]]
+        vim.cmd [[TagbarToggle]]
     end
 
     if doWinCmd then

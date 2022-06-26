@@ -131,6 +131,6 @@ end
 -- User globals {{{
 vim.g.nvimtreeOpen = false
 
-vim.g.vistaOpen = false
+vim.g.tagbarOpen = false
 -- }}}
 
