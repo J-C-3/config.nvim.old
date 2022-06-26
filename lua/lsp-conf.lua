@@ -8,14 +8,7 @@ vim.diagnostic.config({
 
 -- Formatting{{{
 -- Map :Format to vim.lsp.buf.formatting()
-FormattingOptions = {
-    tabSize = 4,
-    insertSpaces = true,
-}
-
-FormattingParams = vim.lsp.util.make_formatting_params(FormattingOptions)
-
-vim.cmd [[command! Format execute 'lua vim.lsp.buf.formatting(FormattingParams)']]
+vim.cmd [[command! Format execute 'lua vim.lsp.buf.format { async = true }']]
 --}}}
 
 -- Aesthetics{{{
