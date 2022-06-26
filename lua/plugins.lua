@@ -74,7 +74,7 @@ require('packer').startup({ function()
                         link = "Terminal"
                     }
                 },
-                shell = vim.fn.expand("~") .. "/.config/nvim/vimterm.sh",
+                -- shell = vim.fn.expand("~") .. "/.config/nvim/vimterm.sh",
             }
         end --}}}
     }
