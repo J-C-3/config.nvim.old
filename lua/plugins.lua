@@ -33,7 +33,48 @@ require('packer').startup({ function()
 
     use {
         'kyazdani42/nvim-tree.lua',
-        requires = 'kyazdani42/nvim-web-devicons'
+        requires = 'kyazdani42/nvim-web-devicons',
+        config =function() --{{{
+        local tree_cb = require 'nvim-tree.config'.nvim_tree_callback
+
+            require 'nvim-tree'.setup {
+                disable_netrw       = false,
+                hijack_netrw        = false,
+                open_on_setup       = false,
+                ignore_ft_on_setup  = {},
+                hijack_directories   = {
+                    enable = true,
+                    auto_open = true,
+                },
+                open_on_tab         = false,
+                hijack_cursor       = false,
+                update_cwd          = false,
+                update_focused_file = {
+                    enable      = true,
+                    update_cwd  = false,
+                    ignore_list = {}
+                },
+                system_open         = {
+                    cmd  = nil,
+                    args = {}
+                },
+                view                = {
+                    width = 30,
+                    side = 'left',
+                    mappings = {
+                        custom_only = false,
+                        list = {
+                            { key = { "<2-RightMouse>", "C" }, cb = tree_cb("cd") },
+                        }
+                    }
+                },
+                actions             = {
+                    open_file = {
+                        resize_window = false,
+                    }
+                },
+            }
+        end --}}}
     }
 
     use {
@@ -168,46 +209,6 @@ require('packer').startup({ function()
     use {
         'nvim-treesitter/nvim-treesitter',
         config = function() --{{{
-            local tree_cb = require 'nvim-tree.config'.nvim_tree_callback
-
-            require 'nvim-tree'.setup {
-                disable_netrw       = false,
-                hijack_netrw        = false,
-                open_on_setup       = false,
-                ignore_ft_on_setup  = {},
-                update_to_buf_dir   = {
-                    enable = true,
-                    auto_open = true,
-                },
-                open_on_tab         = false,
-                hijack_cursor       = false,
-                update_cwd          = false,
-                update_focused_file = {
-                    enable      = true,
-                    update_cwd  = false,
-                    ignore_list = {}
-                },
-                system_open         = {
-                    cmd  = nil,
-                    args = {}
-                },
-                view                = {
-                    width = 30,
-                    side = 'left',
-                    mappings = {
-                        custom_only = false,
-                        list = {
-                            { key = { "<2-RightMouse>", "C" }, cb = tree_cb("cd") },
-                        }
-                    }
-                },
-                actions             = {
-                    open_file = {
-                        resize_window = false,
-                    }
-                }
-            }
-
             require 'nvim-treesitter.configs'.setup {
                 ensure_installed = "all", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
                 ignore_install = { 'haskell', 'phpdoc', 'norg' }, -- List of parsers to ignore installing
@@ -862,6 +863,7 @@ require('packer').startup({ function()
     -- Misc/QOL {{{
     use 'powerman/vim-plugin-AnsiEsc'
     use { "LinArcX/telescope-command-palette.nvim" }
+    use { 'tpope/vim-fugitive'}
 
     use {
         'folke/which-key.nvim',
