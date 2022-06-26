@@ -41,7 +41,7 @@ map("n", "<leader>vt", ":vsplit term://" .. Vimterm .. "<CR>")
 map("n", "<leader>tt", ":term<CR>")
 
 -- Term escape
--- map("t", "<A-z>", "<c-\\><c-n>")
+map("t", "<A-z>", "<c-\\><c-n>")
 
 -- focus buffers
 map("n", "<Tab>", ':lua Util.skipQF("next")<cr>')

@@ -149,7 +149,7 @@ end
 function LazygitFloat()
     local cfg = {
         ft = 'lazygit',
-        cmd = Vimterm .. " lazygit",
+        cmd = Vimterm .. " -c lazygit",
         auto_close = false,
         dimensions = {
             height = 0.9, -- Height of the terminal window
