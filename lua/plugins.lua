@@ -34,15 +34,15 @@ require('packer').startup({ function()
     use {
         'kyazdani42/nvim-tree.lua',
         requires = 'kyazdani42/nvim-web-devicons',
-        config =function() --{{{
-        local tree_cb = require 'nvim-tree.config'.nvim_tree_callback
+        config = function() --{{{
+            local tree_cb = require 'nvim-tree.config'.nvim_tree_callback
 
             require 'nvim-tree'.setup {
                 disable_netrw       = false,
                 hijack_netrw        = false,
                 open_on_setup       = false,
                 ignore_ft_on_setup  = {},
-                hijack_directories   = {
+                hijack_directories  = {
                     enable = true,
                     auto_open = true,
                 },
@@ -85,10 +85,10 @@ require('packer').startup({ function()
     use {
         'preservim/tagbar',
         install = function()
-            vim.cmd("!"..vim.fn.stdpath("config").."/scripts/ctags.sh")
+            vim.cmd("!" .. vim.fn.stdpath("config") .. "/scripts/ctags.sh")
         end,
         config = function()
-            vim.cmd[[
+            vim.cmd [[
             ]]
         end,
     }
