@@ -1010,10 +1010,6 @@ require('packer').startup({ function()
 
     use 'kazhala/close-buffers.nvim'
     -- }}}
-
-    if packer_bootstrap then
-        require('packer').sync()
-    end
 end,
     config = {
         max_jobs = 5,
