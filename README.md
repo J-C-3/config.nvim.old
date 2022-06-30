@@ -58,9 +58,9 @@ This allows for more local user configuration beyond what's in the repo by defau
 A full example of this can be seen here:
 * `~/.config/nvim/lua/plugins.lua`:
 ```lua
-// ... line 1012, at the end of the main configuration function:
+-- ... line 1012, at the end of the main configuration function:
     Util.extraConfs("plugins.d") -- doesn't _have_ to be plugins.d, but makes it easier to keep track
-// ...
+-- ...
 ...
 ```
 
