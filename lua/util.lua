@@ -1,6 +1,53 @@
 -- Util
 Util = {}
 
+-- Apparently interacting with the filesystem in lua requires external modules
+-- So we're gunna do this instead
+Util.extraConfs = function(path)
+    local extraConfigs = Util.listFiles(path)
+
+    if extraConfigs ~= nil then
+        for _, f in ipairs(extraConfigs) do
+            dofile(path.."/"..f)
+        end
+    end
+end
+
+Util.listFiles = function(dirname)
+    local f = io.popen("/usr/bin/ls " .. dirname)
+
+    local files = {}
+
+    local count = 1
+
+    if f == nil then
+        return
+    end
+
+    for name in f:lines() do
+        if Util.isDir(name) then
+            goto continue
+        end
+
+        files[count] = name
+
+        count = count + 1
+
+        ::continue::
+    end
+
+    return files
+end
+
+Util.isDir = function(file)
+    local ret = os.execute("[ -d " .. file .. " ]")
+    if ret ~= 0 then
+        return false
+    end
+
+    return true
+end
+
 Util.newTerm = function()
     if vim.fn.winnr('$') > 1 then
         vim.cmd("split term://" .. Vimterm)
@@ -161,3 +208,5 @@ function LazygitFloat()
 
     term:open()
 end
+
+Util.extraConfs("util.d")

@@ -863,7 +863,6 @@ require('packer').startup({ function()
     -- Misc/QOL {{{
     use 'powerman/vim-plugin-AnsiEsc'
     use { "LinArcX/telescope-command-palette.nvim" }
-    use { 'tpope/vim-fugitive'}
 
     use {
         'folke/which-key.nvim',
@@ -1009,6 +1008,8 @@ require('packer').startup({ function()
     }
 
     use 'kazhala/close-buffers.nvim'
+
+    Util.extraConfs("plugins.d")
     -- }}}
 end,
     config = {
