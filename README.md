@@ -4,16 +4,12 @@ Personal nvim distro
 
 ## Dependencies
 * `nvim`
-* ~`tmux`~ - Tentatively removed as it might just be more trouble than it's worth.
-
-### ~Why `tmux`?~
-~Currently neovim's terminal does not have proper reflow support; If the terminal is shrunk horizontally, it will cut off text permanently; If it is grown horizontally, it will not wrap lines properly. `vimterm.sh` uses a super basic tmux config to sort of emulate a proper terminal.~
 
 ## Install
-
 ```
 git clone https://github.com/distek/config.nvim.git ~/.config/nvim
 ```
+
 Then:
 * run `nvim`
     * You'll get an error, probably for `gitsigns`, just hit enter and Packer will start installing plugins
@@ -22,6 +18,15 @@ Then:
 * use nvim, feel the lua
 
 ## Notes
+
+### Another fuckin neovim distro?
+Yeah I know right?
+
+I don't care about making this necessarily easier to configure, though.
+
+We're just rockin' lua over here so do what you want and there's no weird configuration syntax thing you have to figure out other than the `.d` directories. Which if you've used a unix-like for a reasonable amount of time you've probably already seen and kinda get the gist of.
+
+Also I probably wont advertise this everywhere as I have no time to _actually_ support it. Though I rock neovim's nightly and will keep it functional with that.
 
 ### LSP
 
@@ -37,36 +42,39 @@ or just
 :LspInstall
 ```
 
-Which will bring up a dialog to select the desired LSP client.
-
-### Mappings
-
-Change them to whatever.
+Which will bring up a dialog to select the desired LSP client for the current filetype's language (if any).
 
 ### config.d-like extensions
 
-In `lua/`, config.d-like directories can be added for the various categories (can be custom names as well).
-* example: `lua/plugins.d/` can contain something like `git-things.lua` which can look like:
+* An attempt at sane defaults has been set in `lua/defaults.d/*`
+* Updates to these, or changes to, the settings found therein should go in `lua/user.d/*`
+
 ```
-local use = require('packer').use
-
-use { 'tpope/vim-fugitive'}
+lua
+├── defaults.d
+│   ├── autocmds.lua
+│   ├── globals.lua
+│   ├── lsp-conf.lua
+│   └── mappings.lua
+├── plugins.lua
+├── user.d
+│   ├── distek-mappings.lua
+│   └── distek-plugins.lua
+└── util.lua
 ```
 
-This allows for more local user configuration beyond what's in the repo by default, which will eventually be converted to a simple "sane defaults" configuration and additional functionality provided by the `*.d/` directories
+I've left my configurations in these directories as examples of how to utilize them. _Most_ of the mappings have been moved from the defaults directory as I've come to find that a lot of what I remap is _wild_ and _crazy_ :)
 
-A full example of this can be seen here:
-* `~/.config/nvim/lua/plugins.lua`:
+Also, despite them being `.d` directories, you don't have to number them. They're just called in alphabetical order after the order specified in `init.lua`:
+
 ```lua
--- ... line 1012, at the end of the main configuration function:
-    Util.extraConfs("plugins.d") -- doesn't _have_ to be plugins.d, but makes it easier to keep track
--- ...
-...
-```
+-- Nvim config
+local packerInstall = vim.fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
 
-* `~/.config/nvim/lua/extra.lua`:
-```
-local use = require('packer').use
-
-use { 'tpope/vim-fugitive'}
+require('util')
+require('plugins')
+if vim.fn.empty(vim.fn.glob(packerInstall)) == 0 then
+    Util.extraConfs('defaults.d')
+    Util.extraConfs('user.d')
+end
 ```
