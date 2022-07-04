@@ -31,10 +31,10 @@ Also I probably wont advertise this everywhere as I have no time to _actually_ s
 ### Theme
 
 Gruvbox and Kanagawa are setup by default in `lua/defaults.d/themes.lua`. Gruvbox is the default theme.
-To change the theme, uncomment the line for the desired theme in `lua/user.d/distek-themes.lua`:
+The configuration for the various themes are set in a function that's assigned to a key in the `Themes` table:
 ```lua
 -- Adding nord:
-vim.g.themes = {
+Themes = {
     ["nord"] = function()
         vim.g.nord_contrast = true
         vim.g.nord_borders = true
@@ -49,10 +49,11 @@ vim.g.themes = {
     end
 }
 
+-- To change the theme, uncomment the line for the desired theme in `lua/user.d/distek-themes.lua`:
 -- Uncomment/comment here:
--- vim.g.themes.gruvbox()
--- vim.g.themes.kanagawa()
-vim.g.themes.nord()
+-- Themes.gruvbox()
+-- Themes.kanagawa()
+Themes.nord()
 ```
 
 ### LSP
@@ -82,11 +83,13 @@ lua
 │   ├── autocmds.lua
 │   ├── globals.lua
 │   ├── lsp-conf.lua
-│   └── mappings.lua
+│   ├── mappings.lua
+│   └── themes.lua
 ├── plugins.lua
 ├── user.d
 │   ├── distek-mappings.lua
-│   └── distek-plugins.lua
+│   ├── distek-plugins.lua
+│   └── distek-themes.lua
 └── util.lua
 ```
 
