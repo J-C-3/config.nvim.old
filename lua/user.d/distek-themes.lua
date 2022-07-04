@@ -13,6 +13,6 @@ vim.g.themes = {
     end
 }
 
--- vim.g.themes.gruvbox()
+vim.g.themes.gruvbox()
 -- vim.g.themes.kanagawa()
-vim.g.themes.nord()
+-- vim.g.themes.nord()
