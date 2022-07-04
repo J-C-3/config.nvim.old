@@ -1009,6 +1009,7 @@ require('packer').startup({ function()
 
     use 'kazhala/close-buffers.nvim'
     -- }}}
+
 end,
     config = {
         max_jobs = 5,
