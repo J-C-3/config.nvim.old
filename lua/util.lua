@@ -1,51 +1,16 @@
 -- Util
 Util = {}
 
--- Apparently interacting with the filesystem in lua requires external modules
--- So we're gunna do this instead
+--- Searches for lua files within a provided path in the 
+--- nvim runtime paths
 Util.extraConfs = function(path)
-    local extraConfigs = Util.listFiles(path)
+    local extraConfigs = vim.api.nvim_get_runtime_file("*/"..path.."/*", true)
 
-    if extraConfigs ~= nil then
+    if #extraConfigs > 0 then
         for _, f in ipairs(extraConfigs) do
-            dofile(path.."/"..f)
+            dofile(f)
         end
     end
-end
-
-Util.listFiles = function(dirname)
-    local f = io.popen("/usr/bin/ls " .. dirname)
-
-    local files = {}
-
-    local count = 1
-
-    if f == nil then
-        return
-    end
-
-    for name in f:lines() do
-        if Util.isDir(name) then
-            goto continue
-        end
-
-        files[count] = name
-
-        count = count + 1
-
-        ::continue::
-    end
-
-    return files
-end
-
-Util.isDir = function(file)
-    local ret = os.execute("[ -d " .. file .. " ]")
-    if ret ~= 0 then
-        return false
-    end
-
-    return true
 end
 
 Util.newTerm = function()
