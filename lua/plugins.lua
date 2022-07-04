@@ -1008,8 +1008,6 @@ require('packer').startup({ function()
     }
 
     use 'kazhala/close-buffers.nvim'
-
-    Util.extraConfs("plugins.d")
     -- }}}
 end,
     config = {
