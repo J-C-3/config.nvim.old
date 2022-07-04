@@ -28,6 +28,33 @@ We're just rockin' lua over here so do what you want and there's no weird config
 
 Also I probably wont advertise this everywhere as I have no time to _actually_ support it. Though I rock neovim's nightly and will keep it functional with that.
 
+### Theme
+
+Gruvbox and Kanagawa are setup by default in `lua/defaults.d/themes.lua`. Gruvbox is the default theme.
+To change the theme, uncomment the line for the desired theme in `lua/user.d/distek-themes.lua`:
+```lua
+-- Adding nord:
+vim.g.themes = {
+    ["nord"] = function()
+        vim.g.nord_contrast = true
+        vim.g.nord_borders = true
+        vim.g.nord_disable_background = false
+        vim.g.nord_enable_sidebar_background = true
+        vim.g.nord_cursorline_transparent = false
+        vim.g.nord_italic = true
+
+        require('nord').set()
+
+        vim.cmd('highlight CursorLine guibg='..Darken(Util.getColor("Normal", "bg#"), 0.8))
+    end
+}
+
+-- Uncomment/comment here:
+-- vim.g.themes.gruvbox()
+-- vim.g.themes.kanagawa()
+vim.g.themes.nord()
+```
+
 ### LSP
 
 To install LSPs for whatever language:
