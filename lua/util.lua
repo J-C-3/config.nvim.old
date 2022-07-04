@@ -1,8 +1,8 @@
 -- Util
 Util = {}
 
--- Apparently interacting with the filesystem in lua requires external modules
--- So we're gunna do this instead
+--- Searches for lua files within a provided path in the 
+--- nvim runtime paths
 Util.extraConfs = function(path)
     local extraConfigs = vim.api.nvim_get_runtime_file("*/"..path.."/*", true)
 
