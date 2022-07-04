@@ -1,6 +1,6 @@
-vim.g.themes = {}
+Themes = {}
 
-vim.g.themes["kanagawa"] = function()
+Themes["kanagawa"] = function()
     local conf = {
         undercurl = true, -- enable undercurls
         commentStyle = { italic = true },
@@ -27,7 +27,7 @@ vim.g.themes["kanagawa"] = function()
     vim.cmd('highlight Terminal guibg=' .. Darken(Util.getColor("Normal", "bg#"), 0.5))
 end
 
-vim.g.themes["gruvbox"] = function()
+Themes["gruvbox"] = function()
     vim.g.gruvbox_bold = 1
     vim.g.gruvbox_italic = 1
     vim.g.gruvbox_transparent_bg = 1

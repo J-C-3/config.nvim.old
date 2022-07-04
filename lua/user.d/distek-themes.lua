@@ -1,5 +1,4 @@
-vim.g.themes = {
-    ["nord"] = function()
+Themes["nord"] = function()
         vim.g.nord_contrast = true
         vim.g.nord_borders = true
         vim.g.nord_disable_background = false
@@ -11,8 +10,7 @@ vim.g.themes = {
 
         vim.cmd('highlight CursorLine guibg='..Darken(Util.getColor("Normal", "bg#"), 0.8))
     end
-}
 
-vim.g.themes.gruvbox()
--- vim.g.themes.kanagawa()
--- vim.g.themes.nord()
+Themes.gruvbox()
+-- Themes.kanagawa()
+-- Themes.nord()
