@@ -805,7 +805,6 @@ require('packer').startup({ function()
 
     -- Misc/QOL {{{
     use 'powerman/vim-plugin-AnsiEsc'
-    use { "LinArcX/telescope-command-palette.nvim" }
 
     use {
         'folke/which-key.nvim',
