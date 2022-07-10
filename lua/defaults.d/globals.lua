@@ -53,16 +53,6 @@ vim.o.wildignore = "*.o,*.obj,.git,*.rbc,*.pyc,__pycache__"
 vim.o.wildmode = "list:longest,list:full"
 vim.o.wrap = true
 
-vim.opt.fillchars:append({
-    horiz = '█',
-    horizup = '█',
-    horizdown = '█',
-    vert = '█',
-    vertleft = '█',
-    vertright = '█',
-    verthoriz = '█',
-})
-
 vim.cmd [[set sessionoptions-=blank]]
 
 vim.o.swapfile = false
