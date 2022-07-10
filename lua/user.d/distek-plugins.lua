@@ -36,8 +36,13 @@ use {
                     tmux = { enabled = false },
                 },
                 on_open = function(win)
+                    -- can be used to completely disable/enable completion and lsp diags
+                    -- vim.cmd[[LspStop]]
+                    -- require('cmp').setup.buffer { enabled = false }
                 end,
                 on_close = function()
+                    -- vim.cmd[[LspStart]]
+                    -- require('cmp').setup.buffer { enabled = true }
                 end,
             }
         )
