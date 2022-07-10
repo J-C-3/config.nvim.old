@@ -13,16 +13,7 @@ Util.extraConfs = function(path)
     end
 end
 
-Util.newTerm = function()
-    if vim.fn.winnr('$') > 1 then
-        vim.cmd("split term://" .. Vimterm)
-        return
-    else
-        vim.cmd("vsplit term://" .. Vimterm)
-        return
-    end
-end
-
+-- Returns to previous position in file
 Util.line_return = function()
     local line = vim.fn.line
 
@@ -32,6 +23,7 @@ Util.line_return = function()
 end
 
 -- Skips over quickfix buf when tabbing through buffers
+-- Reason: QF appears to overwrite the <Tab> mappings
 Util.skipQF = function(dir)
     if dir == "prev" then
         vim.cmd [[lua require"cokeline/mappings".by_step("focus", -1)]]
