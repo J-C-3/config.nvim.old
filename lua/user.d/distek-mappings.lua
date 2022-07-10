@@ -72,15 +72,17 @@ map("t", "<A-C-l>", '<cmd>lua require("tmux").resize_right()<cr>')
 map("t", "<A-C-h>", '<cmd>lua require("tmux").resize_left()<cr>')
 
 -- Plugin maps
-
+-- maximize
 map("n", "<A-f>", ":lua require('maximize').toggle()<cr>")
+
+-- Zen
+map("n", "<leader>z", ':ZenMode<cr>')
 
 -- Commentary
 map("n", "<leader>cm", ':Commentary<cr><esc>')
 map("v", "<leader>cm", ':Commentary<cr><esc>')
 
 -- nvim-tree
-
 map("n", "<leader>1", "<cmd>lua Util.nvimTreeToggle()<CR>")
 map("t", "<leader>1", "<cmd>lua Util.nvimTreeToggle()<CR>")
 
