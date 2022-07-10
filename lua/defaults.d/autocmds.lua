@@ -93,7 +93,7 @@ vim.api.nvim_create_autocmd("WinEnter", {
 vim.api.nvim_create_augroup("Terminal", { clear = true })
 
 vim.api.nvim_create_autocmd("BufEnter", {
-    pattern = { "vimterm*" },
+    pattern = { "term://*" },
     callback = function()
         vim.cmd[[startinsert]]
     end,
