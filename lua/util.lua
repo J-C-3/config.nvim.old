@@ -146,11 +146,11 @@ local function blend(fg, bg, alpha)
     return string.format("#%02X%02X%02X", blendChannel(1), blendChannel(2), blendChannel(3))
 end
 
-function Darken(hex, amount)
+Util.darken = function(hex, amount)
     return blend(hex, utilbg, math.abs(amount))
 end
 
-function Lighten(hex, amount)
+Util.lighten = function(hex, amount)
     return blend(hex, utilfg, math.abs(amount))
 end
 
