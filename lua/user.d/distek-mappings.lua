@@ -7,8 +7,6 @@ local exmap = function(mode, keys, command)
     vim.api.nvim_set_keymap(mode, keys, command, { noremap = true, expr = true, silent = true })
 end
 
--- mksession
-map("n", "<leader>mk", ":mksession!")
 -- links
 if vim.loop.os_uname().sysname == "Darwin" then
     map("n", "gx", 'yiW:!open <C-R>"<CR><Esc>')
@@ -30,10 +28,10 @@ map("n", "<leader>tt", ":term<CR>")
 map("t", "<A-z>", "<c-\\><c-n>")
 
 -- Close window(split)
-map("n", "<A-w>", '<cmd>wincmd c<cr>')
+map("n", "<A-q>", '<cmd>wincmd c<cr>')
 
 -- Delete buffer
-map("n", "<A-q>", ':BDelete! this<cr>')
+map("n", "<A-S-q>", ':BDelete! this<cr>')
 
 -- Window movement
 map("n", "<A-S-h>", '<cmd>WinShift left<cr>')
@@ -97,16 +95,13 @@ map("t", "<leader>ft", "<cmd>lua NormalTermFloat()<CR>")
 -- -- Tagbar
 map("n", "<leader>3", "<cmd>lua Util.tagbarToggle()<CR>")
 
-
-map("n", "<leader><leader>", ":Telescope command_palette<cr>")
-
 -- Lazygit
 map("n", "<leader>lg", ":lua LazygitFloat()<cr>")
 
 -- Undotree
 map("n", "<leader>ud", ":packadd undotree | :UndotreeToggle<CR>")
 
--- LSP {{{
+-- LSP
 map('n', '<leader>gy', '<Cmd>lua vim.lsp.buf.declaration()<CR>')
 map('n', '<leader>gd', '<Cmd>lua vim.lsp.buf.definition()<CR>')
 map('n', '<leader>gD', '<cmd>lua vim.lsp.buf.type_definition()<CR>')
@@ -119,17 +114,12 @@ map('n', '<leader>g]', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>')
 map('n', '<leader>rn', "<cmd>lua require('lspsaga.rename').rename()<CR>")
 map('n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>')
 
---}}}
-
+-- Telescopic Johnson
 map('n', '<leader>pr', "<cmd>lua require('telescope.builtin').live_grep()<cr>")
 map('n', '<leader>pw', "<cmd>lua require('telescope.builtin').grep_string()<cr>")
 
 -- Limelight toggles with '!!'
 -- map('n', '<leader>li',   '<cmd>Limelight!!<CR>')
-
--- Obsession
-map('n', '<leader>Ob', '<cmd>Obsess<CR>')
-map('n', '<leader>OB', '<cmd>Obsess!<CR>')
 
 map("n", "<leader>tf", "<cmd>lua require('telescope.builtin').find_files()<cr>")
 map("n", "<leader>tg", "<cmd>lua require('telescope.builtin').live_grep()<cr>")
@@ -137,7 +127,6 @@ map("n", "<leader>tb", "<cmd>lua require('telescope.builtin').buffers()<cr>")
 map("n", "<leader>th", "<cmd>lua require('telescope.builtin').help_tags()<cr>")
 
 map("n", "<leader>qf", "<cmd>lua require('telescope.builtin').quickfix()<cr>")
-map('n', '<leader>ql', "<cmd>lua require('telescope.builtin').loclist()<cr>")
 map('n', '<leader>ql', "<cmd>lua require('telescope.builtin').loclist()<cr>")
 
 -- Debug maps
@@ -151,9 +140,6 @@ map("n", "<leader>dd", "<cmd>lua require('dap').down()<CR>")
 map("n", "<leader>dc", "<cmd>lua require('dap').continue()<CR>")
 map("n", "<leader>ds", "<cmd>lua require('dapui').open()<cr>")
 map("n", "<leader>dS", "<cmd>lua Util.dapStop()<cr>")
-
--- Custom Function maps
-map("n", "<leader>sn", ":call SynStack()<cr>")
 
 -- term split like any ol TWM
 map("n", "<M-CR>", "<cmd>lua Util.newTerm()<cr>")
