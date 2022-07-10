@@ -7,11 +7,14 @@ local exmap = function(mode, keys, command)
     vim.api.nvim_set_keymap(mode, keys, command, { noremap = true, expr = true, silent = true })
 end
 
--- links for macos
-map("n", "gx", 'yiW:!open <C-R>"<CR><Esc>')
-
 -- mksession
 map("n", "<leader>mk", ":mksession!")
+-- links
+if vim.loop.os_uname().sysname == "Darwin" then
+    map("n", "gx", 'yiW:!open <C-R>"<CR><Esc>')
+elseif vim.loop.os_uname().sysname == "Linux" then
+    map("n", "gx", 'yiW:!xdg-open <C-R>"<CR><Esc>')
+end
 
 -- nohl
 map("n", "<leader>nh", ":nohl<CR>")
