@@ -83,11 +83,16 @@ map("v", "<leader>cm", ':Commentary<cr><esc>')
 map("n", "<leader>1", "<cmd>lua Util.nvimTreeToggle()<CR>")
 map("t", "<leader>1", "<cmd>lua Util.nvimTreeToggle()<CR>")
 
+-- toggleterm
 map("n", "<leader>2", "<cmd>lua Util.toggleTerm()<CR>")
 map("t", "<leader>2", "<cmd>lua Util.toggleTerm()<CR>")
 
+-- float toggleterm
+map("n", "<leader>ft", "<cmd>lua NormalTermFloat()<CR>")
+map("t", "<leader>ft", "<cmd>lua NormalTermFloat()<CR>")
+
 -- -- Tagbar
-map("n", "<leader>3",        "<cmd>lua Util.tagbarToggle()<CR>")
+map("n", "<leader>3", "<cmd>lua Util.tagbarToggle()<CR>")
 
 
 map("n", "<leader><leader>", ":Telescope command_palette<cr>")
