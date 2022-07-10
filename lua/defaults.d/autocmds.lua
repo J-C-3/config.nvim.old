@@ -107,6 +107,7 @@ vim.api.nvim_create_autocmd("TermOpen", {
         vim.opt_local.relativenumber = false
         vim.opt_local.wrap = true
         vim.opt_local.list = true
+        vim.opt_local.signcolumn = "no"
     end,
     group = "Terminal",
 })
