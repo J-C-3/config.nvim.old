@@ -55,5 +55,5 @@ Themes["gruvbox"] = function()
 
     vim.cmd("colorscheme gruvbox")
 
-    vim.cmd('highlight NvimTreeNormal guibg='..Darken(Util.getColor("Normal", "bg#"), 0.8))
+    vim.cmd('highlight NvimTreeNormal guibg='..Util.darken(Util.getColor("Normal", "bg#"), 0.8))
 end

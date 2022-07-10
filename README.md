@@ -45,7 +45,7 @@ Themes = {
 
         require('nord').set()
 
-        vim.cmd('highlight CursorLine guibg='..Darken(Util.getColor("Normal", "bg#"), 0.8))
+        vim.cmd('highlight CursorLine guibg='..Util.darken(Util.getColor("Normal", "bg#"), 0.8))
     end
 }
 
