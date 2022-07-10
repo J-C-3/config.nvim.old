@@ -157,21 +157,3 @@ end
 Util.getColor = function(group, attr)
     return vim.fn.synIDattr(vim.fn.synIDtrans(vim.fn.hlID(group)), attr)
 end
-
-function LazygitFloat()
-    local cfg = {
-        ft = 'lazygit',
-        cmd = Vimterm .. " -c lazygit",
-        auto_close = false,
-        dimensions = {
-            height = 0.9, -- Height of the terminal window
-            width = 0.9, -- Width of the terminal window
-        },
-    }
-
-    local term = require('FTerm'):new(cfg)
-
-    term:open()
-end
-
-Util.extraConfs("util.d")

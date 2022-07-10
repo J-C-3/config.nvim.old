@@ -120,8 +120,6 @@ require('packer').startup({ function()
         end --}}}
     }
 
-    use "numToStr/FTerm.nvim"
-
     use {
         'vimwiki/vimwiki',
         config = function() --{{{
