@@ -72,3 +72,25 @@ use {
         )
     end
 }
+
+use {
+  'rmagatti/auto-session',
+  config = function()
+    require('auto-session').setup {
+      log_level = 'info',
+      auto_session_suppress_dirs = {'~/', '~/Projects'}
+    }
+  end
+}
+
+use({
+  'glepnir/zephyr-nvim',
+  requires = { 'nvim-treesitter/nvim-treesitter', opt = true },
+})
+
+use 'Mofiqul/dracula.nvim'
+
+use 'tiagovla/tokyodark.nvim'
+
+use 'tanvirtin/monokai.nvim'
+
