@@ -131,6 +131,8 @@ map("n", "<leader>th", "<cmd>lua require('telescope.builtin').help_tags()<cr>")
 map("n", "<leader>qf", "<cmd>lua require('telescope.builtin').quickfix()<cr>")
 map('n', '<leader>ql', "<cmd>lua require('telescope.builtin').loclist()<cr>")
 
+map('n', '<leader>pp', "<cmd>Telescope projects<cr>")
+
 -- Debug maps
 map("n", "<leader>db", "<cmd>lua require('dap').toggle_breakpoint()<CR>")
 map("n", "<leader>di", "<cmd>lua require('dap').step_into()<CR>")

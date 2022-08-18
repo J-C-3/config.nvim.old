@@ -80,6 +80,14 @@ require('packer').startup({ function()
     }
 
     use {
+        "ahmedkhalf/project.nvim",
+        config = function()
+            require("project_nvim").setup {}
+        end
+    }
+
+
+    use {
         'mbbill/undotree',
         opt = true
     }
@@ -150,7 +158,6 @@ require('packer').startup({ function()
         "rebelot/kanagawa.nvim",
     }
     --}}}
-
     use {
         'nvim-treesitter/nvim-treesitter',
         config = function() --{{{
@@ -881,7 +888,7 @@ require('packer').startup({ function()
                 -- }
             })
 
-            -- require('telescope').load_extension('')
+            require('telescope').load_extension('projects')
 
         end --}}}
     }
