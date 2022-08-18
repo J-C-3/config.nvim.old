@@ -771,44 +771,104 @@ require('packer').startup({ function()
     }
 
     use {
-        'tami5/lspsaga.nvim',
+        'glepnir/lspsaga.nvim',
         config = function() --{{{
-            require('lspsaga').init_lsp_saga {
-                use_saga_diagnostic_sign = true,
-                error_sign = '',
-                warn_sign = '',
-                hint_sign = '',
-                infor_sign = '',
+            local saga = require 'lspsaga'
+
+            -- change the lsp symbol kind
+            -- local kind = require('lspsaga.lspkind')
+            -- -- kind[type_number][2] = icon -- see lua/lspsaga/lspkind.lua
+
+            -- use custom config
+            saga.init_lsp_saga({
+                -- put modified options in there
+                -- Options with default value
+                -- "single" | "double" | "rounded" | "bold" | "plus"
+                border_style = "single",
+                --the range of 0 for fully opaque window (disabled) to 100 for fully
+                --transparent background. Values between 0-30 are typically most useful.
+                saga_winblend = 0,
+                -- when cursor in saga window you config these to move
+                move_in_saga = { prev = '<C-p>', next = '<C-n>' },
+
+                -- Error, Warn, Info, Hint
+                diagnostic_header = { "", "", "", "" },
+
+                -- show diagnostic source
+                show_diagnostic_source = true,
+
+                -- add bracket or something with diagnostic source, just have 2 elements
+                diagnostic_source_bracket = {},
+
+                -- preview lines of lsp_finder and definition preview
+                max_preview_lines = 10,
+
+                -- use emoji lightbulb in default
                 code_action_icon = ' ',
-                code_action_prompt = {
+
+                -- if true can press number to execute the codeaction in codeaction window
+                code_action_num_shortcut = true,
+
+                -- same as nvim-lightbulb but async
+                code_action_lightbulb = {
                     enable = true,
-                    sign = false,
+                    sign = true,
                     sign_priority = 20,
                     virtual_text = true,
                 },
 
-                -- finder_definition_icon = '  ',
-                -- finder_reference_icon = '  ',
-                -- max_preview_lines = 10, -- preview lines of lsp_finder and definition preview
-                -- finder_action_keys = {
-                --   open = 'o', vsplit = 's',split = 'i',quit = 'q',scroll_down = '<C-f>', scroll_up = '<C-b>' -- quit can be a table
-                -- },
-                -- code_action_keys = {
-                --   quit = 'q',exec = '<CR>'
-                -- },
-                -- rename_action_keys = {
-                --   quit = '<C-c>',exec = '<CR>'  -- quit can be a table
-                -- },
-                -- definition_preview_icon = '  '
-                -- "single" "double" "round" "plus"
-                border_style = "double",
-                rename_prompt_prefix = '>',
+                -- finder icons
+                finder_icons = {
+                    def = '  ',
+                    ref = '諭 ',
+                    link = '  ',
+                },
+
+                finder_action_keys = {
+                    open = "<CR>",
+                    vsplit = "s",
+                    split = "i",
+                    quit = "<ESC>",
+                    scroll_down = "<C-f>",
+                    scroll_up = "<C-b>", -- quit can be a table
+                },
+
+                code_action_keys = {
+                    quit = "<ESC>",
+                    exec = "<CR>",
+                },
+
+                rename_action_quit = "<ESC>",
+                definition_preview_icon = "  ",
+
+                -- show symbols in winbar must nightly
+                symbol_in_winbar = {
+                    in_custom = true,
+                    enable = true,
+                    separator = ' ',
+                    show_file = true,
+                    click_support = false,
+                },
+
+                -- show outline
+                show_outline = {
+                    win_position = 'right',
+                    -- set the special filetype in there which in left like nvimtree neotree defx
+                    left_with = 'nvimtree',
+                    win_width = 30,
+                    auto_enter = true,
+                    auto_preview = true,
+                    virt_text = '┃',
+                    jump_key = '<CR>',
+                    -- auto refresh when change buffer
+                    auto_refresh = true,
+                },
                 -- if you don't use nvim-lspconfig you must pass your server name and
                 -- the related filetypes into this table
-                -- like server_filetype_map = {metals = {'sbt', 'scala'}}
-                -- server_filetype_map = {}
-            }
-        end --}}}
+                -- like server_filetype_map = { metals = { "sbt", "scala" } }
+                server_filetype_map = {},
+            })
+        end
     }
     --}}}
 
