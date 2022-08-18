@@ -22,6 +22,13 @@ Util.line_return = function()
     end
 end
 
+
+function len(T)
+    local count = 0
+    for _ in pairs(T) do count = count + 1 end
+    return count
+end
+
 -- Skips over quickfix buf when tabbing through buffers
 -- Reason: QF appears to overwrite the <Tab> mappings
 Util.skipQFAndTerm = function(dir)
