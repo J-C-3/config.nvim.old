@@ -689,6 +689,8 @@ require('packer').startup({ function()
                     { name = 'cmdline' },
                     { name = 'path' },
                     { name = 'calc' },
+                    { name = 'cmdline_history' },
+                    { name = "dictionary" },
                 })
             })
         end --}}}
@@ -701,6 +703,8 @@ require('packer').startup({ function()
     use 'hrsh7th/cmp-calc'
     use 'hrsh7th/cmp-nvim-lua'
     use 'f3fora/cmp-spell'
+    use 'uga-rosa/cmp-dictionary'
+    use 'dmitmel/cmp-cmdline-history'
 
     use 'hrsh7th/cmp-vsnip'
     use {
