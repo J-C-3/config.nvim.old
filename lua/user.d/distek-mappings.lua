@@ -72,7 +72,6 @@ map("t", "<A-C-l>", '<cmd>lua require("tmux").resize_right()<cr>')
 map("t", "<A-C-h>", '<cmd>lua require("tmux").resize_left()<cr>')
 
 -- Plugin maps
--- maximize
 
 -- Zen
 map("n", "<leader>z", ':ZenMode<cr>')
