@@ -884,7 +884,6 @@ require('packer').startup({ function()
         config = function() --{{{
             require("which-key").setup {
                 triggers_blacklist = {
-                    i = { "<" },
                     c = { "h" },
                 }
             }
