@@ -28,17 +28,17 @@ Themes["tokyodark"] = function()
 end
 
 Themes["monokai"] = function()
-    -- require('monokai').setup {}
-    require('monokai').setup { palette = require('monokai').pro }
+    require('monokai').setup {}
+    -- require('monokai').setup { palette = require('monokai').pro }
     -- require('monokai').setup { palette = require('monokai').soda }
     -- require('monokai').setup { palette = require('monokai').ristretto }
 end
 
 -- Themes.gruvbox()
 -- Themes.kanagawa()
-Themes.nord()
+-- Themes.nord()
 -- Themes.zephyr()
 -- Themes.dracula()
 -- Themes.tokyodark()
--- Themes.monokai()
+Themes.monokai()
 
