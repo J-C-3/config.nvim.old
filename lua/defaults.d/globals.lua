@@ -81,10 +81,6 @@ vim.cmd [[
     endif
 ]]
 
--- Neovide
-vim.cmd [[set guifont=FiraCode\ Nerd\ Font\ Mono:h10]]
-vim.cmd [[set guicursor+=a:blinkon650]]
-
 -- netrw Sexplore or Lexplore
 vim.cmd [[let g:netrw_winsize = 20]]
 
@@ -122,5 +118,6 @@ end
 vim.g.nvimtreeOpen = false
 
 vim.g.tagbarOpen = false
+
 -- }}}
 
