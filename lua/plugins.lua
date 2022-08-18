@@ -915,15 +915,6 @@ require('packer').startup({ function()
         end
     }
 
-    use {
-        'declancm/maximize.nvim',
-        config = function() --{{{
-            require('maximize').setup({
-                default_keymaps = false,
-            })
-        end --}}}
-    }
-
     use 'norcalli/nvim-colorizer.lua'
 
     use 'nvim-lua/plenary.nvim'
