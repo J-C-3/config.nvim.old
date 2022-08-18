@@ -24,25 +24,82 @@ end
 
 -- Skips over quickfix buf when tabbing through buffers
 -- Reason: QF appears to overwrite the <Tab> mappings
-Util.skipQF = function(dir)
+Util.skipQFAndTerm = function(dir)
     if dir == "prev" then
-        vim.cmd [[lua require"cokeline/mappings".by_step("focus", -1)]]
+        require"cokeline/mappings".by_step("focus", "-1")
+
+        local buftype = vim.api.nvim_buf_get_option(0, "buftype")
+
+        if buftype == "quickfix" or buftype == "terminal" then
+            if buftype == "terminal" then
+                -- if the terminal is not open elsewhere
+                if len(vim.fn.win_findbuf(vim.fn.bufnr('%'))) == 1 then
+                    return
+                end
+
+                vim.cmd[[stopinsert]]
+
+                return
+            end
+
+            Util.skipQFAndTerm(dir)
+        end
     else
-        vim.cmd [[lua require"cokeline/mappings".by_step("focus", 1)]]
-    end
+        require"cokeline/mappings".by_step("focus", '1')
 
-    while vim.api.nvim_buf_get_option(0, "buftype") == "quickfix" do
-        if dir == "prev" then
-            vim.cmd [[lua require"cokeline/mappings".by_step("focus", -1)]]
+        local buftype = vim.api.nvim_buf_get_option(0, "buftype")
 
-            -- I have no idea why this is needed
-            vim.cmd [[stopinsert]]
-        else
-            vim.cmd [[lua require"cokeline/mappings".by_step("focus", 1)]]
+        if buftype == "quickfix" or buftype == "terminal" then
+            if buftype == "terminal" then
+                -- if the terminal is not open elsewhere
+                if len(vim.fn.win_findbuf(vim.fn.bufnr('%'))) == 1 then
+                    return
+                end
 
-            vim.cmd [[stopinsert]]
+                vim.cmd[[stopinsert]]
+
+                return
+            end
+
+            Util.skipQFAndTerm(dir)
         end
     end
+
+    -- while true do
+    --     local buftype = vim.api.nvim_buf_get_option(0, "buftype")
+
+    --     if buftype == "quickfix" or buftype == "terminal" then
+    --         if dir == "prev" then
+    --             if buftype == "terminal" then
+    --                 -- if the terminal is not open elsewhere
+    --                 if len(vim.fn.win_findbuf(vim.fn.bufnr('%'))) < 1 then
+    --                     break
+    --                 end
+    --             end
+
+    --             vim.cmd [[
+    --                 stopinsert
+    --                 lua require"cokeline/mappings".by_step("focus", -1)
+    --                 stopinsert
+    --             ]]
+    --         else
+    --             if buftype == "terminal" then
+    --                 -- if the terminal is not open elsewhere
+    --                 if len(vim.fn.win_findbuf(vim.fn.bufnr('%'))) < 1 then
+    --                     break
+    --                 end
+    --             end
+
+    --             vim.cmd [[
+    --                 stopinsert
+    --                 lua require"cokeline/mappings".by_step("focus", 1)
+    --                 stopinsert
+    --             ]]
+    --         end
+    --     else
+    --         break
+    --     end
+    -- end
 end
 
 -- Useful for determining highlight names

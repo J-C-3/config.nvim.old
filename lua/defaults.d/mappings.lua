@@ -25,8 +25,8 @@ map("n", "n", "<Cmd>execute('normal! ' . v:count1 . 'n')<CR><Cmd>lua require('hl
 map("n", "N", "<Cmd>execute('normal! ' . v:count1 . 'N')<CR><Cmd>lua require('hlslens').start()<CR>")
 
 -- focus buffers
-map("n", "<Tab>", ':lua Util.skipQF("next")<cr>')
-map("n", "<S-Tab>", ':lua Util.skipQF("prev")<cr>')
+map("n", "<Tab>", ':lua Util.skipQFAndTerm("next")<cr>')
+map("n", "<S-Tab>", ':lua Util.skipQFAndTerm("prev")<cr>')
 
 -- move buffers
 map("n", "<A-Tab>", '<Cmd>lua require"cokeline/mappings".by_step("switch", 1)<CR>')
