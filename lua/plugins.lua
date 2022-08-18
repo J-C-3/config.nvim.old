@@ -907,6 +907,14 @@ require('packer').startup({ function()
         end --}}}
     })
 
+    -- Keeps buffer proportions on window resizes and whatnot
+    use {
+        "kwkarlwang/bufresize.nvim",
+        config = function()
+            require("bufresize").setup()
+        end
+    }
+
     use {
         'declancm/maximize.nvim',
         config = function() --{{{
