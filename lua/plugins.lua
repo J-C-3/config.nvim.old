@@ -38,21 +38,23 @@ require('packer').startup({ function()
             local tree_cb = require 'nvim-tree.config'.nvim_tree_callback
 
             require 'nvim-tree'.setup {
-                disable_netrw       = false,
-                hijack_netrw        = false,
-                open_on_setup       = false,
-                ignore_ft_on_setup  = {},
-                hijack_directories  = {
+                disable_netrw      = false,
+                hijack_netrw       = false,
+                open_on_setup      = false,
+                ignore_ft_on_setup = {},
+                hijack_directories = {
                     enable = true,
                     auto_open = true,
                 },
-                open_on_tab         = false,
-                hijack_cursor       = false,
-                update_cwd          = false,
+                open_on_tab        = false,
+                hijack_cursor      = false,
+                update_cwd         = false,
+                respect_buf_cwd    = true,
+                sync_root_with_cwd = true,
+
                 update_focused_file = {
-                    enable      = true,
-                    update_cwd  = false,
-                    ignore_list = {}
+                    enable     = true,
+                    update_cwd = true
                 },
                 system_open         = {
                     cmd  = nil,
