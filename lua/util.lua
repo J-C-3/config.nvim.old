@@ -1,10 +1,10 @@
 -- Util
 Util = {}
 
---- Searches for lua files within a provided path in the 
+--- Searches for lua files within a provided path in the
 --- nvim runtime paths
 Util.extraConfs = function(path)
-    local extraConfigs = vim.api.nvim_get_runtime_file("*/"..path.."/*", true)
+    local extraConfigs = vim.api.nvim_get_runtime_file("*/" .. path .. "/*", true)
 
     if #extraConfigs > 0 then
         for _, f in ipairs(extraConfigs) do
