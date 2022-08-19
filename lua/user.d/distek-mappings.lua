@@ -147,3 +147,14 @@ map("n", "<leader>dS", "<cmd>lua Util.dapStop()<cr>")
 map("n", "<M-CR>", "<cmd>lua Util.newTerm()<cr>")
 map("t", "<M-CR>", "<cmd>lua Util.newTerm()<cr>")
 map("i", "<M-CR>", "<cmd>lua Util.newTerm()<cr>")
+
+-- refactoring.nvim
+map("v", "<leader>re", [[ <Esc><Cmd>lua require('refactoring').refactor('Extract Function')<CR>]])
+map("v", "<leader>rf", [[ <Esc><Cmd>lua require('refactoring').refactor('Extract Function To File')<CR>]])
+map("v", "<leader>rv", [[ <Esc><Cmd>lua require('refactoring').refactor('Extract Variable')<CR>]])
+map("v", "<leader>ri", [[ <Esc><Cmd>lua require('refactoring').refactor('Inline Variable')<CR>]])
+
+map("n", "<leader>rb", [[ <Cmd>lua require('refactoring').refactor('Extract Block')<CR>]])
+map("n", "<leader>rbf", [[ <Cmd>lua require('refactoring').refactor('Extract Block To File')<CR>]])
+
+map("n", "<leader>ri", [[ <Cmd>lua require('refactoring').refactor('Inline Variable')<CR>]])

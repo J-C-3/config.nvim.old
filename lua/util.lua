@@ -71,42 +71,6 @@ Util.skipQFAndTerm = function(dir)
             Util.skipQFAndTerm(dir)
         end
     end
-
-    -- while true do
-    --     local buftype = vim.api.nvim_buf_get_option(0, "buftype")
-
-    --     if buftype == "quickfix" or buftype == "terminal" then
-    --         if dir == "prev" then
-    --             if buftype == "terminal" then
-    --                 -- if the terminal is not open elsewhere
-    --                 if len(vim.fn.win_findbuf(vim.fn.bufnr('%'))) < 1 then
-    --                     break
-    --                 end
-    --             end
-
-    --             vim.cmd [[
-    --                 stopinsert
-    --                 lua require"cokeline/mappings".by_step("focus", -1)
-    --                 stopinsert
-    --             ]]
-    --         else
-    --             if buftype == "terminal" then
-    --                 -- if the terminal is not open elsewhere
-    --                 if len(vim.fn.win_findbuf(vim.fn.bufnr('%'))) < 1 then
-    --                     break
-    --                 end
-    --             end
-
-    --             vim.cmd [[
-    --                 stopinsert
-    --                 lua require"cokeline/mappings".by_step("focus", 1)
-    --                 stopinsert
-    --             ]]
-    --         end
-    --     else
-    --         break
-    --     end
-    -- end
 end
 
 -- Useful for determining highlight names
