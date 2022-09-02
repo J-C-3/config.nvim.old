@@ -81,8 +81,8 @@ map("n", "<leader>cm", ':Commentary<cr><esc>')
 map("v", "<leader>cm", ':Commentary<cr><esc>')
 
 -- nvim-tree
-map("n", "<leader>1", "<cmd>lua Util.nvimTreeToggle()<CR>")
-map("t", "<leader>1", "<cmd>lua Util.nvimTreeToggle()<CR>")
+map("n", "<leader>1", "<cmd>Telescope file_browser path=%:p:h<CR>")
+map("t", "<leader>1", "<cmd>Telescope file_browser path=%:p:h<CR>")
 
 -- toggleterm
 map("n", "<leader>2", "<cmd>lua Util.toggleTerm()<CR>")

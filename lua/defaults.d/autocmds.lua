@@ -74,6 +74,13 @@ vim.api.nvim_create_autocmd("FocusGained", {
     end
 })
 
+vim.api.nvim_create_autocmd("FocusGained", {
+    pattern = { "*" },
+    callback = function()
+        vim.cmd[[checktime]]
+    end
+})
+
 -- Deal with quickfix
 -- set nobuflisted and close if last window
 vim.api.nvim_create_augroup("qf", { clear = true })

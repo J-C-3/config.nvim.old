@@ -1,8 +1,8 @@
 -- Util
 Util = {}
 
---- Searches for lua files within a provided path in the
---- nvim runtime paths
+-- Searches for lua files within a provided path in the
+-- nvim runtime paths
 Util.extraConfs = function(path)
     local extraConfigs = vim.api.nvim_get_runtime_file("*/" .. path .. "/*", true)
 
@@ -113,7 +113,7 @@ Util.toggleTerm = function()
     local doWinCmd = false
 
     local nvimTree = require "nvim-tree"
-    local nvimTreeView = require "nvim-tree.view"
+    local nvimTreeView = nvimTree.view
 
     if vim.g.nvimtreeOpen then
         nvimTreeView.close()

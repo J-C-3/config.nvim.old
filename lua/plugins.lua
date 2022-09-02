@@ -32,51 +32,7 @@ require('packer').startup({ function()
     }
 
     use {
-        'kyazdani42/nvim-tree.lua',
-        requires = 'kyazdani42/nvim-web-devicons',
-        config = function() --{{{
-            local tree_cb = require 'nvim-tree.config'.nvim_tree_callback
-
-            require 'nvim-tree'.setup {
-                disable_netrw      = false,
-                hijack_netrw       = false,
-                open_on_setup      = false,
-                ignore_ft_on_setup = {},
-                hijack_directories = {
-                    enable = true,
-                    auto_open = true,
-                },
-                open_on_tab        = false,
-                hijack_cursor      = false,
-                update_cwd         = false,
-                respect_buf_cwd    = true,
-                sync_root_with_cwd = true,
-
-                update_focused_file = {
-                    enable     = true,
-                    update_cwd = true
-                },
-                system_open         = {
-                    cmd  = nil,
-                    args = {}
-                },
-                view                = {
-                    width = 30,
-                    side = 'left',
-                    mappings = {
-                        custom_only = false,
-                        list = {
-                            { key = { "<2-RightMouse>", "C" }, cb = tree_cb("cd") },
-                        }
-                    }
-                },
-                actions             = {
-                    open_file = {
-                        resize_window = false,
-                    }
-                },
-            }
-        end --}}}
+        "nvim-telescope/telescope-file-browser.nvim",
     }
 
     use {
@@ -957,6 +913,7 @@ require('packer').startup({ function()
             })
 
             require('telescope').load_extension('projects')
+            require('telescope').load_extension('file_browser')
 
         end --}}}
     }
@@ -991,3 +948,4 @@ if firstRun then
     require('packer').sync()
 end
 -- }}}
+--
