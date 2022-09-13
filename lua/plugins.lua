@@ -646,7 +646,6 @@ require('packer').startup({ function()
                     { name = 'cmdline' },
                     { name = 'path' },
                     { name = 'calc' },
-                    { name = 'cmdline_history' },
                     { name = "dictionary" },
                 })
             })
@@ -920,9 +919,9 @@ require('packer').startup({ function()
 
     use 'tpope/vim-commentary'
 
-    use {
-        "lukas-reineke/indent-blankline.nvim",
-    }
+    -- use {
+    --     "lukas-reineke/indent-blankline.nvim",
+    -- }
 
     use {
         'lewis6991/gitsigns.nvim',
@@ -940,8 +939,9 @@ end,
         profile = {
             enable = true,
             threshold = 1
-        }
-    }
+        },
+        compile_path = vim.fn.stdpath("data").."/packer/packer_compiled.lua"
+    },
 })
 
 if firstRun then

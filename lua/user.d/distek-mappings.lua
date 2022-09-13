@@ -158,3 +158,10 @@ map("n", "<leader>rb", [[ <Cmd>lua require('refactoring').refactor('Extract Bloc
 map("n", "<leader>rbf", [[ <Cmd>lua require('refactoring').refactor('Extract Block To File')<CR>]])
 
 map("n", "<leader>ri", [[ <Cmd>lua require('refactoring').refactor('Inline Variable')<CR>]])
+
+map("n", "<leader>Li", "<cmd>LspInstallInfo<CR>")
+map("n", "<leader>Lr", "<cmd>LspRestart<CR>")
+map("n", "<leader>Ls", "<cmd>LspStart<CR>")
+map("n", "<leader>LS", "<cmd>LspStop<CR>")
+-- Meta LSP stuff
+
