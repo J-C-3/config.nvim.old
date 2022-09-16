@@ -940,7 +940,7 @@ end,
             enable = true,
             threshold = 1
         },
-        compile_path = vim.fn.stdpath("data").."/packer/packer_compiled.lua"
+        compile_path = vim.fn.stdpath("data").."/packer/plugin/packer_compiled.lua"
     },
 })
 
