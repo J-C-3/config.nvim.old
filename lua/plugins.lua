@@ -754,12 +754,6 @@ require('packer').startup({ function()
                 -- Error, Warn, Info, Hint
                 diagnostic_header = { "", "", "", "" },
 
-                -- show diagnostic source
-                show_diagnostic_source = true,
-
-                -- add bracket or something with diagnostic source, just have 2 elements
-                diagnostic_source_bracket = {},
-
                 -- preview lines of lsp_finder and definition preview
                 max_preview_lines = 10,
 
@@ -799,7 +793,6 @@ require('packer').startup({ function()
                 },
 
                 rename_action_quit = "<ESC>",
-                definition_preview_icon = "  ",
 
                 -- show symbols in winbar must nightly
                 symbol_in_winbar = {
