@@ -1033,6 +1033,19 @@ require('packer').startup({ function()
 
 
     use {
+        "nvim-telescope/telescope-file-browser.nvim",
+    }
+
+    use {
+        'nvim-telescope/telescope-ui-select.nvim'
+    }
+
+    use {
+        'nvim-telescope/telescope-dap.nvim'
+    }
+
+
+    use {
         'nvim-telescope/telescope.nvim',
         config = function() --{{{
             require('telescope').setup({
@@ -1082,3 +1095,7 @@ end,
 if firstRun then
     require('packer').sync()
 end
+<<<<<<< HEAD
+=======
+-- }}}
+>>>>>>> 1dd4e21 (move telescope plugins closer to telescope)
