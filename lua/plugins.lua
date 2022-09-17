@@ -1095,4 +1095,3 @@ end,
 if firstRun then
     require('packer').sync()
 end
--- }}}
