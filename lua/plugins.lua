@@ -34,15 +34,6 @@ require('packer').startup({ function()
     use {
         "nvim-telescope/telescope-file-browser.nvim",
     }
-
-    use {
-        "ahmedkhalf/project.nvim",
-        config = function()
-            require("project_nvim").setup {}
-        end
-    }
-
-
     use {
         'mbbill/undotree',
         opt = true
@@ -904,7 +895,6 @@ require('packer').startup({ function()
                 -- }
             })
 
-            require('telescope').load_extension('projects')
             require('telescope').load_extension('file_browser')
 
         end --}}}
