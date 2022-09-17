@@ -36,11 +36,11 @@ lsp_installer.settings {
     }
 }
 
-lsp_installer.on_server_ready(
-    function(server)
-        server:setup {}
-    end
-)
+-- lsp_installer.on_server_ready(
+--     function(server)
+--         server:setup {}
+--     end
+-- )
 --}}}
 
 -- Extra server config{{{
