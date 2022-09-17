@@ -1095,7 +1095,4 @@ end,
 if firstRun then
     require('packer').sync()
 end
-<<<<<<< HEAD
-=======
 -- }}}
->>>>>>> 1dd4e21 (move telescope plugins closer to telescope)
