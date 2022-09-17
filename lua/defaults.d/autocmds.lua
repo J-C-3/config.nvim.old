@@ -133,6 +133,7 @@ vim.api.nvim_create_autocmd("TermClose", {
     end,
     group = "Terminal",
 })
+
 -- I am putting off rewriting this
 vim.cmd [[
     function! NeatFoldText()
@@ -149,8 +150,13 @@ vim.cmd [[
     set foldtext=NeatFoldText()
 ]]
 
-vim.cmd [[
-    augroup markdown
-        setlocal spell
-    augroup end
-]]
+vim.api.nvim_create_augroup("markdown", { clear = true })
+
+vim.api.nvim_create_autocmd("BufEnter", {
+    pattern = { "*.md" },
+    callback = function()
+        vim.cmd [[setlocal spell]]
+    end,
+    group = "markdown",
+})
+
