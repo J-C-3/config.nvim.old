@@ -20,7 +20,6 @@ vim.cmd [[
 
 --}}}
 
--- Plugins{{{
 require('packer').startup({ function()
     local use = require('packer').use
 
@@ -1015,8 +1014,6 @@ require('packer').startup({ function()
             require('gitsigns').setup()
         end, --}}}
     }
-
-    use 'kazhala/close-buffers.nvim'
     -- }}}
 
 end,
@@ -1033,4 +1030,3 @@ end,
 if firstRun then
     require('packer').sync()
 end
--- }}}

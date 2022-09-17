@@ -31,7 +31,7 @@ map("t", "<A-z>", "<c-\\><c-n>")
 map("n", "<A-q>", '<cmd>wincmd c<cr>')
 
 -- Delete buffer
-map("n", "<A-S-q>", ':BDelete! this<cr>')
+map("n", "<A-S-q>", '<cmd>bd<cr>')
 
 -- Window movement
 map("n", "<A-S-h>", '<cmd>WinShift left<cr>')
