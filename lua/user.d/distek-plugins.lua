@@ -74,18 +74,21 @@ use {
 }
 
 use {
-  'rmagatti/auto-session',
-  config = function()
-    require('auto-session').setup {
-      log_level = 'info',
-      auto_session_suppress_dirs = {'~/', '~/Projects'}
-    }
-  end
+    'rmagatti/auto-session',
+    config = function()
+        require('auto-session').setup {
+            log_level = 'error',
+            auto_session_suppress_dirs = {
+                vim.fn.expand("~/"),
+                vim.fn.expand("~/") .. '/Projects',
+            }
+        }
+    end
 }
 
 use({
-  'glepnir/zephyr-nvim',
-  requires = { 'nvim-treesitter/nvim-treesitter', opt = true },
+    'glepnir/zephyr-nvim',
+    requires = { 'nvim-treesitter/nvim-treesitter', opt = true },
 })
 
 use 'Mofiqul/dracula.nvim'
@@ -93,4 +96,3 @@ use 'Mofiqul/dracula.nvim'
 use 'tiagovla/tokyodark.nvim'
 
 use 'tanvirtin/monokai.nvim'
-
