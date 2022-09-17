@@ -70,14 +70,14 @@ vim.api.nvim_create_autocmd("CursorMoved", {
 vim.api.nvim_create_autocmd("FocusGained", {
     pattern = { "*" },
     callback = function()
-        vim.cmd[[checktime]]
+        vim.cmd [[checktime]]
     end
 })
 
 vim.api.nvim_create_autocmd("FocusGained", {
     pattern = { "*" },
     callback = function()
-        vim.cmd[[checktime]]
+        vim.cmd [[checktime]]
     end
 })
 
@@ -109,7 +109,7 @@ vim.api.nvim_create_augroup("Terminal", { clear = true })
 vim.api.nvim_create_autocmd("BufEnter", {
     pattern = { "term://*" },
     callback = function()
-        vim.cmd[[startinsert]]
+        vim.cmd [[startinsert]]
     end,
     group = "Terminal",
 })
