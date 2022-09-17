@@ -159,9 +159,9 @@ map("n", "<leader>rbf", [[ <Cmd>lua require('refactoring').refactor('Extract Blo
 
 map("n", "<leader>ri", [[ <Cmd>lua require('refactoring').refactor('Inline Variable')<CR>]])
 
+-- Meta LSP stuff
 map("n", "<leader>Li", "<cmd>LspInstallInfo<CR>")
 map("n", "<leader>Lr", "<cmd>LspRestart<CR>")
 map("n", "<leader>Ls", "<cmd>LspStart<CR>")
 map("n", "<leader>LS", "<cmd>LspStop<CR>")
--- Meta LSP stuff
 
