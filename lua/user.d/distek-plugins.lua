@@ -31,7 +31,7 @@ use {
                         ruler = false,
                         showcmd = false,
                     },
-                    twilight = { enabled = true },
+                    twilight = { enabled = false },
                     gitsigns = { enabled = false },
                     tmux = { enabled = false },
                 },
@@ -49,6 +49,7 @@ use {
     end
 }
 
+-- like limelight
 use {
     "folke/twilight.nvim",
     config = function()
