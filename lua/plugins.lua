@@ -32,9 +32,6 @@ require('packer').startup({ function()
     }
 
     use {
-        "nvim-telescope/telescope-file-browser.nvim",
-    }
-    use {
         'mbbill/undotree',
         opt = true
     }
@@ -888,6 +885,19 @@ require('packer').startup({ function()
     use 'nvim-lua/plenary.nvim'
 
     use {
+        "nvim-telescope/telescope-file-browser.nvim",
+    }
+
+    use {
+        'nvim-telescope/telescope-ui-select.nvim'
+    }
+
+    use {
+        'nvim-telescope/telescope-dap.nvim'
+    }
+
+
+    use {
         'nvim-telescope/telescope.nvim',
         config = function() --{{{
             require('telescope').setup({
@@ -896,7 +906,7 @@ require('packer').startup({ function()
             })
 
             require('telescope').load_extension('file_browser')
-
+            require('telescope').load_extension('dap')
         end --}}}
     }
 
@@ -923,7 +933,7 @@ end,
             enable = true,
             threshold = 1
         },
-        compile_path = vim.fn.stdpath("data").."/packer/plugin/packer_compiled.lua"
+        compile_path = vim.fn.stdpath("data") .. "/packer/plugin/packer_compiled.lua"
     },
 })
 
@@ -931,4 +941,3 @@ if firstRun then
     require('packer').sync()
 end
 -- }}}
---
