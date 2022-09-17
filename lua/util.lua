@@ -97,12 +97,6 @@ Util.dapStop = function()
     dapui.close()
 end
 
-Util.nvimTreeToggle = function()
-    vim.g.nvimtreeOpen = not vim.g.nvimtreeOpen
-
-    require 'nvim-tree'.toggle()
-end
-
 Util.tagbarToggle = function()
     vim.g.tagbarOpen = not vim.g.tagbarOpen
 
@@ -112,23 +106,11 @@ end
 Util.toggleTerm = function()
     local doWinCmd = false
 
-    local nvimTree = require "nvim-tree"
-    local nvimTreeView = nvimTree.view
-
-    if vim.g.nvimtreeOpen then
-        nvimTreeView.close()
-    end
-
     if vim.g.tagbarOpen then
         vim.cmd [[TagbarToggle]]
     end
 
     vim.cmd [[ToggleTerm]]
-
-    if vim.g.nvimtreeOpen then
-        doWinCmd = true
-        nvimTree.toggle()
-    end
 
     if vim.g.tagbarOpen then
         doWinCmd = true
