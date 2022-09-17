@@ -165,3 +165,7 @@ map("n", "<leader>Lr", "<cmd>LspRestart<CR>")
 map("n", "<leader>Ls", "<cmd>LspStart<CR>")
 map("n", "<leader>LS", "<cmd>LspStop<CR>")
 
+-- Fugitive
+map("n", "<leader>gfs", "<cmd>vert Git<cr>")
+map("n", "<leader>gfc", "<cmd>Git commit<cr>")
+map("n", "<leader>gfp", "<cmd>Git push<cr>")
