@@ -159,3 +159,9 @@ end
 Util.getColor = function(group, attr)
     return vim.fn.synIDattr(vim.fn.synIDtrans(vim.fn.hlID(group)), attr)
 end
+
+
+Util.inspect = function(vars,  ...)
+    print(vim.inspect(vars, ...))
+end
+
