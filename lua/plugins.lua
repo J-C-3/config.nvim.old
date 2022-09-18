@@ -61,15 +61,6 @@ require('packer').startup({ function()
                 persist_size = true,
                 direction = 'horizontal',
                 close_on_exit = false,
-                -- highlights = {
-                --     Normal = {
-                --         link = "Terminal"
-                --     },
-                --     SignColumn = {
-                --         link = "Terminal"
-                --     }
-                -- },
-                -- shell = vim.fn.expand("~") .. "/.config/nvim/vimterm.sh",
             }
         end --}}}
     }
@@ -102,6 +93,7 @@ require('packer').startup({ function()
         "rebelot/kanagawa.nvim",
     }
     --}}}
+    
     use {
         'nvim-treesitter/nvim-treesitter',
         config = function() --{{{
@@ -129,10 +121,12 @@ require('packer').startup({ function()
         end --}}}
     }
 
+    use 'nvim-treesitter/playground'
+
     use {
         'nvim-treesitter/nvim-treesitter-context',
         config = function()
-            require 'treesitter-context'.setup {
+            require 'treesitter-context'.setup {-- {{{
                 enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
                 max_lines = 0, -- How many lines the window should span. Values <= 0 mean no limit.
                 trim_scope = 'outer', -- Which context lines to discard if `max_lines` is exceeded. Choices: 'inner', 'outer'
@@ -207,7 +201,7 @@ require('packer').startup({ function()
                 -- Separator between context and content. Should be a single character string, like '-'.
                 -- When separator is set, the context will only show up when there are at least 2 lines above cursorline.
                 separator = nil,
-            }
+            }-- }}}
         end
     }
 
@@ -251,7 +245,7 @@ require('packer').startup({ function()
     })
 
     use({ 'noib3/nvim-cokeline',
-        requires = 'kyazdani42/nvim-web-devicons', -- If you want devicons
+        requires = 'kyazdani42/nvim-web-devicons',
         config = function() --{{{
             local get_hex = require('cokeline/utils').get_hex
 
