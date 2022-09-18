@@ -17,9 +17,9 @@ use {
                     height = 1, -- >1 dicates height of the actual window
                     options = {
                         signcolumn = "no",
-                        number = false,
-                        relativenumber = false,
-                        cursorline = false,
+                        number = true,
+                        relativenumber = true,
+                        cursorline = true,
                         cursorcolumn = false,
                         foldcolumn = "0",
                         list = false,
@@ -28,11 +28,11 @@ use {
                 plugins = {
                     options = {
                         enabled = true,
-                        ruler = false,
-                        showcmd = false,
+                        ruler = true,
+                        showcmd = true,
                     },
                     twilight = { enabled = false },
-                    gitsigns = { enabled = false },
+                    gitsigns = { enabled = true },
                     tmux = { enabled = false },
                 },
                 on_open = function(win)
