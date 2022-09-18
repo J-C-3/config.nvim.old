@@ -4,7 +4,7 @@
 vim.api.nvim_create_autocmd("BufWritePost", {
     pattern = { "*/nvim/init.lua", "*/nvim/lua/*.lua" },
     callback = function()
-        os.execute("rm " .. vim.fn.expand("~") .. "/.config/nvim/plugin/packer_compiled.lua")
+        vim.cmd("source %")
         require("packer").compile()
     end
 })
