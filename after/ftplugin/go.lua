@@ -21,55 +21,50 @@ vim.api.nvim_create_autocmd("BufEnter", {
 -- Args:
 --     open: bool - opens test file after function creation
 function GoAddTest(open)
-    local function getBaseFilename(line)
-        local ret, _ = line:gsub(".go$", "")
-        return ret
+    if vim.fn.executable("gotests") == 0 then
+        vim.notify("GoAddTest: gotests not in path or not installed", vim.log.levels.ERROR)
+        return
     end
 
-    local function subRootDir(root, path)
-        local ret, _ = path:gsub(root.."/", "")
-        return ret
-    end
-
-    -- get buffer info (funcName, path)
     local bufNumber = vim.api.nvim_get_current_buf()
 
     local bufPath = vim.api.nvim_buf_get_name(bufNumber)
 
-    local ts = require("nvim-treesitter.ts_utils")
+    local ts_utils = require("nvim-treesitter.ts_utils")
 
-    local current_node = ts.get_node_at_cursor()
-    if not current_node then
+    local node = ts_utils.get_node_at_cursor()
+    if not node then
         return
     end
 
-    local expr = current_node
+    local currentNode = node
 
-    while expr do
-        if expr:type() == 'function_declaration' then
+    while currentNode do
+        if currentNode:type() == 'function_declaration' then
             break
         end
-        expr = expr:parent()
+        currentNode = currentNode:parent()
     end
 
-    if expr == nil then
-        print("Apparently could not find parent")
+    if not currentNode then
+        vim.notify("GoAddTest: Could not find parent", vim.log.levels.ERROR)
         return
     end
 
-    local funcName = ts.get_node_text(expr:child(1))
+    local funcName = vim.treesitter.query.get_node_text(currentNode:child(1), 0)
 
-    if funcName == nil or funcName == "" then
+    if not funcName then
+        vim.notify("GoAddTest: No function under cursor", vim.log.levels.ERROR)
         return
     end
-    local subRoot = subRootDir(vim.lsp.buf.list_workspace_folders()[1], bufPath)
-    -- pathSubGo - name without the .go ext
-    local pathSubGo = getBaseFilename(subRoot)
 
-    -- run gotests -only ..funcName.. -w ..pathSubGo.._test.go
-    --
-    local ret = os.execute("gotests -only \"^" .. funcName[1] .. "$\" -w ".. pathSubGo.."_test.go ".. pathSubGo ..".go ", 'r')
+    local subRoot, _ = bufPath:gsub(vim.lsp.buf.list_workspace_folders()[1] .. "/", "")
 
+    local pathSubGo = subRoot:gsub(".go$", "")
+
+    os.execute(
+        "gotests -only \"^" .. funcName .. "$\" -w " .. pathSubGo .. "_test.go " .. pathSubGo .. ".go "-- what I have to do
+    )
 
     if open then
         vim.cmd("edit " .. pathSubGo .. "_test.go")
