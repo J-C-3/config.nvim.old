@@ -17,15 +17,6 @@ vim.api.nvim_create_autocmd("BufReadPost", {
     end
 })
 
--- Return to previous line in file
-vim.api.nvim_create_autocmd("BufNewFile,BufRead", {
-    pattern = { "*.ha" },
-    callback = function()
-        vim.notify("asdf")
-        vim.cmd [[:set syntax=cpp]]
-    end
-})
-
 -- LSP - documentHighlight
 -- highlight - normal
 vim.api.nvim_create_autocmd("CursorHold", {
