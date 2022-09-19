@@ -72,3 +72,6 @@ function GoAddTest(open)
 end
 
 vim.api.nvim_create_user_command("GoAddTest", "lua GoAddTest(true)", {})
+
+
+vim.cmd[[TagbarOpen]]

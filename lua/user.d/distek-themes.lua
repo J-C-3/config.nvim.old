@@ -34,11 +34,10 @@ Themes["monokai"] = function()
     -- require('monokai').setup { palette = require('monokai').ristretto }
 end
 
--- Themes.gruvbox()
+Themes.gruvbox()
 -- Themes.kanagawa()
 -- Themes.nord()
 -- Themes.zephyr()
 -- Themes.dracula()
 -- Themes.tokyodark()
-Themes.monokai()
-
+-- Themes.monokai()
