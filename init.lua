@@ -4,7 +4,7 @@ if vim.g.vscode then
 else
     local packerInstall = vim.fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
 
-    vim.o.runtimepath = vim.o.runtimepath..','..vim.fn.stdpath("data").."/packer/"
+    vim.o.runtimepath = vim.o.runtimepath .. ',' .. vim.fn.stdpath("data") .. "/packer/"
 
     require('util')
     require('plugins')

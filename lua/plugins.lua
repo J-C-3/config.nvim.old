@@ -23,7 +23,14 @@ vim.cmd [[
 require('packer').startup({ function()
     local use = require('packer').use
 
-    use 'wbthomason/packer.nvim'
+    use {
+        'wbthomason/packer.nvim'
+    }
+
+    -- only for seeing what's taking so long if we get a slowdown
+    -- use {
+    --     'tweekmonster/startuptime.vim'
+    -- }
 
     -- Modes{{{
     use {
@@ -93,7 +100,7 @@ require('packer').startup({ function()
         "rebelot/kanagawa.nvim",
     }
     --}}}
-    
+
     use {
         'nvim-treesitter/nvim-treesitter',
         config = function() --{{{
@@ -121,12 +128,14 @@ require('packer').startup({ function()
         end --}}}
     }
 
-    use 'nvim-treesitter/playground'
+    use {
+        'nvim-treesitter/playground'
+    }
 
     use {
         'nvim-treesitter/nvim-treesitter-context',
         config = function()
-            require 'treesitter-context'.setup {-- {{{
+            require 'treesitter-context'.setup { -- {{{
                 enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
                 max_lines = 0, -- How many lines the window should span. Values <= 0 mean no limit.
                 trim_scope = 'outer', -- Which context lines to discard if `max_lines` is exceeded. Choices: 'inner', 'outer'
@@ -201,13 +210,17 @@ require('packer').startup({ function()
                 -- Separator between context and content. Should be a single character string, like '-'.
                 -- When separator is set, the context will only show up when there are at least 2 lines above cursorline.
                 separator = nil,
-            }-- }}}
+            } -- }}}
         end
     }
 
-    use 'p00f/nvim-ts-rainbow'
+    use {
+        'p00f/nvim-ts-rainbow'
+    }
 
-    use 'kevinhwang91/nvim-hlslens'
+    use {
+        'kevinhwang91/nvim-hlslens'
+    }
 
     use({ 'nvim-lualine/lualine.nvim',
         requires = { 'kyazdani42/nvim-web-devicons', opt = true },
@@ -321,6 +334,7 @@ require('packer').startup({ function()
     -- Languages/Filetypes {{{
     use "nathom/filetype.nvim"
 
+    -- Neovim lua writing
     use {
         "folke/lua-dev.nvim",
         config = function() --{{{
@@ -344,7 +358,9 @@ require('packer').startup({ function()
     }
 
     -- GPG
-    use 'jamessan/vim-gnupg'
+    use {
+        'jamessan/vim-gnupg'
+    }
 
     -- C
     use {
@@ -627,11 +643,19 @@ require('packer').startup({ function()
             require('nvim-dap-virtual-text').setup()
         end --}}}
     }
-    use 'rcarriga/nvim-dap-ui'
-    use 'theHamsta/nvim-dap-virtual-text'
+    use {
+        'rcarriga/nvim-dap-ui'
+    }
+    use {
+        'theHamsta/nvim-dap-virtual-text'
+    }
 
-    use 'neovim/nvim-lspconfig'
-    use 'williamboman/nvim-lsp-installer'
+    use {
+        'neovim/nvim-lspconfig'
+    }
+    use {
+        'williamboman/nvim-lsp-installer'
+    }
 
     use {
         'hrsh7th/nvim-cmp',
@@ -718,25 +742,49 @@ require('packer').startup({ function()
             })
         end --}}}
     }
-    use 'hrsh7th/cmp-nvim-lsp'
-    use 'hrsh7th/cmp-buffer'
-    use 'hrsh7th/cmp-look'
-    use 'hrsh7th/cmp-cmdline'
-    use 'hrsh7th/cmp-path'
-    use 'hrsh7th/cmp-calc'
-    use 'hrsh7th/cmp-nvim-lua'
-    use 'f3fora/cmp-spell'
-    use 'uga-rosa/cmp-dictionary'
-    use 'dmitmel/cmp-cmdline-history'
+    use {
+        'hrsh7th/cmp-nvim-lsp'
+    }
+    use {
+        'hrsh7th/cmp-buffer'
+    }
+    use {
+        'hrsh7th/cmp-look'
+    }
+    use {
+        'hrsh7th/cmp-cmdline'
+    }
+    use {
+        'hrsh7th/cmp-path'
+    }
+    use {
+        'hrsh7th/cmp-calc'
+    }
+    use {
+        'hrsh7th/cmp-nvim-lua'
+    }
+    use {
+        'f3fora/cmp-spell'
+    }
+    use {
+        'uga-rosa/cmp-dictionary'
+    }
+    use {
+        'dmitmel/cmp-cmdline-history'
+    }
 
-    use 'hrsh7th/cmp-vsnip'
+    use {
+        'hrsh7th/cmp-vsnip'
+    }
     use {
         'hrsh7th/vim-vsnip',
         config = function()
             vim.g.vsnip_snippet_dir = os.getenv('HOME') .. "/.config/nvim/vsnip/"
         end
     }
-    use 'rafamadriz/friendly-snippets'
+    use {
+        'rafamadriz/friendly-snippets'
+    }
 
     use {
         'ray-x/lsp_signature.nvim',
@@ -753,7 +801,9 @@ require('packer').startup({ function()
         end --}}}
     }
 
-    use 'onsails/lspkind-nvim'
+    use {
+        'onsails/lspkind-nvim'
+    }
 
     use {
         'windwp/nvim-autopairs',
@@ -921,7 +971,9 @@ require('packer').startup({ function()
         end
     }
 
-    use 'powerman/vim-plugin-AnsiEsc'
+    use {
+        'powerman/vim-plugin-AnsiEsc'
+    }
 
     use {
         'folke/which-key.nvim',
@@ -959,9 +1011,13 @@ require('packer').startup({ function()
         end
     }
 
-    use 'norcalli/nvim-colorizer.lua'
+    use {
+        'norcalli/nvim-colorizer.lua'
+    }
 
-    use 'nvim-lua/plenary.nvim'
+    use {
+        'nvim-lua/plenary.nvim'
+    }
 
     use {
         "nvim-telescope/telescope-file-browser.nvim",
@@ -989,7 +1045,9 @@ require('packer').startup({ function()
         end --}}}
     }
 
-    use 'tpope/vim-commentary'
+    use {
+        'tpope/vim-commentary'
+    }
 
     use {
         "lukas-reineke/indent-blankline.nvim",
