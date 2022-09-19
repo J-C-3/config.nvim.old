@@ -41,4 +41,3 @@ end
 -- Themes.dracula()
 -- Themes.tokyodark()
 Themes.monokai()
-
