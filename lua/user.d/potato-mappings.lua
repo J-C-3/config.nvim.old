@@ -32,6 +32,9 @@ map("n", "<leader>l", ":wincmd l<cr>")
 map("n", "<leader>+", ":vertical resize +5<CR>")
 map("n", "<leader>-", ":vertical resize -5<CR>")
 
+-- Float
+map("n", "<leader>fw", "<cmd> lua Float()<cr>")
+
 -- Telescope
 map("n", "<leader>pf", "<cmd>lua require('telescope.builtin').find_files()<cr>")
 map("n", "<leader>pv", ":wincmd v <bar> lua require('telescope.builtin').find_files()<cr>")
@@ -54,5 +57,5 @@ map("n", "<leader>gj", ":diffget //3<cr>")
 map("n", "<leader>gf", ":diffget //2<cr>")
 -- }}}
 -- }}}
---}}t commit
+--}}
 -- }
