@@ -41,17 +41,17 @@ map("n", "<leader>ph", "<cmd>lua require('telescope.builtin').help_tags()<cr>")
 
 -- }}}
 -- Git {{{
-map("n", "<leader>gs", ":Git<CR>")
-map("n", "<leader>gw", ":Gwrite<CR>")
-map("n", "<leader>gc", ":Git commit<CR>")
-map("n", "<leader>gsh", ":Git push<CR>")
-map("n", "<leader>gll", ":Git pull<CR>")
-map("n", "<leader>gb", ":Git blame<CR>")
-map("n", "<leader>gd", ":Gvdiff<CR>")
-map("n", "<leader>gr", ":Gremove<CR>")
-map("n", "<leader>o", ":Gbrowse<CR>")
-map("n", "<leader>gj", ":diffget //3<CR>")
-map("n", "<leader>gf", ":diffget //2<CR>")
+map("n", "<leader>gs", ":Git <cr> <cmd> lua floatFromCurBuf(true)<cr>")
+map("n", "<leader>gw", ":Gwrite<cr>")
+map("n", "<leader>gc", ":Git commit<cr> <cmd> lua floatFromCurBuf(true)<cr>")
+map("n", "<leader>gsh", ":Git push<cr>")
+map("n", "<leader>gll", ":Git pull<cr>")
+map("n", "<leader>gb", ":Git blame<cr> <cmd> lua floatFromCurBuf(true)<cr>")
+map("n", "<leader>gd", ":Gvdiff<cr>")
+map("n", "<leader>gr", ":GRemove<cr>")
+map("n", "<leader>o", ":GBrowse<cr>")
+map("n", "<leader>gj", ":diffget //3<cr>")
+map("n", "<leader>gf", ":diffget //2<cr>")
 -- }}}
 -- }}}
 --}}}
