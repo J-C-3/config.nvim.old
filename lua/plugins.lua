@@ -1031,20 +1031,6 @@ require('packer').startup({ function()
         'nvim-telescope/telescope-dap.nvim'
     }
 
-
-    use {
-        "nvim-telescope/telescope-file-browser.nvim",
-    }
-
-    use {
-        'nvim-telescope/telescope-ui-select.nvim'
-    }
-
-    use {
-        'nvim-telescope/telescope-dap.nvim'
-    }
-
-
     use {
         'nvim-telescope/telescope.nvim',
         config = function() --{{{
