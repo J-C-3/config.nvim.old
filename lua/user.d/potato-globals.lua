@@ -4,9 +4,10 @@ vim.wo.colorcolumn = "0"
 
 -- Float a focused window
 function Float()
-    -- Allow it to fail silently if the window can't be floated
+    -- Allow it to fail if the window can't be floated
     if len(api.nvim_list_wins()) < 2
     then
+        print("Float() can only be used if there is more than one window")
         return
     end
 
