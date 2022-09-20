@@ -41,12 +41,12 @@ map("n", "<leader>ph", "<cmd>lua require('telescope.builtin').help_tags()<cr>")
 
 -- }}}
 -- Git {{{
-map("n", "<leader>gs", ":Git <cr> <cmd> lua floatFromCurBuf(true)<cr>")
+map("n", "<leader>gs", ":Git | lua Float()<cr>")
 map("n", "<leader>gw", ":Gwrite<cr>")
-map("n", "<leader>gc", ":Git commit<cr> <cmd> lua floatFromCurBuf(true)<cr>")
+map("n", "<leader>gc", ":Git commit | lua Float()<cr>")
 map("n", "<leader>gsh", ":Git push<cr>")
 map("n", "<leader>gll", ":Git pull<cr>")
-map("n", "<leader>gb", ":Git blame<cr> <cmd> lua floatFromCurBuf(true)<cr>")
+map("n", "<leader>gb", ":Git blame | lua Float()<cr>")
 map("n", "<leader>gd", ":Gvdiff<cr>")
 map("n", "<leader>gr", ":GRemove<cr>")
 map("n", "<leader>o", ":GBrowse<cr>")
@@ -54,4 +54,5 @@ map("n", "<leader>gj", ":diffget //3<cr>")
 map("n", "<leader>gf", ":diffget //2<cr>")
 -- }}}
 -- }}}
---}}}
+--}}t commit
+-- }

@@ -2,7 +2,7 @@ local api = vim.api
 vim.wo.colorcolumn = "0"
 
 
-function floatFromCurBuf(closeCurWin)
+function Float()
     local curBuf = api.nvim_get_current_buf()
     local curWin = api.nvim_get_current_win()
     local ui = api.nvim_list_uis()[1]
@@ -16,9 +16,5 @@ function floatFromCurBuf(closeCurWin)
         anchor = "NW",
         style = "",
     }
-    api.nvim_open_win(curBuf, true, opts)
-    if closeCurWin == true
-    then
-        api.nvim_win_close(curWin, false)
-    end
+    api.nvim_win_set_config(curWin, opts )
 end
