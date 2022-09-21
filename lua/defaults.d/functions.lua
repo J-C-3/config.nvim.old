@@ -22,11 +22,11 @@ function Float(floatWidthDivisor, floatHeightDivisor)
     end
 
     local width, height = math.floor(ui.width / widthDivisor), math.floor(ui.height / heightDivisor)
-    local doubleBufHeight = api.nvim_buf_line_count(api.nvim_get_current_buf()) * 4
+    local quadBufHeight = api.nvim_buf_line_count(api.nvim_get_current_buf()) * 4
 
     -- Ensure the window is not ridiculously large for the content
-    if doubleBufHeight < height then
-        height = doubleBufHeight
+    if quadBufHeight < height then
+        height = quadBufHeight
     end
 
     local opts = { relative = "editor",
