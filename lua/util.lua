@@ -8,7 +8,14 @@ Util.extraConfs = function(path)
 
     if #extraConfigs > 0 then
         for _, f in ipairs(extraConfigs) do
+            if f:match("plugins") then
+                -- skip over plugins as we already handle that in the top-level plugins.lua
+                goto continue
+            end
+
             dofile(f)
+
+            ::continue::
         end
     end
 end
