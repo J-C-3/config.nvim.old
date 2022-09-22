@@ -2,9 +2,11 @@
 
 -- Compile packer on save of nvim's init.lua
 vim.api.nvim_create_autocmd("BufWritePost", {
-    pattern = { "*/nvim/init.lua", "*/nvim/lua/*.lua" },
+    pattern = {
+        vim.fn.expand('~/') .. "/.config/nvim/init.lua",
+        vim.fn.expand('~/') .. "/.config/nvim/lua/*.lua"
+    },
     callback = function()
-        vim.cmd("source %")
         require("packer").compile()
     end
 })
@@ -134,4 +136,3 @@ vim.api.nvim_create_autocmd("BufEnter", {
     end,
     group = "markdown",
 })
-
