@@ -4,6 +4,7 @@ Personal nvim distro
 
 ## Dependencies
 * `nvim`
+* some `cc` compiler like `clang` or `gcc`
 
 ## Install
 ```
@@ -12,10 +13,12 @@ git clone https://github.com/distek/config.nvim.git ~/.config/nvim
 
 Then:
 * run `nvim`
-    * You'll get an error, probably for `gitsigns`, just hit enter and Packer will start installing plugins
-* close `nvim` once packer finishes and/or closes
-* reopen to let TreeSitter compile it's parsers
-* use nvim, feel the lua
+    * After the initial clone of packer, it will begin to install plugins.
+    * Press enter or something after packer shows "finished"
+* wait for the treesitter parsers to compile
+    * if some of the compilers fail, wait until it's finished and then close and reopen `nvim` and it will attempt to restart
+
+This is about as clean and simple as I can get the init. The autocmd packer provides in the readme doesn't seem to work, but I'm sure that's likely my fault.
 
 ## Notes
 
@@ -28,12 +31,28 @@ We're just rockin' lua over here so do what you want and there's no weird config
 
 Also I probably wont advertise this everywhere as I have no time to _actually_ support it. Though I rock neovim's nightly and will keep it functional with that.
 
+### It's not _BLAZINGlY FAST_ to open
+I haven't spent an ungodly amount of time trying to get this config to open in less than 10ms.
+
+It opens faster than vscode or whatever IDE one might use, so it's good enough for me.
+
 ### Theme
 
 Gruvbox and Kanagawa are setup by default in `lua/defaults.d/themes.lua`. Gruvbox is the default theme.
-The configuration for the various themes are set in a function that's assigned to a key in the `Themes` table:
+To add nord, for example:
+
+- In `lua/user.d/yourname-plugins.lua`:
 ```lua
--- Adding nord:
+
+use {
+    'shaunsingh/nord.nvim',
+}
+
+```
+
+- The configuration for the various themes are set in a function that's assigned to a key in the `Themes` table:
+```lua
+-- Adding nord (in lua/user.d/yourname-themes.lua):
 Themes = {
     ["nord"] = function()
         vim.g.nord_contrast = true
@@ -95,16 +114,25 @@ lua
 
 I've left my configurations in these directories as examples of how to utilize them. _Most_ of the mappings have been moved from the defaults directory as I've come to find that a lot of what I remap is _wild_ and _crazy_ :)
 
-Also, despite them being `.d` directories, you don't have to number them. They're just called in alphabetical order after the order specified in `init.lua`:
+Also, despite them being `.d` directories, you don't _have_ to number them, though they're called in alphabetical order after the order specified in `init.lua`:
 
 ```lua
--- Nvim config
-local packerInstall = vim.fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
+if vim.g.vscode then
+    require('vscode')
+else
+    vim.o.runtimepath = vim.o.runtimepath .. ',' .. vim.fn.stdpath("data") .. "/packer/"
 
-require('util')
-require('plugins')
-if vim.fn.empty(vim.fn.glob(packerInstall)) == 0 then
-    Util.extraConfs('defaults.d')
-    Util.extraConfs('user.d')
+    local firstRun = require('plugins')
+
+    if firstRun then
+        require('packer').install()
+    else
+        require('packer').compile()
+
+        require('util')
+
+        Util.extraConfs('defaults.d') -- you can add your own ".d" directories, if you want
+        Util.extraConfs('user.d')
+    end
 end
 ```

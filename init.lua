@@ -1,4 +1,3 @@
--- Nvim config
 if vim.g.vscode then
     require('vscode')
 else
@@ -7,14 +6,7 @@ else
     local firstRun = require('plugins')
 
     if firstRun then
-        local packer = require('packer')
-        local complete = function()
-            packer.compile()
-            vim.cmd("quit")
-        end
-
-        packer.on_complete(complete)
-        packer.sync()
+        require('packer').sync()
     else
         require('util')
 

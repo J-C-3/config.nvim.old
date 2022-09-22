@@ -6,7 +6,8 @@ local firstRun = false
 
 if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
     firstRun = true
-    vim.cmd("!git clone https://github.com/wbthomason/packer.nvim " .. install_path)
+    vim.notify("Cloning packer.nvim...")
+    vim.cmd("silent !git clone https://github.com/wbthomason/packer.nvim " .. install_path)
 end
 
 vim.cmd [[
@@ -1086,6 +1087,9 @@ end,
             enable = true,
             threshold = 1
         },
+
+        compile_on_sync = true,
+        ensure_dependencies = true,
         compile_path = vim.fn.stdpath("data") .. "/packer/plugin/packer_compiled.lua"
     },
 })
