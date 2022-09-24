@@ -1,7 +1,7 @@
 local api = vim.api
 -- Float() is a helper function to make a currently focused window float
 -- Adjust the size of your window by setting FloatHeightDivisor & FloatWidthDivisor in your config
-function Float()
+function Float(floatWidthDivisor, floatHeightDivisor)
     -- Allow it to fail if the window can't be floated
     if len(api.nvim_list_wins()) < 2
     then
@@ -14,20 +14,19 @@ function Float()
 
     -- Allow the divisor to be set elsewhere
     local heightDivisor, widthDivisor = 2, 2
-    if FloatHeightDivisor then
-        heightDivisor = FloatHeightDivisor
+    if floatWidthDivisor then
+        widthDivisor = floatWidthDivisor
     end
-    if FloatWidthDivisor then
-        widthDivisor = FloatWidthDivisor
+    if floatHeightDivisor then
+        heightDivisor = floatHeightDivisor
     end
 
     local width, height = math.floor(ui.width / widthDivisor), math.floor(ui.height / heightDivisor)
-    local doubleBufHeight = api.nvim_buf_line_count(api.nvim_get_current_buf()) * 4
+    local quadBufHeight = api.nvim_buf_line_count(api.nvim_get_current_buf()) * 4
 
     -- Ensure the window is not ridiculously large for the content
-    if doubleBufHeight < height
-    then
-        height = doubleBufHeight
+    if quadBufHeight < height then
+        height = quadBufHeight
     end
 
     local opts = { relative = "editor",
