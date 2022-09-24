@@ -689,7 +689,6 @@ require('packer').startup({ function()
                             nvim_lua = "[Lua]",
                             look     = "[Look]",
                             spell    = "[Spell]",
-                            cmdline  = "[CmdLine]",
                             path     = "[Path]",
                             calc     = "[Calc]",
                         })
@@ -739,44 +738,44 @@ require('packer').startup({ function()
             })
         end --}}}
     }
+
     use {
         'hrsh7th/cmp-nvim-lsp',
         after = 'nvim-cmp'
     }
+
     use {
         'hrsh7th/cmp-buffer',
         after = 'nvim-cmp'
     }
+
     use {
         'hrsh7th/cmp-look',
         after = 'nvim-cmp'
     }
-    use {
-        'hrsh7th/cmp-cmdline',
-        after = 'nvim-cmp'
-    }
+
     use {
         'hrsh7th/cmp-path',
         after = 'nvim-cmp'
     }
+
     use {
         'hrsh7th/cmp-calc',
         after = 'nvim-cmp'
     }
+
     use {
         'hrsh7th/cmp-nvim-lua',
         after = 'nvim-cmp'
     }
+
     use {
         'f3fora/cmp-spell',
         after = 'nvim-cmp'
     }
+
     use {
         'uga-rosa/cmp-dictionary',
-        after = 'nvim-cmp'
-    }
-    use {
-        'dmitmel/cmp-cmdline-history',
         after = 'nvim-cmp'
     }
 
@@ -790,6 +789,7 @@ require('packer').startup({ function()
             vim.g.vsnip_snippet_dir = os.getenv('HOME') .. "/.config/nvim/vsnip/"
         end
     }
+
     use {
         'rafamadriz/friendly-snippets'
     }
