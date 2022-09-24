@@ -29,7 +29,8 @@ function Float(floatWidthDivisor, floatHeightDivisor)
         height = quadBufHeight
     end
 
-    local opts = { relative = "editor",
+    local opts = {
+        relative = "editor",
         width = width,
         height = height,
         col = math.floor(ui.width / 2) - math.floor(width / 2),

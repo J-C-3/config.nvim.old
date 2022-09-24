@@ -51,9 +51,9 @@ Themes["gruvbox"] = function()
     vim.g.gruvbox_improved_warnings = 0
     vim.g.gruvbox_guisp_fallback = 'NONE'
 
-    vim.cmd[[highlight link TSError Normal]]
+    vim.cmd [[highlight link TSError Normal]]
 
     vim.cmd("colorscheme gruvbox")
 
-    vim.cmd('highlight NvimTreeNormal guibg='..Util.darken(Util.getColor("Normal", "bg#"), 0.8))
+    vim.cmd('highlight NvimTreeNormal guibg=' .. Util.darken(Util.getColor("Normal", "bg#"), 0.8))
 end

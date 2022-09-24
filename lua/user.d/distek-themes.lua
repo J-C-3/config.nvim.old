@@ -16,7 +16,7 @@ Themes["zephyr"] = function()
 end
 
 Themes["dracula"] = function()
-    vim.cmd[[colorscheme dracula]]
+    vim.cmd [[colorscheme dracula]]
 end
 
 Themes["tokyodark"] = function()

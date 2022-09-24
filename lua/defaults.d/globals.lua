@@ -120,4 +120,3 @@ vim.g.nvimtreeOpen = false
 vim.g.tagbarOpen = false
 
 -- }}}
-
