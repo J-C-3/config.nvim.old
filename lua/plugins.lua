@@ -1,24 +1,18 @@
 -- Packer
 
--- Init {{{
--- Don't mind me:{{{
-vim = vim
---}}}
-
 local install_path = vim.fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
 
 local firstRun = false
 
 if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
     firstRun = true
-    vim.cmd("!git clone https://github.com/wbthomason/packer.nvim " .. install_path)
+    vim.notify("Cloning packer.nvim...")
+    vim.cmd("silent !git clone https://github.com/wbthomason/packer.nvim " .. install_path)
 end
 
 vim.cmd [[
         packadd packer.nvim
-]]
-
---}}}
+    ]]
 
 require('packer').startup({ function()
     local use = require('packer').use
@@ -129,7 +123,8 @@ require('packer').startup({ function()
     }
 
     use {
-        'nvim-treesitter/playground'
+        'nvim-treesitter/playground',
+        after = 'nvim-treesitter'
     }
 
     use {
@@ -211,11 +206,13 @@ require('packer').startup({ function()
                 -- When separator is set, the context will only show up when there are at least 2 lines above cursorline.
                 separator = nil,
             } -- }}}
-        end
+        end,
+        after = 'nvim-treesitter'
     }
 
     use {
-        'p00f/nvim-ts-rainbow'
+        'p00f/nvim-ts-rainbow',
+        after = 'nvim-treesitter'
     }
 
     use {
@@ -743,38 +740,49 @@ require('packer').startup({ function()
         end --}}}
     }
     use {
-        'hrsh7th/cmp-nvim-lsp'
+        'hrsh7th/cmp-nvim-lsp',
+        after = 'nvim-cmp'
     }
     use {
-        'hrsh7th/cmp-buffer'
+        'hrsh7th/cmp-buffer',
+        after = 'nvim-cmp'
     }
     use {
-        'hrsh7th/cmp-look'
+        'hrsh7th/cmp-look',
+        after = 'nvim-cmp'
     }
     use {
-        'hrsh7th/cmp-cmdline'
+        'hrsh7th/cmp-cmdline',
+        after = 'nvim-cmp'
     }
     use {
-        'hrsh7th/cmp-path'
+        'hrsh7th/cmp-path',
+        after = 'nvim-cmp'
     }
     use {
-        'hrsh7th/cmp-calc'
+        'hrsh7th/cmp-calc',
+        after = 'nvim-cmp'
     }
     use {
-        'hrsh7th/cmp-nvim-lua'
+        'hrsh7th/cmp-nvim-lua',
+        after = 'nvim-cmp'
     }
     use {
-        'f3fora/cmp-spell'
+        'f3fora/cmp-spell',
+        after = 'nvim-cmp'
     }
     use {
-        'uga-rosa/cmp-dictionary'
+        'uga-rosa/cmp-dictionary',
+        after = 'nvim-cmp'
     }
     use {
-        'dmitmel/cmp-cmdline-history'
+        'dmitmel/cmp-cmdline-history',
+        after = 'nvim-cmp'
     }
 
     use {
-        'hrsh7th/cmp-vsnip'
+        'hrsh7th/cmp-vsnip',
+        after = 'nvim-cmp'
     }
     use {
         'hrsh7th/vim-vsnip',
@@ -1067,6 +1075,11 @@ require('packer').startup({ function()
     }
     -- }}}
 
+    local userPlugins = vim.api.nvim_get_runtime_file("*/user.d/*plugins.lua", true)
+
+    for _, s in ipairs(userPlugins) do
+        dofile(s)
+    end
 end,
     config = {
         max_jobs = 5,
@@ -1074,10 +1087,11 @@ end,
             enable = true,
             threshold = 1
         },
+
+        compile_on_sync = true,
+        ensure_dependencies = true,
         compile_path = vim.fn.stdpath("data") .. "/packer/plugin/packer_compiled.lua"
     },
 })
 
-if firstRun then
-    require('packer').sync()
-end
+return firstRun

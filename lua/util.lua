@@ -8,7 +8,14 @@ Util.extraConfs = function(path)
 
     if #extraConfigs > 0 then
         for _, f in ipairs(extraConfigs) do
+            if f:match("plugins") then
+                -- skip over plugins as we already handle that in the top-level plugins.lua
+                goto continue
+            end
+
             dofile(f)
+
+            ::continue::
         end
     end
 end
@@ -33,7 +40,7 @@ end
 -- Reason: QF appears to overwrite the <Tab> mappings
 Util.skipQFAndTerm = function(dir)
     if dir == "prev" then
-        require"cokeline/mappings".by_step("focus", "-1")
+        require "cokeline/mappings".by_step("focus", "-1")
 
         local buftype = vim.api.nvim_buf_get_option(0, "buftype")
 
@@ -44,7 +51,7 @@ Util.skipQFAndTerm = function(dir)
                     return
                 end
 
-                vim.cmd[[stopinsert]]
+                vim.cmd [[stopinsert]]
 
                 return
             end
@@ -52,7 +59,7 @@ Util.skipQFAndTerm = function(dir)
             Util.skipQFAndTerm(dir)
         end
     else
-        require"cokeline/mappings".by_step("focus", '1')
+        require "cokeline/mappings".by_step("focus", '1')
 
         local buftype = vim.api.nvim_buf_get_option(0, "buftype")
 
@@ -63,7 +70,7 @@ Util.skipQFAndTerm = function(dir)
                     return
                 end
 
-                vim.cmd[[stopinsert]]
+                vim.cmd [[stopinsert]]
 
                 return
             end
@@ -161,7 +168,6 @@ Util.getColor = function(group, attr)
 end
 
 
-Util.inspect = function(vars,  ...)
+Util.inspect = function(vars, ...)
     print(vim.inspect(vars, ...))
 end
-
