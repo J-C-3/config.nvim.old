@@ -4,6 +4,7 @@ Personal nvim distro
 
 ## Dependencies
 * `nvim`
+* `git`
 * some `cc` compiler like `clang` or `gcc`
 
 ## Install
