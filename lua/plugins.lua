@@ -648,10 +648,15 @@ require('packer').startup({ function()
     }
 
     use {
-        'neovim/nvim-lspconfig'
+        "williamboman/mason.nvim",
     }
+
     use {
-        'williamboman/nvim-lsp-installer'
+        "williamboman/mason-lspconfig.nvim",
+    }
+
+    use {
+        "neovim/nvim-lspconfig"
     }
 
     use {
