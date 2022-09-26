@@ -17,11 +17,8 @@ map("n", "<leader>sh", ":terminal<cr>")
 map("t", "<C-p>", "<C-\\><C-n>")
 
 --- Buffer navigation
--- map("n", "<leader>bd", ":BDelete this<CR>")
 map("n", "<leader>bd", ":bp<bar>sp<bar>bn<bar>bd<cr>")
 map("n", "<leader>pb", "<cmd>lua require('telescope.builtin').buffers()<cr>")
-map("n", "<leader>bd", ":BDelete this<CR>")
-map("n", "<leader>tb", "<cmd>lua require('telescope.builtin').buffers()<cr>")
 
 -- Navigate between panes easily
 map("n", "<leader>h", ":wincmd h<cr>")
