@@ -331,22 +331,6 @@ require('packer').startup({ function()
     -- Languages/Filetypes {{{
     use "nathom/filetype.nvim"
 
-    -- Neovim lua writing
-    use {
-        "folke/lua-dev.nvim",
-        config = function() --{{{
-            local luadev = require("lua-dev").setup({
-                lspconfig = {
-                    cmd = { vim.fn.stdpath('data') ..
-                        "/lsp_servers/sumneko_lua/extension/server/bin/lua-language-server" }
-                },
-            })
-
-            local lspconfig = require('lspconfig')
-            lspconfig.sumneko_lua.setup(luadev)
-        end --}}}
-    }
-
     -- Ansible
     use {
         'pearofducks/ansible-vim',
@@ -648,10 +632,15 @@ require('packer').startup({ function()
     }
 
     use {
-        'neovim/nvim-lspconfig'
+        "williamboman/mason.nvim",
     }
+
     use {
-        'williamboman/nvim-lsp-installer'
+        "williamboman/mason-lspconfig.nvim",
+    }
+
+    use {
+        "neovim/nvim-lspconfig"
     }
 
     use {
