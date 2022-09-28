@@ -170,3 +170,8 @@ map("n", "<leader>gfs", "<cmd>vert Git<cr>")
 map("n", "<leader>gfc", "<cmd>Git commit<cr>")
 map("n", "<leader>gfp", "<cmd>Git push<cr>")
 map("n", "<leader>gfl", "<cmd>Gclog<cr>")
+
+-- Sessions
+map("n", "<leader>Ps", "<cmd>SaveSession<CR>")
+map("n", "<leader>Pl", "<cmd>SearchSession<CR>")
+map("n", "<leader>Pd", "<cmd>Autosession delete<CR>")

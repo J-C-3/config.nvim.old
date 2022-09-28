@@ -87,6 +87,16 @@ use {
     end
 }
 
+use {
+    'rmagatti/session-lens',
+    requires = { 'rmagatti/auto-session', 'nvim-telescope/telescope.nvim' },
+    config = function()
+        require('session-lens').setup({ --[[your custom config--]] })
+
+        require("telescope").load_extension("session-lens")
+    end
+}
+
 use({
     'glepnir/zephyr-nvim',
     requires = { 'nvim-treesitter/nvim-treesitter', opt = true },
