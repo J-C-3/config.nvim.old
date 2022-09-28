@@ -711,13 +711,23 @@ require('packer').startup({ function()
                     { name = 'buffer' },
                     { name = 'look', keyword_length = 2, options = { convert_case = true, loud = true } },
                     { name = 'spell' },
-                    { name = 'cmdline' },
                     { name = 'path' },
                     { name = 'calc' },
                     { name = "dictionary" },
                 })
             })
         end --}}}
+    }
+
+    use {
+        'hrsh7th/cmp-cmdline',
+        config = function()
+            require 'cmp'.setup.cmdline(':', {
+                sources = {
+                    { name = 'cmdline' }
+                }
+            })
+        end
     }
 
     use {
