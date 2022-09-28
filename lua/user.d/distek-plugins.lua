@@ -97,3 +97,5 @@ use 'Mofiqul/dracula.nvim'
 use 'tiagovla/tokyodark.nvim'
 
 use 'tanvirtin/monokai.nvim'
+
+use 'rebelot/kanagawa.nvim'

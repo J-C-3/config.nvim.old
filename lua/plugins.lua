@@ -90,9 +90,6 @@ require('packer').startup({ function()
     use {
         'ellisonleao/gruvbox.nvim',
     }
-    use {
-        "rebelot/kanagawa.nvim",
-    }
     --}}}
 
     use {
