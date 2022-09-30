@@ -26,7 +26,7 @@ require('packer').startup({ function()
     --     'tweekmonster/startuptime.vim'
     -- }
 
-    -- Modes{{{
+    -- Modes
     use {
         'sindrets/winshift.nvim'
     }
@@ -83,17 +83,11 @@ require('packer').startup({ function()
             }
         end --}}}
     }
-    --}}}
 
-    -- Aesthetics{{{
-    -- Theme{{{
+    -- Aesthetics
     use {
         'ellisonleao/gruvbox.nvim',
     }
-    use {
-        "rebelot/kanagawa.nvim",
-    }
-    --}}}
 
     use {
         'nvim-treesitter/nvim-treesitter',
@@ -326,9 +320,8 @@ require('packer').startup({ function()
             })
         end --}}}
     })
-    --}}}
 
-    -- Languages/Filetypes {{{
+    -- Languages/Filetypes
     use "nathom/filetype.nvim"
 
     -- Ansible
@@ -482,9 +475,8 @@ require('packer').startup({ function()
     -- use {
     --     'https://git.sr.ht/~sircmpwn/hare.vim',
     -- }
-    -- }}}
 
-    -- LSP & Completion {{{
+    -- LSP & Completion
     use {
         'mfussenegger/nvim-dap',
         config = function() --{{{
@@ -719,13 +711,23 @@ require('packer').startup({ function()
                     { name = 'buffer' },
                     { name = 'look', keyword_length = 2, options = { convert_case = true, loud = true } },
                     { name = 'spell' },
-                    { name = 'cmdline' },
                     { name = 'path' },
                     { name = 'calc' },
                     { name = "dictionary" },
                 })
             })
         end --}}}
+    }
+
+    use {
+        'hrsh7th/cmp-cmdline',
+        config = function()
+            require 'cmp'.setup.cmdline(':', {
+                sources = {
+                    { name = 'cmdline' }
+                }
+            })
+        end
     }
 
     use {
@@ -774,9 +776,9 @@ require('packer').startup({ function()
     }
     use {
         'hrsh7th/vim-vsnip',
-        config = function()
+        config = function() -- {{{
             vim.g.vsnip_snippet_dir = os.getenv('HOME') .. "/.config/nvim/vsnip/"
-        end
+        end -- }}}
     }
 
     use {
@@ -939,16 +941,15 @@ require('packer').startup({ function()
     }
     --}}}
 
-    -- }}}
 
-    -- Misc/QOL {{{
+    -- Misc/QOL
     use {
         "ThePrimeagen/refactoring.nvim",
         requires = {
             { "nvim-lua/plenary.nvim" },
             { "nvim-treesitter/nvim-treesitter" }
         },
-        config = function()
+        config = function() -- {{{
             require('refactoring').setup({
                 -- prompt for return type
                 prompt_func_return_type = {
@@ -965,7 +966,7 @@ require('packer').startup({ function()
                     java = true,
                 },
             })
-        end
+        end -- }}}
     }
 
     use {
@@ -1003,9 +1004,9 @@ require('packer').startup({ function()
     -- Keeps buffer proportions on window resizes and whatnot
     use {
         "kwkarlwang/bufresize.nvim",
-        config = function()
+        config = function() -- {{{
             require("bufresize").setup()
-        end
+        end -- }}}
     }
 
     use {
@@ -1038,6 +1039,7 @@ require('packer').startup({ function()
 
             require('telescope').load_extension('file_browser')
             require('telescope').load_extension('dap')
+            require('telescope').load_extension('ui-select')
         end --}}}
     }
 
@@ -1047,13 +1049,13 @@ require('packer').startup({ function()
 
     use {
         "lukas-reineke/indent-blankline.nvim",
-        config = function()
+        config = function() -- {{{
             require("indent_blankline").setup {
                 space_char_blankline = " ",
                 show_current_context = true,
                 show_current_context_start = true,
             }
-        end
+        end -- }}}
     }
 
     use {
@@ -1062,7 +1064,6 @@ require('packer').startup({ function()
             require('gitsigns').setup()
         end, --}}}
     }
-    -- }}}
 
     local userPlugins = vim.api.nvim_get_runtime_file("*/user.d/*plugins.lua", true)
 

@@ -170,3 +170,13 @@ map("n", "<leader>gfs", "<cmd>vert Git<cr>")
 map("n", "<leader>gfc", "<cmd>Git commit<cr>")
 map("n", "<leader>gfp", "<cmd>Git push<cr>")
 map("n", "<leader>gfl", "<cmd>Gclog<cr>")
+
+-- Sessions
+map("n", "<leader>Ps", "<cmd>SaveSession<CR>")
+map("n", "<leader>Pl", "<cmd>SearchSession<CR>")
+map("n", "<leader>Pd", "<cmd>Autosession delete<CR>")
+
+-- Fuck q:
+-- https://www.reddit.com/r/neovim/comments/lizyxj/how_to_get_rid_of_q/
+-- wont work if you take too long to do perform the action, but that's fine
+map("n", "q:", "<nop>")
