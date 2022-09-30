@@ -1,5 +1,5 @@
---- Mappings {{{
--- inits {{{
+--- Mappings
+-- inits
 local opts = { noremap = true, silent = true }
 local map = function(mode, keys, command)
     vim.api.nvim_set_keymap(mode, keys, command, opts)
@@ -8,7 +8,7 @@ end
 local exmap = function(mode, keys, command)
     vim.api.nvim_set_keymap(mode, keys, command, { noremap = true, expr = true, silent = true })
 end
--- Vim Maps {{{
+-- Vim Maps
 -- Source the init
 map("n", "<leader><cr>", ":source ~/.config/nvim/init.lua<cr>")
 
@@ -40,20 +40,15 @@ map("n", "<leader>ph", ":wincmd s <bar> lua require('telescope.builtin').find_fi
 map("n", "<leader>pg", "<cmd>lua require('telescope.builtin').live_grep()<cr>")
 map("n", "<leader>ph", "<cmd>lua require('telescope.builtin').help_tags()<cr>")
 
--- }}}
--- Git {{{
+-- Git
 map("n", "<leader>gs", ":Git | lua Float()<cr>")
 map("n", "<leader>gw", ":Gwrite<cr>")
 map("n", "<leader>gc", ":Git commit | lua Float()<cr>")
 map("n", "<leader>gsh", ":Git push<cr>")
 map("n", "<leader>gll", ":Git pull<cr>")
 map("n", "<leader>gb", ":Git blame | lua Float()<cr>")
-map("n", "<leader>gd", ":Gvdiff<cr>")
+map("n", "<leader>gvd", ":Gvdiff<cr>")
 map("n", "<leader>gr", ":GRemove<cr>")
 map("n", "<leader>o", ":GBrowse<cr>")
 map("n", "<leader>gj", ":diffget //3<cr>")
 map("n", "<leader>gf", ":diffget //2<cr>")
--- }}}
--- }}}
---}}
--- }
