@@ -1,3 +1,25 @@
+function dump(o)
+   if type(o) == 'table' then
+      local s = '{ '
+      for k,v in pairs(o) do
+         if type(k) ~= 'number' then k = '"'..k..'"' end
+         s = s .. '['..k..'] = ' .. dump(v) .. ','
+      end
+      return s .. '} '
+  else
+      return tostring(o)
+   end
+end
+cmpTable = {}
+function cmpSetup(tbl)
+    for k, v in pairs(tbl)do
+        if cmpTable[k] == nil then
+            cmpTable[k]={v}
+        else
+            table.insert(cmpTable[k], v)
+        end
+    end
+end
 require("lazy").setup({
     { 
         "dstein64/vim-startuptime",
@@ -11,54 +33,7 @@ require("lazy").setup({
             vim.cmd([[colorscheme gruvbox]])
         end,
 	},
-    {
-        "nvim-treesitter/nvim-treesitter",
-        config = {
-            ensure_installed = { 
-                "bash",
-                "c", 
-                "c_sharp",
-                "cmake",
-                "devicetree",
-                "dockerfile",
-                "git_rebase",
-                "gitattributes",
-                "gitcommit",
-                "gitignore",
-                "go",
-                "graphql",
-                "help",
-                "html",
-                "htmldjango",
-                "http",
-                "javascript",
-                "json",
-                "jsonnet",
-                "JSON with comments",
-                "jq",
-                "llvm",
-                "lua", 
-                "make",
-                "markdown",
-                "markdown_inline",
-                "perl",
-                "php",
-                "phpdoc",
-                "python",
-                "racket",
-                "ruby",
-                "rust",
-                "sql",
-                "swift",
-                "todotxt",
-                "toml",
-                "typescript",
-                "vim", 
-                "yaml",
-            },
-            sync_install = false,
-        },
-    },
+    { "nvim-treesitter/nvim-treesitter" },
     {
         "nvim-treesitter/nvim-treesitter-context",
         dependencies = "nvim-treesitter/nvim-treesitter",
@@ -66,35 +41,6 @@ require("lazy").setup({
     {
         "nvim-lualine/lualine.nvim", -- TODO: jacob is fancy and usually has cool bars
         dependencies = "kyazdani42/nvim-web-devicons",
-        config = {
-             options = {
-                icons_enabled = true,
-                theme = "auto",
-                component_separators = { left = "|", right = "|" },
-                section_separators = { left = "", right = "" },
-                disabled_filetypes = {},
-                always_divide_middle = true,
-                globalstatus = true,
-            },
-            sections = {
-                lualine_a = { "mode" },
-                lualine_b = { "branch", "diff", "diagnostics" },
-                lualine_c = { "filename" },
-                lualine_x = { "encoding", "fileformat", "filetype" },
-                lualine_y = { "progress" },
-                lualine_z = { "location" }
-            },
-            inactive_sections = {
-                lualine_a = {},
-                lualine_b = {},
-                lualine_c = { "filename" },
-                lualine_x = { "location" },
-                lualine_y = {},
-                lualine_z = {}
-            },
-            tabline = {},
-            extensions = {}
-       },
     },
     {
         "noib3/nvim-cokeline", -- TODO: what _is_ cokeline and check setup details
@@ -103,36 +49,10 @@ require("lazy").setup({
     {
         "williamboman/mason.nvim",
         lazy = false,
-        config = true,
     },
     {
         "williamboman/mason-lspconfig.nvim",
-        dependencies = {
-            "williamboman/mason.nvim",
-        },
-        config = function()
-            require("mason-lspconfig").setup({
-                ensure_installed = {
-                    "bashls", 
-                    "clangd",
-                    "dockerls",
-                    "gopls",
-                    "jsonls",
-                    "tsserver",
-                    "jsonnet_ls",
-                    "sumneko_lua",
-                    "marksman",
-                    "jedi_language_server",
-                    "taplo",
-                    "lemminx",
-                },
-            })
-            require("mason-lspconfig").setup_handlers{
-                function (server_name)
-                    require("lspconfig")[server_name].setup {}
-                end,
-            }
-        end,
+        dependencies = "williamboman/mason.nvim",
     },
     {
         "neovim/nvim-lspconfig",
@@ -141,31 +61,7 @@ require("lazy").setup({
         },
     },
 --    { "onsails/lspkind-nvim" },
-    {
-        "hrsh7th/nvim-cmp",
-        dependencies = {
-            "L3MON4D3/LuaSnip",
-            "saadparwaiz1/cmp_luasnip",
-            "hrsh7th/cmp-cmdline",
-            "hrsh7th/cmp-nvim-lsp",
-            "hrsh7th/cmp-buffer",
-            "hrsh7th/cmp-look",
-            "hrsh7th/cmp-path",
-            "hrsh7th/cmp-calc",
-            "hrsh7th/cmp-nvim-lua",
-            "uga-rosa/cmp-dictionary",
-            "hrsh7th/vim-vsnip",
-            "rafamadriz/friendly-snippets",
-            "honza/vim-snippets",
-        },
-        config = {
-            snippet = {
-                expand = function(args)
-                    require('luasnip').lsp_expand(args.body)
-                end
-            },
-        },
-    },
+    { "hrsh7th/nvim-cmp" },
     {
         "hrsh7th/cmp-nvim-lsp",
         dependencies = "hrsh7th/nvim-cmp",
@@ -178,13 +74,7 @@ require("lazy").setup({
 --            })
 --        end,
         config = function()
-            require("cmp").setup({
-                sources = {
-                    {
-                        name = "nvim_lsp"
-                    },
-                },
-            })
+            cmpSetup({ sources = { name = "nvim_lsp" } })
         end,
     },
     {
@@ -192,12 +82,12 @@ require("lazy").setup({
         dependencies = "hrsh7th/nvim-cmp",
         config = function()
             local cmp = require("cmp")
-            cmp.setup.cmdline({ ":" },
-            {
+            cmpSetup({ sources = { name = "buffer" } })
+            cmp.setup.cmdline({ "/", "?" }, {
                 mapping = cmp.mapping.preset.cmdline(),
                 sources = {
-                    name = "buffer"
-                },
+                  { name = "buffer" }
+                }
             })
         end,
     },
@@ -205,9 +95,12 @@ require("lazy").setup({
         "hrsh7th/cmp-cmdline",
         dependencies = "hrsh7th/nvim-cmp",
         config = function()
-            require("cmp").setup.cmdline(":", {
+            local cmp = require("cmp")
+            cmpSetup({ sources = { name = "cmdline" } })
+            cmp.setup.cmdline({ ":" }, {
+                mapping = cmp.mapping.preset.cmdline(),
                 sources = {
-                    { name = "cmdline" }
+                  { name = "cmdline" }
                 }
             })
         end,
@@ -216,38 +109,28 @@ require("lazy").setup({
         "hrsh7th/cmp-calc",
         dependencies = "hrsh7th/nvim-cmp",
         config = function()
-            require("cmp").setup({
-                sources = {
-                    { name = "calc" },
-                },
-            })
+            cmpSetup({ sources = { name = "calc" } })
         end,
     },
     {
         "hrsh7th/cmp-path",
         dependencies = "hrsh7th/nvim-cmp",
         config = function()
-            require("cmp").setup({
-                sources = {
-                    { name = "path" },
-                },
-            })
+            cmpSetup({ sources = { name = "path" } })
         end,
     },
     {
         "hrsh7th/cmp-look",
         dependencies = "hrsh7th/nvim-cmp",
         config = function()
-            require("cmp").setup({
+            cmpSetup({
                 sources = {
-                    {
-                        name = "look",
-                        keyword_length = 2,
-                        options = {
-                            convert_case = true,
-                            loud = true
-                        }
-                    },
+                    name = "look",
+                    keyword_length = 2,
+                    options = {
+                        convert_case = true,
+                        loud = true
+                    }
                 },
             })
         end,
@@ -256,16 +139,14 @@ require("lazy").setup({
         "f3fora/cmp-spell",
         dependencies = "hrsh7th/nvim-cmp",
         config = function()
-            require("cmp").setup({
+            cmpSetup({
                 sources = {
-                    {
-                        name = "spell",
-                        option = {
-                            keep_all_entries = false,
-                            enable_in_context = function()
-                                return require("cmp.config.context").in_treesitter_capture('spell')
-                            end,
-                        },
+                    name = "spell",
+                    option = {
+                        keep_all_entries = false,
+                        enable_in_context = function()
+                            return require("cmp.config.context").in_treesitter_capture('spell')
+                        end,
                     },
                 },
             })
@@ -274,18 +155,26 @@ require("lazy").setup({
     {
         "uga-rosa/cmp-dictionary",
         dependencies = "hrsh7th/nvim-cmp",
-        config= function()
-            require("cmp").setup({
-            sources = {
-                {
-                    name = "dictionary",
+        config = function()
+            cmpSetup({ sources = { name = "dictionary" } })
+        end,
+    },
+    {
+        "L3MON4D3/LuaSnip"
+    },
+    {
+        "saadparwaiz1/cmp_luasnip",
+        config = function()
+            cmpSetup({
+                snippet = {
+                  expand = function(args)
+                    require'luasnip'.lsp_expand(args.body)
+                  end
                 },
-            },
-        })
+                sources = { name = 'luasnip' },
+            })
         end
     },
-    { "L3MON4D3/LuaSnip" },
-    { "saadparwaiz1/cmp_luasnip" },
     {
         "windwp/nvim-autopairs",
         config = {
