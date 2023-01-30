@@ -8,7 +8,6 @@ Util.extraConfs = function(path)
     if #extraConfigs > 0 then
         for _, f in ipairs(extraConfigs) do
             dofile(f)
-            ::continue::
         end
     end
 end
