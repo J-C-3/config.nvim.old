@@ -25,6 +25,29 @@ plugins.lsp = {
         }
     },
     {
+        "jay-babu/mason-null-ls.nvim",
+        dependencies = { "jose-elias-alvarez/null-ls.nvim" },
+        config = function()
+            require("mason-null-ls").setup {
+                ensure_installed = {
+                    "clang_format",
+                    "codespell",
+                    "gofumpt",
+                    "goimports",
+                    "golangci_lint",
+                    "jq",
+                    "prettier",
+                    "sh",
+                    "shfmt",
+                },
+                automatic_installation = false,
+                automatic_setup = true, -- Recommended, but optional
+            }
+            require("null-ls").setup()
+            require("mason-null-ls").setup_handlers({})
+        end,
+    },
+    {
         "neovim/nvim-lspconfig",
         dependencies = {
             "williamboman/mason.nvim",
@@ -35,30 +58,6 @@ plugins.lsp = {
                     require("lspconfig")[server_name].setup {}
                 end,
             }
-        end
-    },
-    {
-        "onsails/lspkind-nvim",
-        config = function()
-            local lspkind = require("lspkind")
-            -- cmpSetup({
-            --     formatting = {
-            --         format = require("lspkind").cmp_format({
-            --             with_text = true,
-            --             maxwidth = 50,
-            --             menu = {
-            --                 buffer = "[Buffer]",
-            --                 nvim_lsp = "[LSP]",
-            --                 luasnip = "[Luasnip]",
-            --                 nvim_lua = "[Lua]",
-            --                 look = "[Look]",
-            --                 spell = "[Spell]",
-            --                 path = "[Path]",
-            --                 calc = "[Calc]",
-            --             },
-            --         }),
-            --     }
-            -- })
         end
     },
     {

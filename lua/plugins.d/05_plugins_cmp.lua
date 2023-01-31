@@ -1,8 +1,38 @@
 plugins.cmp = {
     {
         "hrsh7th/nvim-cmp",
+        dependencies = {
+            "L3MON4D3/LuaSnip",
+            "f3fora/cmp-spell",
+            "honza/vim-snippets",
+            "hrsh7th/cmp-buffer",
+            "hrsh7th/cmp-calc",
+            "hrsh7th/cmp-cmdline",
+            "hrsh7th/cmp-look",
+            "hrsh7th/cmp-nvim-lsp",
+            "hrsh7th/cmp-nvim-lua",
+            "hrsh7th/cmp-path",
+            "onsails/lspkind-nvim",
+            "rafamadriz/friendly-snippets",
+            "saadparwaiz1/cmp_luasnip",
+            "uga-rosa/cmp-dictionary",
+        },
         opts = function()
-            local cmp = require("cmp")
+            local cmp, luasnip = require("cmp"), require("luasnip")
+            require("luasnip.loaders.from_vscode").lazy_load()
+            require("luasnip.loaders.from_snipmate").lazy_load()
+            cmp.setup.cmdline({ ":" }, {
+                mapping = cmp.mapping.preset.cmdline(),
+                sources = {
+                    { name = "cmdline" }
+                }
+            })
+            cmp.setup.cmdline({ "/", "?" }, {
+                mapping = cmp.mapping.preset.cmdline(),
+                sources = {
+                    { name = "buffer" }
+                }
+            })
             cmp.setup({
                 sources = {
                     {
@@ -49,6 +79,22 @@ plugins.cmp = {
                         require 'luasnip'.lsp_expand(args.body)
                     end
                 },
+                formatting = {
+                    format = require("lspkind").cmp_format({
+                        with_text = true,
+                        maxwidth = 50,
+                        menu = {
+                            buffer = "[Buffer]",
+                            nvim_lsp = "[LSP]",
+                            luasnip = "[Luasnip]",
+                            nvim_lua = "[Lua]",
+                            look = "[Look]",
+                            spell = "[Spell]",
+                            path = "[Path]",
+                            calc = "[Calc]",
+                        },
+                    }),
+                },
                 mapping = cmp.mapping.preset.insert({
                     ["<C-d>"] = cmp.mapping.scroll_docs(-4),
                     ["<C-f>"] = cmp.mapping.scroll_docs(4),
@@ -78,75 +124,5 @@ plugins.cmp = {
                 })
             })
         end,
-    },
-    {
-        "hrsh7th/cmp-nvim-lua",
-    },
-    {
-        "hrsh7th/cmp-nvim-lsp",
-        --        init = function()
-        --            local lsp_config = require("lspconfig")
-        --            lsp_config.util.default_config = vim.tbl_deep_extend(
-        --            "force",
-        --            lsp_config.util.default_config, {
-        --                capabilities = require("cmp_nvim_lsp").default_capabilities(),
-        --            })
-        --        end,
-    },
-    {
-        "hrsh7th/cmp-buffer",
-        config = function()
-            local cmp=require("cmp")
-            cmp.setup.cmdline({ "/", "?" }, {
-                mapping = cmp.mapping.preset.cmdline(),
-                sources = {
-                    { name = "buffer" }
-                }
-            })
-        end,
-    },
-    {
-        "hrsh7th/cmp-cmdline",
-        init = function()
-            local cmp=require("cmp")
-            cmp.setup.cmdline({ ":" }, {
-                mapping = cmp.mapping.preset.cmdline(),
-                sources = {
-                    { name = "cmdline" }
-                }
-            })
-        end,
-    },
-    {
-        "hrsh7th/cmp-calc",
-    },
-    {
-        "hrsh7th/cmp-path",
-    },
-    {
-        "hrsh7th/cmp-look",
-    },
-    {
-        "f3fora/cmp-spell",
-    },
-    {
-        "uga-rosa/cmp-dictionary",
-    },
-    {
-        "rafamadriz/friendly-snippets",
-    },
-    {
-        "honza/vim-snippets",
-    },
-    {
-        "L3MON4D3/LuaSnip",
-        build = "make install_jsregexp",
-        init = function()
-            require("luasnip.loaders.from_vscode").lazy_load()
-            require("luasnip.loaders.from_snipmate").lazy_load()
-        end
-    },
-    {
-        "saadparwaiz1/cmp_luasnip",
     },
 }

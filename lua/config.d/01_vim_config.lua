@@ -48,7 +48,7 @@ vim.o.timeoutlen = 250
 vim.o.updatetime = 250
 vim.o.wildignore = "*.o,*.obj,.git,*.rbc,*.pyc,__pycache__"
 vim.o.wildmode = "list:longest,list:full"
-vim.o.wrap = false
+vim.o.wrap = true
 
 vim.cmd [[set sessionoptions-=blank]]
 

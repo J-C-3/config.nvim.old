@@ -1,7 +1,20 @@
 plugins.qol = {
     { "tpope/vim-commentary" },
     { "tpope/vim-fugitive" },
-    { "nvim-lua/plenary.nvim" },
+    {
+        "simrat39/symbols-outline.nvim",
+        config = true
+    },
+    {
+        "ThePrimeagen/git-worktree.nvim",
+        dependencies = {
+            "nvim-lua/plenary.nvim",
+            "nvim-telescope/telescope.nvim"
+        },
+        config = function()
+            require("telescope").load_extension("git_worktree")
+        end
+    },
     {
         'kevinhwang91/nvim-hlslens',
         config = true,
@@ -13,25 +26,13 @@ plugins.qol = {
     {
         'folke/which-key.nvim',
         config = {
-                triggers_blacklist = {
-                    c = { "h" },
-                }
+            triggers_blacklist = {
+                c = { "h" },
+            }
         }
     },
     {
-        "akinsho/toggleterm.nvim",
-        config = {
-            open_mapping = [[<c-`>]],
-            size = 15,
-            hide_numbers = true,
-            shade_terminals = true,
-            shading_factor = "0.4",
-            start_in_insert = true,
-            terminal_mappings = true,
-            persist_size = true,
-            direction = "horizontal",
-            close_on_exit = false,
-        },
+        "distek/nvim-terminal",
     },
     {
         "lukas-reineke/indent-blankline.nvim",
@@ -93,15 +94,60 @@ plugins.qol = {
     },
     {
         "nvim-telescope/telescope.nvim",
-        config = function()
-            require("telescope").load_extension("file_browser")
-            require("telescope").load_extension("dap")
-            require("telescope").load_extension("ui-select")
-        end,
         dependencies = {
+            "nvim-lua/plenary.nvim",
             "nvim-telescope/telescope-dap.nvim",
             "nvim-telescope/telescope-ui-select.nvim",
             "nvim-telescope/telescope-file-browser.nvim",
         },
+        config = function()
+            require("telescope").setup({
+                defaults = {
+                    mappings = {
+                        n = {
+                            ["<esc>"] = require("telescope.actions").close,
+                        },
+                    },
+                },
+            })
+            require("telescope").load_extension("file_browser")
+            require("telescope").load_extension("dap")
+            require("telescope").load_extension("ui-select")
+        end,
     },
+    {
+        "nvim-tree/nvim-tree.lua",
+        cmd = "NvimTreeToggle",
+        config = {
+            sort_by = "case_sensitive",
+            sync_root_with_cwd = true,
+            view = {
+                width = {
+                    min = 30,
+                    max = 30
+                }
+                -- mappings = {
+                --   list = {
+                --     { key = "u", action = "dir_up" },
+                --   },
+                -- },
+            },
+            renderer = {
+                group_empty = true,
+            },
+            filters = {
+                dotfiles = true,
+            },
+            tab = {
+                sync = {
+                    open = false,
+                    close = false,
+                    ignore = {},
+                },
+            },
+            update_focused_file = {
+                update_root = true
+            }
+        },
+    }
 }

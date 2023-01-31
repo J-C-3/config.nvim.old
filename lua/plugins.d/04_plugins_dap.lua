@@ -1,15 +1,21 @@
-plugins.dap={
+plugins.dap = {
     {
         "mfussenegger/nvim-dap",
         config = function()
-            local dap = require('dap')
+            local dap = require("dap")
 
-            dap.adapters.go = function(callback, config)
+            vim.fn.sign_define("DapBreakpoint", { text = "", texthl = "red" })
+            vim.fn.sign_define("DapBreakpointCondition", { text = "ﳁ", texthl = "blue" })
+            vim.fn.sign_define("DapBreakpointRejected", { text = "", texthl = "red" })
+            vim.fn.sign_define("DapLogPoint", { text = "", texthl = "yellow" })
+            vim.fn.sign_define("DapStopped", { text = "", texthl = "green" })
+
+            dap.adapters.go = function(callback, _)
                 local handle
                 local port = 38697
                 handle, _ = vim.loop.spawn("dlv", {
                     args = { "dap", "-l", "127.0.0.1:" .. port },
-                    detached = true
+                    detached = true,
                 }, function(code)
                     handle:close()
                     print("Delve exited with exit code: " .. code)
@@ -25,7 +31,7 @@ plugins.dap={
             require("dapui").setup({
                 icons = { expanded = "▾", collapsed = "▸" },
                 mappings = {
-                    -- Use a table to apply multiple mappings
+                    -- use(a table to apply multiple mappings
                     expand = { "<CR>", "<2-LeftMouse>" },
                     open = "o",
                     remove = "d",
@@ -35,26 +41,43 @@ plugins.dap={
                 layouts = {
                     {
                         elements = {
-                            'scopes',
-                            'breakpoints',
-                            'stacks',
-                            'watches',
+                            "scopes",
+                            "breakpoints",
+                            "stacks",
+                            "watches",
                         },
                         size = 40,
-                        position = 'left',
+                        position = "left",
                     },
                     {
                         elements = {
-                            'repl',
-                            'console',
+                            "repl",
+                            "console",
                         },
                         size = 10,
-                        position = 'bottom',
+                        position = "bottom",
+                    },
+                },
+                controls = {
+                    -- Requires Neovim nightly (or 0.8 when released)
+                    enabled = true,
+                    -- Display controls in this element
+                    element = "console",
+                    icons = {
+                        pause = "",
+                        play = "",
+                        step_into = "",
+                        step_over = "",
+                        step_out = "",
+                        step_back = "",
+                        run_last = "",
+                        terminate = "",
                     },
                 },
                 floating = {
-                    max_height = nil, -- These can be integers or a float between 0 and 1.
-                    max_width = nil, -- Floats will be treated as percentage of your screen.
+                    max_height = 1, -- These can be integers or a float between 0 and 1.
+                    max_width = 19, -- Floats will be treated as percentage of your screen.
+                    border = "single", -- Border style. Can be "single", "double" or "rounded"
                     mappings = {
                         close = { "q", "<Esc>" },
                     },
@@ -70,45 +93,43 @@ plugins.dap={
                 local opts = {
                     stdio = { nil, stdout },
                     args = { "dap", "-l", "127.0.0.1:" .. port },
-                    detached = true
+                    detached = true,
                 }
                 handle, pid_or_err = vim.loop.spawn("dlv", opts, function(code)
                     stdout:close()
                     handle:close()
                     if code ~= 0 then
-                        print('dlv exited with code', code)
+                        print("dlv exited with code", code)
                     end
                 end)
-                assert(handle, 'Error running dlv: ' .. tostring(pid_or_err))
+                assert(handle, "Error running dlv: " .. tostring(pid_or_err))
                 stdout:read_start(function(err, chunk)
                     assert(not err, err)
                     if chunk then
                         vim.schedule(function()
                             --- You could adapt this and send `chunk` to somewhere else
-                            require('dap.repl').append(chunk)
+                            require("dap.repl").append(chunk)
                         end)
                     end
                 end)
                 -- Wait for delve to start
-                vim.defer_fn(
-                    function()
-                        cb({ type = "server", host = "127.0.0.1", port = port })
-                    end,
-                    100)
+                vim.defer_fn(function()
+                    cb({ type = "server", host = "127.0.0.1", port = port })
+                end, 100)
             end
 
             dap.configurations.go = {
                 {
-                    type = 'dlv_spawn',
-                    name = 'Launch dlv & file',
-                    request = 'launch',
-                    program = "${workspaceFolder}";
+                    type = "dlv_spawn",
+                    name = "Launch dlv & file",
+                    request = "launch",
+                    program = "${workspaceFolder}",
                 },
                 {
                     type = "go",
                     name = "Debug",
                     request = "launch",
-                    program = "${workspaceFolder}"
+                    program = "${workspaceFolder}",
                 },
                 {
                     type = "dlv_spawn",
@@ -116,26 +137,20 @@ plugins.dap={
                     request = "launch",
                     program = "${workspaceFolder}",
                     args = function()
-                        local args_string = vim.fn.input('Arguments: ')
+                        local args_string = vim.fn.input("Arguments: ")
                         return vim.split(args_string, " +")
                     end,
-
                 },
                 {
                     type = "go",
                     name = "Debug test",
                     request = "launch",
                     mode = "test", -- Mode is important
-                    program = "${file}"
-                }
+                    program = "${file}",
+                },
             }
 
-            dap.defaults.fallback.force_external_terminal = true
-            dap.defaults.fallback.external_terminal = {
-                command = '/Applications/Alacritty.app/Contents/MacOS/alacritty';
-                args = { '-e' };
-            }
-            require('nvim-dap-virtual-text').setup()
+            require("nvim-dap-virtual-text").setup({})
         end
     },
     {
